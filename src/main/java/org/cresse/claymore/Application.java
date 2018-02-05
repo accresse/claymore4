@@ -37,7 +37,7 @@ public class Application implements CommandLineRunner {
 		quin.setWeight(200);
 		quin.setRace(Race.Human);
 		quin.setCurrentHp(8);
-		quin.setXp(20);
+		quin.setXp(30);
 		quin.setStrength(18);
 		quin.setDexterity(18);
 		quin.setConstitution(18);
@@ -70,10 +70,20 @@ public class Application implements CommandLineRunner {
 		//level 1
 		quin.addXpBuy(new XpBuy(1,1,AbilityCategory.Class,"Fighter"));
 		quin.addXpBuy(new XpBuy(1,5,AbilityCategory.HP,null));
-		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponSkill,"{mws:2,bws:1}"));
-		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.FighterClassAbility,"['Blades, Slashing','Bows']"));
+		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponSkill,"{\"mws\":2, \"bws\":1}"));
+		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponMastery,"['Blades, Slashing','Bows']"));
 		
-		quin.addXpBuy(new XpBuy(2,6,AbilityCategory.Class,"Priest"));
+		//level 2
+		quin.addXpBuy(new XpBuy(2,5,AbilityCategory.HP,null));
+		quin.addXpBuy(new XpBuy(2,2,AbilityCategory.WeaponSkill,"{\"mws\":2,\"bws\":1}"));
+		quin.addXpBuy(new XpBuy(2,1,AbilityCategory.ClassSavingThrow,"{\"fortitude\": 15, \"identity\": -5}"));
+		quin.addXpBuy(new XpBuy(2,2,AbilityCategory.WeaponMastery,"['Blades, Slashing','Bows']"));
+
+		//level 3
+		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.SkillPoints,null));
+		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.SavingThrow,"{\"agility\":2,\"fortitude\":1}"));
+		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.ClassSavingThrow,"{\"might\": 10}"));
+		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.FighterClassAbility,"Weapon Appraisal"));
 
 		characterRepository.save(quin);
 	}

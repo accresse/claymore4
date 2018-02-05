@@ -178,7 +178,7 @@
                           <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_passiveId">--</span>%</a>
                         </td>
                         <td id="character_weightLimit" class="text-center">--</td>
-                        <td id="character_maxLimit" class="text-center">--</td>
+                        <td id="character_maxLift" class="text-center">--</td>
                       </tr>
                     </tbody>
                   </table>
