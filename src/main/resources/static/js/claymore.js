@@ -1,18 +1,37 @@
 var character = null;
+var path = window.location.pathname;
+var id = path.substring(path.lastIndexOf('/') + 1);
 
-$(document).ready(function(){loadCharFromServer();});
+$(document).ready(
+	function(){
+		loadCharFromServer();
+		$("#save_button").click(saveCharacter);
+	}
+);
+
+var saveCharacter = function() {
+	var jqxhr = $.ajax({
+			type: "PUT",
+			url: "/claymore/api/characters/" + id, 
+			data: character, 
+			success: function(data) {
+				alert('success');
+			},
+			contentType: "application/json; charset=utf-8"
+	});
+}
 
 var loadCharFromServer = function() {
-	var path = window.location.pathname;
-	var id = path.substring(path.lastIndexOf('/') + 1);
 	var jqxhr = $.get("/claymore/api/characters/" + id, function(data) {
 		character = data;
 		var promises = [];
+		/**
 		for (var link in character._links) {
 			if(link != "self" && link != "character") {
 				promises.push(getLink(character._links[link].href, link));
 			}
 		}
+		 **/
 		$.when.apply($, promises).then(function() {
 			createFormFromModel();
 			updateJsonView();
@@ -59,8 +78,8 @@ var updateJsonView = function() {
 };
 
 var updateDerivedFields = function() {
-	processXpBuys();
-	showRelaventClassSections();
+	//processXpBuys();
+	//showRelaventClassSections();
 	
 	$("#character_name").text(character.name);
 	$("#character_race").text(character.race);

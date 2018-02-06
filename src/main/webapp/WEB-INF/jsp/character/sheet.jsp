@@ -546,8 +546,10 @@
         </div>
         <div id="inventory" class="tab-pane">
 		  <div class="py-0">
+	          <div class="container"><a id="save_button" href="#" class="btn btn-outline-primary" title="Save Character">Save</a></div>
 	          <div class="container" id="inventory_div"></div>
 	      </div>
+	      
         </div>
         <div id="xpShop" class="tab-pane">
 		  <div class="py-0">
