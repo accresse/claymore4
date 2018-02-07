@@ -562,6 +562,7 @@
   <!-- 
   <script src="../js/jqueryui-editable.min.js"></script>
    -->
+  <script src="../js/dice-roller.js"></script>
   <script src="../js/claymore.js"></script>
   <!-- 
    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;

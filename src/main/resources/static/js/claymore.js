@@ -1,5 +1,6 @@
 var character = null;
 var attackTemplate;
+var dice = new DiceRoller();
 
 $(document).ready(
 	function(){
@@ -16,7 +17,7 @@ $(document).ready(
 var rollable_d100 = function(event){
 	var text = event.target.textContent;
 	text = text.replace('%','');
-	var roll = Math.floor(Math.random() * 100) + 1;
+	var roll = dice.roll('d100').getTotal();
 	var diff = text - roll;
 	if(diff > 0) {
 		alert('Roll: '+roll+'\nPass by: '+diff);
@@ -28,29 +29,8 @@ var rollable_d100 = function(event){
 
 var rollable_literal = function(event){
 	var text = event.target.textContent;
-	if(text.startsWith('d')) {
-		text='1'+text;
-	}
-	var re = /(\d+)d(\d+)[+]?(-?\d+)?/g;
-	var found = re.exec(text);
-	if(found) {
-		var numRolls=found[1];
-		var sides=found[2];
-		var bonus=0;
-		if(found[3]) {
-			bonus = parseInt(found[3]);
-		}
-		var total = bonus;
-		var rolls = [];
-		for(var i=0; i<numRolls; i++) {
-			var roll = Math.floor(Math.random() * sides) + 1;
-			total += roll;
-			rolls.push(roll);
-		}
-		alert("["+rolls+"] + "+bonus+" = "+total);
-	} else {
-		alert("Bad dice pattern: "+text);
-	}
+	var roll = dice.roll(text);
+	alert(roll);
 	return false;
 };
 
