@@ -6,6 +6,7 @@ import org.cresse.claymore.model.Defense;
 import org.cresse.claymore.model.Gender;
 import org.cresse.claymore.model.Player;
 import org.cresse.claymore.model.Race;
+import org.cresse.claymore.model.WeaponSkill;
 import org.cresse.claymore.model.XpBuy;
 import org.cresse.claymore.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class Application implements CommandLineRunner {
 		quin.setProblemSolving(18);
 		quin.setWit(18);
 		quin.setLeadership(18);
+		quin.setPrimaryWeaponSkill(WeaponSkill.MWS);
 		
 		Attack club = new Attack();
 		club.setName("2H Club");

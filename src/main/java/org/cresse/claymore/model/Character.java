@@ -46,6 +46,9 @@ public class Character {
 	private int wit;
 	private int leadership;
 	
+	@Enumerated(EnumType.STRING)
+	private WeaponSkill primaryWeaponSkill;
+	
 	@ManyToOne(cascade = {CascadeType.ALL})
 	private Player player;
 	
@@ -199,6 +202,14 @@ public class Character {
 
 	public void setLeadership(int leadership) {
 		this.leadership = leadership;
+	}
+
+	public WeaponSkill getPrimaryWeaponSkill() {
+		return primaryWeaponSkill;
+	}
+
+	public void setPrimaryWeaponSkill(WeaponSkill primaryWeaponSkill) {
+		this.primaryWeaponSkill = primaryWeaponSkill;
 	}
 
 	public Player getPlayer() {

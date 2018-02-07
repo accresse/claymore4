@@ -87,6 +87,8 @@ var updateDerivedFields = function() {
 	$("#character_weightLimit").text(character.weightLimit);
 	$("#character_maxLift").text(character.maxLift);
 
+	$("#character_mws").text(character.mws);
+	$("#character_bws").text(character.bws);
 
 };
 
@@ -267,13 +269,52 @@ class ClassSavingThrowProcessor extends CharacterProcessor {
 	}
 }
 
-var weaponSkillProcessor = function() {};
+class WeaponSkillProcessor extends CharacterProcessor {
+	
+	init() {
+		if(character.primaryWeaponSkill=='MWS') {
+			character.mws = PWS_BASE;
+			character.bws = SWS_BASE;
+		} else {
+			character.mws = SWS_BASE;
+			character.bws = PWS_BASE;
+		}
+
+		character.mws += STR_TABLE[character.strength].mwsMod;
+		character.bws += DEX_TABLE[character.dexterity].bwsMod;
+		
+	}
+	
+	postProcess() {		
+
+		for(var level=1; level<=character.level; level++) {
+			var levelWeaponSkillBuys = getXpBuys(level, 'WeaponSkill');
+			if(levelWeaponSkillBuys) {				
+				for (var i = 0; i<levelWeaponSkillBuys.length; i++) {
+					var weaponSkillBuy = levelWeaponSkillBuys[i];
+					var ability = JSON.parse(weaponSkillBuy.ability);
+					character.mws += ability['mws'];
+					character.bws += ability['bws'];
+				}
+			} else {
+				if(character.primaryWeaponSkill=='MWS') {
+					character.mws += 1;
+				} else {
+					character.bws += 1;
+				}
+			}
+		}
+	}
+}
+
+
+var weaponMasteryProcessor = function() {};
+
 var skillPointProcessor = function() {};
 
 var classProcessor = function() {
 	character.classes.push(xpBuy.ability);
 }
-var weaponMasteryProcessor = function() {};
 var classSavingThrowProcessor = function() {};
 var fighterClassAbilityProcessor = function() {};
 
@@ -284,7 +325,8 @@ var buyProcessors = {
 	Class: new ClassProcessor(),
 	//SavingThrow and ClassSavingThrow need to stay in this order
 	SavingThrow: new SavingThrowProcessor(),
-	ClassSavingThrow: new ClassSavingThrowProcessor()
+	ClassSavingThrow: new ClassSavingThrowProcessor(),
+	WeaponSkill: new WeaponSkillProcessor()
 };
 
 var getHpIncrease = function(level, points) {
@@ -301,6 +343,8 @@ var getHpIncrease = function(level, points) {
 
 var MAX_HP_BUY_PER_LEVEL = 10;
 var HP_BASE = 6;
+var PWS_BASE = 50;
+var SWS_BASE = 45;
 
 var HP_BUY_TABLE = {
 	lowLevel:  {0:1,2:3,5:6},
@@ -309,41 +353,41 @@ var HP_BUY_TABLE = {
 
 var STR_TABLE = [
 	{},
-	{wmsMod:-22, damMod:-9, might:-40, maxLift:3},
-	{wmsMod:-16, damMod:-6, might:-32, maxLift:5},
-	{wmsMod:-13, damMod:-5, might:-28, maxLift:10},
-	{wmsMod:-11, damMod:-4, might:-26, maxLift:15},
-	{wmsMod:-8, damMod:-3, might:-24, maxLift:25},
-	{wmsMod:-6, damMod:-2, might:-20, maxLift:55},
-	{wmsMod:-4, damMod:-1, might:-15, maxLift:90},
-	{wmsMod:-2, damMod:0, might:-8, maxLift:110},
-	{wmsMod:-2, damMod:0, might:-8, maxLift:110},
-	{wmsMod:-1, damMod:0, might:-5, maxLift:140},
-	{wmsMod:-1, damMod:0, might:-5, maxLift:140},
-	{wmsMod:-1, damMod:0, might:-5, maxLift:140},
-	{wmsMod:0, damMod:0, might:0, maxLift:170},
-	{wmsMod:0, damMod:0, might:0, maxLift:170},
-	{wmsMod:0, damMod:0, might:0, maxLift:170},
-	{wmsMod:1, damMod:0, might:2, maxLift:200},
-	{wmsMod:1, damMod:0, might:2, maxLift:200},
-	{wmsMod:1, damMod:0, might:6, maxLift:225},
-	{wmsMod:1, damMod:0, might:10, maxLift:260},
-	{wmsMod:2, damMod:1, might:14, maxLift:280},
-	{wmsMod:3, damMod:2, might:18, maxLift:300},
-	{wmsMod:3, damMod:3, might:22, maxLift:330},
-	{wmsMod:4, damMod:4, might:26, maxLift:380},
-	{wmsMod:6, damMod:6, might:30, maxLift:475},
-	{wmsMod:9, damMod:9, might:50, maxLift:700},
-	{wmsMod:13, damMod:12, might:60, maxLift:900},
-	{wmsMod:16, damMod:15, might:70, maxLift:1200},
-	{wmsMod:20, damMod:18, might:80, maxLift:1600},
-	{wmsMod:24, damMod:21, might:90, maxLift:2100},
-	{wmsMod:28, damMod:24, might:100, maxLift:3000},
-	{wmsMod:31, damMod:27, might:120, maxLift:4000},
-	{wmsMod:35, damMod:30, might:140, maxLift:5000},
-	{wmsMod:39, damMod:33, might:160, maxLift:6000},
-	{wmsMod:42, damMod:36, might:180, maxLift:8000},
-	{wmsMod:48, damMod:39, might:200, maxLift:10000}
+	{mwsMod:-22, damMod:-9, might:-40, maxLift:3},
+	{mwsMod:-16, damMod:-6, might:-32, maxLift:5},
+	{mwsMod:-13, damMod:-5, might:-28, maxLift:10},
+	{mwsMod:-11, damMod:-4, might:-26, maxLift:15},
+	{mwsMod:-8, damMod:-3, might:-24, maxLift:25},
+	{mwsMod:-6, damMod:-2, might:-20, maxLift:55},
+	{mwsMod:-4, damMod:-1, might:-15, maxLift:90},
+	{mwsMod:-2, damMod:0, might:-8, maxLift:110},
+	{mwsMod:-2, damMod:0, might:-8, maxLift:110},
+	{mwsMod:-1, damMod:0, might:-5, maxLift:140},
+	{mwsMod:-1, damMod:0, might:-5, maxLift:140},
+	{mwsMod:-1, damMod:0, might:-5, maxLift:140},
+	{mwsMod:0, damMod:0, might:0, maxLift:170},
+	{mwsMod:0, damMod:0, might:0, maxLift:170},
+	{mwsMod:0, damMod:0, might:0, maxLift:170},
+	{mwsMod:1, damMod:0, might:2, maxLift:200},
+	{mwsMod:1, damMod:0, might:2, maxLift:200},
+	{mwsMod:1, damMod:0, might:6, maxLift:225},
+	{mwsMod:1, damMod:0, might:10, maxLift:260},
+	{mwsMod:2, damMod:1, might:14, maxLift:280},
+	{mwsMod:3, damMod:2, might:18, maxLift:300},
+	{mwsMod:3, damMod:3, might:22, maxLift:330},
+	{mwsMod:4, damMod:4, might:26, maxLift:380},
+	{mwsMod:6, damMod:6, might:30, maxLift:475},
+	{mwsMod:9, damMod:9, might:50, maxLift:700},
+	{mwsMod:13, damMod:12, might:60, maxLift:900},
+	{mwsMod:16, damMod:15, might:70, maxLift:1200},
+	{mwsMod:20, damMod:18, might:80, maxLift:1600},
+	{mwsMod:24, damMod:21, might:90, maxLift:2100},
+	{mwsMod:28, damMod:24, might:100, maxLift:3000},
+	{mwsMod:31, damMod:27, might:120, maxLift:4000},
+	{mwsMod:35, damMod:30, might:140, maxLift:5000},
+	{mwsMod:39, damMod:33, might:160, maxLift:6000},
+	{mwsMod:42, damMod:36, might:180, maxLift:8000},
+	{mwsMod:48, damMod:39, might:200, maxLift:10000}
 ];
 
 var CON_TABLE = [
@@ -382,36 +426,36 @@ var CON_TABLE = [
 
 var DEX_TABLE = [
 	{},
-	{bmsMod:-42, aglMod:-25, iMod:-12},
-	{bmsMod:-30, aglMod:-20, iMod:-6},
-	{bmsMod:-25, aglMod:-17, iMod:-4},
-	{bmsMod:-20, aglMod:-13, iMod:-3},
-	{bmsMod:-15, aglMod:-11, iMod:-2},
-	{bmsMod:-10, aglMod:-8, iMod:-2},
-	{bmsMod:-5, aglMod:-5, iMod:-1},
-	{bmsMod:-2, aglMod:-2, iMod:-1},
-	{bmsMod:-1, aglMod:-1, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:0, aglMod:0, iMod:0},
-	{bmsMod:1, aglMod:2, iMod:0},
-	{bmsMod:2, aglMod:3, iMod:0},
-	{bmsMod:3, aglMod:6, iMod:1},
-	{bmsMod:5, aglMod:9, iMod:1},
-	{bmsMod:7, aglMod:12, iMod:1},
-	{bmsMod:9, aglMod:14, iMod:1},
-	{bmsMod:10, aglMod:17, iMod:2},
-	{bmsMod:13, aglMod:20, iMod:2},
-	{bmsMod:16, aglMod:22, iMod:2},
-	{bmsMod:19, aglMod:23, iMod:2},
-	{bmsMod:22, aglMod:24, iMod:3},
-	{bmsMod:28, aglMod:24, iMod:4},
-	{bmsMod:34, aglMod:26, iMod:6},
-	{bmsMod:41, aglMod:33, iMod:10}	
+	{bwsMod:-42, aglMod:-25, iMod:-12},
+	{bwsMod:-30, aglMod:-20, iMod:-6},
+	{bwsMod:-25, aglMod:-17, iMod:-4},
+	{bwsMod:-20, aglMod:-13, iMod:-3},
+	{bwsMod:-15, aglMod:-11, iMod:-2},
+	{bwsMod:-10, aglMod:-8, iMod:-2},
+	{bwsMod:-5, aglMod:-5, iMod:-1},
+	{bwsMod:-2, aglMod:-2, iMod:-1},
+	{bwsMod:-1, aglMod:-1, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:0, aglMod:0, iMod:0},
+	{bwsMod:1, aglMod:2, iMod:0},
+	{bwsMod:2, aglMod:3, iMod:0},
+	{bwsMod:3, aglMod:6, iMod:1},
+	{bwsMod:5, aglMod:9, iMod:1},
+	{bwsMod:7, aglMod:12, iMod:1},
+	{bwsMod:9, aglMod:14, iMod:1},
+	{bwsMod:10, aglMod:17, iMod:2},
+	{bwsMod:13, aglMod:20, iMod:2},
+	{bwsMod:16, aglMod:22, iMod:2},
+	{bwsMod:19, aglMod:23, iMod:2},
+	{bwsMod:22, aglMod:24, iMod:3},
+	{bwsMod:28, aglMod:24, iMod:4},
+	{bwsMod:34, aglMod:26, iMod:6},
+	{bwsMod:41, aglMod:33, iMod:10}	
 ];
 
 var PS_TABLE = [
