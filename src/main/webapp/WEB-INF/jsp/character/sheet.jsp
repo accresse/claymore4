@@ -154,28 +154,28 @@
                     <tbody>
                       <tr>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_might">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_might" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_fortitude">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_fortitude" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_agility">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_agility" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_will">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_will" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_identity">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_identity" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_surprise">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_surprise" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_perception">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_perception" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_passiveId">--</span>%</a>
+                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_passiveId" value="--%"></button>
                         </td>
                         <td id="character_weightLimit" class="text-center">--</td>
                         <td id="character_maxLift" class="text-center">--</td>
@@ -193,10 +193,10 @@
                   <div class="row">
                     <div class="col-md-7">Attack</div>
                     <div class="col-md-2">MWS:
-                      <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_mws">--</span>%</a>
+                      <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_mws" value="--%"></button>
                     </div>
                     <div class="col-md-2">BWS:
-                      <a href="#" class="btn btn-outline-primary" title="Press to Roll"><span id="character_bws">--</span>%</a>
+                      <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_bws" value="--%"></button>
                     </div>
                     <div class="col-md-1">
                       <a href="#"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>

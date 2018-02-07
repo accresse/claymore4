@@ -1,6 +1,26 @@
 var character = null;
 
-$(document).ready(function(){loadCharFromServer();});
+$(document).ready(
+	function(){
+		loadCharFromServer();
+		
+		$('.rollable').click(
+			function(event){
+				var text = event.target.textContent;
+				text = text.replace('%','');
+				var roll = Math.floor(Math.random() * 100) + 1;
+				var diff = text - roll;
+				if(diff > 0) {
+					alert('Roll: '+roll+' Pass by: '+diff);
+				} else {
+					alert('Roll: '+roll+' Fail by: '+Math.abs(diff));
+				}
+				return false;
+			}
+		);
+		
+	}
+);
 
 var loadCharFromServer = function() {
 	var path = window.location.pathname;
@@ -76,19 +96,19 @@ var updateDerivedFields = function() {
 	
 	updateHpCard();
 	
-	$("#character_might").text(character.might);
-	$("#character_fortitude").text(character.fortitude);
-	$("#character_agility").text(character.agility);
-	$("#character_will").text(character.will);
-	$("#character_identity").text(character.identity);
-	$("#character_surprise").text(character.surprise);
-	$("#character_perception").text(character.perception);
-	$("#character_passiveId").text(character.passiveId);
+	$("#character_might").text(character.might+"%");
+	$("#character_fortitude").text(character.fortitude+"%");
+	$("#character_agility").text(character.agility+"%");
+	$("#character_will").text(character.will+"%");
+	$("#character_identity").text(character.identity+"%");
+	$("#character_surprise").text(character.surprise+"%");
+	$("#character_perception").text(character.perception+"%");
+	$("#character_passiveId").text(character.passiveId+"%");
 	$("#character_weightLimit").text(character.weightLimit);
 	$("#character_maxLift").text(character.maxLift);
 
-	$("#character_mws").text(character.mws);
-	$("#character_bws").text(character.bws);
+	$("#character_mws").text(character.mws+"%");
+	$("#character_bws").text(character.bws+"%");
 
 };
 
