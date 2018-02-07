@@ -43,6 +43,7 @@ public class Application implements CommandLineRunner {
 		quin.setDexterity(18);
 		quin.setConstitution(18);
 		quin.setProblemSolving(18);
+		quin.setRecall(18);
 		quin.setWit(18);
 		quin.setLeadership(18);
 		quin.setPrimaryWeaponSkill(WeaponSkill.MWS);

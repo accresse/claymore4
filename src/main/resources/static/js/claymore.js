@@ -215,7 +215,7 @@ class HpProcessor extends CharacterProcessor {
 				character.maxHp += getHpIncrease(level, 0);
 			}
 			//add con bonus
-			character.maxHp += CON_TABLE[character.constitution].hpMod
+			character.maxHp += getConstitutionMods().hpMod
 		}
 	}
 	
@@ -233,14 +233,14 @@ class ClassProcessor extends CharacterProcessor {
 
 class SavingThrowProcessor extends CharacterProcessor {
 	init() {
-		character.might=30;
-		character.fortitude=20;
-		character.agility=20;
-		character.will=20;
-		character.identity=20;
-		character.perception=WIT_TABLE[character.constitution].percMod;//add racial base and rogue abilities
-		character.weightLimit=CON_TABLE[character.constitution].weight;
-		character.maxLift=STR_TABLE[character.strength].maxLift;
+		character.might=30 + getStrengthMods().might;
+		character.fortitude=20 + getConstitutionMods().fotMod;
+		character.agility=20 + getDexterityMods().aglMod;
+		character.will=20 + getProblemSolvingMods().wilMod;
+		character.identity=20 + getRecallMods().idnMod;
+		character.perception=getWitMods().percMod;//TODO: add racial base and rogue abilities
+		character.weightLimit=getConstitutionMods().weight;
+		character.maxLift=getStrengthMods().maxLift;
 	}
 	
 	processBuy(xpBuy) {
@@ -280,8 +280,8 @@ class WeaponSkillProcessor extends CharacterProcessor {
 			character.bws = PWS_BASE;
 		}
 
-		character.mws += STR_TABLE[character.strength].mwsMod;
-		character.bws += DEX_TABLE[character.dexterity].bwsMod;
+		character.mws += getStrengthMods().mwsMod;
+		character.bws += getDexterityMods().bwsMod;
 		
 	}
 	
@@ -338,6 +338,30 @@ var getHpIncrease = function(level, points) {
 	}
 	return hpMap[points];
 }
+
+var getStrengthMods = function() {
+	return STR_TABLE[character.strength];
+};
+
+var getConstitutionMods = function() {
+	return CON_TABLE[character.constitution];
+};
+
+var getDexterityMods = function() {
+	return DEX_TABLE[character.dexterity];
+};
+
+var getProblemSolvingMods = function() {
+	return PS_TABLE[character.problemSolving];
+};
+
+var getRecallMods = function() {
+	return RC_TABLE[character.recall];
+};
+
+var getWitMods = function() {
+	return WIT_TABLE[character.wit];
+};
 
 //important constants and tables of data go below here
 
