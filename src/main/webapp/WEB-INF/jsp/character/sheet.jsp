@@ -154,28 +154,28 @@
                     <tbody>
                       <tr>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_might" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_might" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_fortitude" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_fortitude" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_agility" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_agility" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_will" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_will" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_identity" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_identity" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_surprise" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_surprise" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_perception" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_perception" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_passiveId" value="--%"></button>
+                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_passiveId" value="--%"></button>
                         </td>
                         <td id="character_weightLimit" class="text-center">--</td>
                         <td id="character_maxLift" class="text-center">--</td>
@@ -193,10 +193,10 @@
                   <div class="row">
                     <div class="col-md-7">Attack</div>
                     <div class="col-md-2">MWS:
-                      <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_mws" value="--%"></button>
+                      <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
                     </div>
                     <div class="col-md-2">BWS:
-                      <button class="btn btn-outline-primary rollable" title="Press to Roll" id="character_bws" value="--%"></button>
+                      <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
                     </div>
                     <div class="col-md-1">
                       <a href="#"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
@@ -215,30 +215,28 @@
                         <th>Notes</th>
                       </tr>
                     </thead>
-                    <tbody>
-                    <!-- 
-                      <tr class="text-center">
+                    <tbody id="attack_table">
+                      <tr id="attack_template" class="text-center" style="display:none">
                         <td class="">
-                          <a href="#">${attack.name}</a>
+                          <a href="#" class="attack_name"></a>
                         </td>
                         <td>
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">${attack.hit}%</a>
+                          <button class="btn btn-outline-primary attack_hit rollable_d100" title="Press to Roll" value="--%"></button>
                         </td>
                         <td>
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">${attack.damage}</a>
+                          <button class="btn btn-outline-primary attack_damage rollable_literal" title="Press to Roll" value="--"></button>
                         </td>
-                        <td>${attack.speed}</td>
-                        <td>${attack.attacks}</td>
+                        <td class="attack_speed">-</td>
+                        <td class="attack_attacks">--</td>
                         <td>
                           <div class="btn-group border border-primary">
                             <button class="btn dropdown-toggle btn-link" data-toggle="dropdown"> <i class="fa d-inline fa-lg fa-exclamation-circle"></i> </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">${attack.notes}</a>
+                              <a class="dropdown-item attack_notes" href="#"></a>
                             </div>
                           </div>
                         </td>
                       </tr>
-                     -->
                     </tbody>
                   </table>
                 </div>

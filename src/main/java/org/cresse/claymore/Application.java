@@ -66,6 +66,15 @@ public class Application implements CommandLineRunner {
 		chain.setNotes("this is another <b>note</b>");
 		quin.addAttack(chain);
 		
+		Attack dagger = new Attack();
+		dagger.setName("Dagger");
+		dagger.setHit("100");
+		dagger.setDamage("d4");
+		dagger.setAttacks(2.5f);
+		dagger.setSpeed(5);
+		dagger.setNotes("this is another <b>note</b>");
+		quin.addAttack(dagger);
+		
 		Defense defense = new Defense();
 		defense.setName("Natural");
 		quin.addDefense(defense);

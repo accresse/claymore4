@@ -1,26 +1,58 @@
 var character = null;
+var attackTemplate;
 
 $(document).ready(
 	function(){
+		attackTemplate = $('#attack_template').clone();
+		
 		loadCharFromServer();
 		
-		$('.rollable').click(
-			function(event){
-				var text = event.target.textContent;
-				text = text.replace('%','');
-				var roll = Math.floor(Math.random() * 100) + 1;
-				var diff = text - roll;
-				if(diff > 0) {
-					alert('Roll: '+roll+' Pass by: '+diff);
-				} else {
-					alert('Roll: '+roll+' Fail by: '+Math.abs(diff));
-				}
-				return false;
-			}
-		);
+		$('.rollable_d100').click(rollable_d100);
+		$('.rollable_literal').click(rollable_literal);
 		
 	}
 );
+
+var rollable_d100 = function(event){
+	var text = event.target.textContent;
+	text = text.replace('%','');
+	var roll = Math.floor(Math.random() * 100) + 1;
+	var diff = text - roll;
+	if(diff > 0) {
+		alert('Roll: '+roll+'\nPass by: '+diff);
+	} else {
+		alert('Roll: '+roll+'\nFail by: '+Math.abs(diff));
+	}
+	return false;
+};
+
+var rollable_literal = function(event){
+	var text = event.target.textContent;
+	if(text.startsWith('d')) {
+		text='1'+text;
+	}
+	var re = /(\d+)d(\d+)[+]?(-?\d+)?/g;
+	var found = re.exec(text);
+	if(found) {
+		var numRolls=found[1];
+		var sides=found[2];
+		var bonus=0;
+		if(found[3]) {
+			bonus = parseInt(found[3]);
+		}
+		var total = bonus;
+		var rolls = [];
+		for(var i=0; i<numRolls; i++) {
+			var roll = Math.floor(Math.random() * sides) + 1;
+			total += roll;
+			rolls.push(roll);
+		}
+		alert("["+rolls+"] + "+bonus+" = "+total);
+	} else {
+		alert("Bad dice pattern: "+text);
+	}
+	return false;
+};
 
 var loadCharFromServer = function() {
 	var path = window.location.pathname;
@@ -109,6 +141,8 @@ var updateDerivedFields = function() {
 
 	$("#character_mws").text(character.mws+"%");
 	$("#character_bws").text(character.bws+"%");
+	
+	updateAttacks();
 
 };
 
@@ -177,6 +211,25 @@ var getXpBuys = function(level, category) {
 		return null;
 	} else {
 		return character.levelToXpBuyMap[level][category];
+	}
+};
+
+var updateAttacks = function() {
+	$('#attack_table').empty();
+	for(var i=0; i<character.attacks.length; i++) {
+		var attack = character.attacks[i];
+		var row = attackTemplate.clone();
+		row.attr('id','attack.'+i);
+		row.find('.attack_name').text(attack.name);
+		row.find('.attack_hit').text(attack.hit+'%');
+		row.find('.attack_damage').text(attack.damage);
+		row.find('.attack_speed').text(attack.speed);
+		row.find('.attack_attacks').text(attack.attacks);
+		row.find('.attack_notes').html(attack.notes);
+		row.find('.rollable_d100').click(rollable_d100);
+		row.find('.rollable_literal').click(rollable_literal);
+		row.appendTo('#attack_table');
+		row.show();
 	}
 };
 
