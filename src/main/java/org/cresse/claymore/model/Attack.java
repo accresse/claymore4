@@ -1,6 +1,8 @@
 package org.cresse.claymore.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +18,24 @@ public class Attack {
 	private Long attackId;
     
 	private String name;
+	
+	@ManyToOne
+	private Weapon baseWeapon;
+	
+	@Enumerated(EnumType.STRING)
+	private WeaponSkill weaponSkill;
+	
 	private String hit;
 	private String damage;
-	private int speed;
-	private float attacks;
+	private String speed;
+	private String attacks;
+	
+	public Attack() {}
+	
+	public Attack(Weapon baseWeapon, WeaponSkill weaponSkill) {
+		this.setBaseWeapon(baseWeapon);
+		this.setWeaponSkill(weaponSkill);
+	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "character_id")
@@ -43,6 +59,22 @@ public class Attack {
 		this.name = name;
 	}
 
+	public Weapon getBaseWeapon() {
+		return baseWeapon;
+	}
+
+	public void setBaseWeapon(Weapon baseWeapon) {
+		this.baseWeapon = baseWeapon;
+	}
+
+	public WeaponSkill getWeaponSkill() {
+		return weaponSkill;
+	}
+
+	public void setWeaponSkill(WeaponSkill weaponSkill) {
+		this.weaponSkill = weaponSkill;
+	}
+
 	public String getHit() {
 		return hit;
 	}
@@ -59,19 +91,19 @@ public class Attack {
 		this.damage = damage;
 	}
 
-	public int getSpeed() {
+	public String getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(String speed) {
 		this.speed = speed;
 	}
 
-	public float getAttacks() {
+	public String getAttacks() {
 		return attacks;
 	}
 
-	public void setAttacks(float attacks) {
+	public void setAttacks(String attacks) {
 		this.attacks = attacks;
 	}
 

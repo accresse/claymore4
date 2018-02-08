@@ -1,4 +1,5 @@
 var character = null;
+
 var attackTemplate;
 var dice = new DiceRoller();
 
@@ -37,22 +38,28 @@ var rollable_literal = function(event){
 var loadCharFromServer = function() {
 	var path = window.location.pathname;
 	var id = path.substring(path.lastIndexOf('/') + 1);
-	var jqxhr = $.get("/claymore/api/characters/" + id, function(data) {
-		character = data;
-		var promises = [];
-		for (var link in character._links) {
-			if(link != "self" && link != "character") {
-				promises.push(getLink(character._links[link].href, link));
+	var jqxhr = $.get(
+		"/claymore/api/characters/" + id, 
+		function(data) {
+			character = data;
+			var promises = [];
+			for (var link in character._links) {
+				if(link != "self" && link != "character") {
+					promises.push(getLink(character._links[link].href, link));
+				}
 			}
+			$.when.apply($, promises).then(
+				function() {
+					createFormFromModel();
+					updateJsonView();
+					updateDerivedFields();
+				}, 
+				function() {
+					alert("Error loading character");
+				}
+			);
 		}
-		$.when.apply($, promises).then(function() {
-			createFormFromModel();
-			updateJsonView();
-			updateDerivedFields();
-		}, function() {
-			alert("Error loading character");
-		});
-	});
+	);
 };
 
 var getLink = function(href, prop) {
@@ -200,18 +207,71 @@ var updateAttacks = function() {
 		var attack = character.attacks[i];
 		var row = attackTemplate.clone();
 		row.attr('id','attack.'+i);
-		row.find('.attack_name').text(attack.name);
-		row.find('.attack_hit').text(attack.hit+'%');
-		row.find('.attack_damage').text(attack.damage);
-		row.find('.attack_speed').text(attack.speed);
-		row.find('.attack_attacks').text(attack.attacks);
-		row.find('.attack_notes').html(attack.notes);
-		row.find('.rollable_d100').click(rollable_d100);
-		row.find('.rollable_literal').click(rollable_literal);
 		row.appendTo('#attack_table');
-		row.show();
+		getBaseWeapon(attack,row);
 	}
 };
+
+var getBaseWeapon = function(attack, row) {
+	var jqxhr = $.get(
+		attack._links.baseWeapon.href, 
+		function(baseWeapon) {
+			row.find('.attack_name').text(getAttackValOverride(attack.name,baseWeapon.name));
+			row.find('.attack_hit').text(getAttackValSum(attack.hit,character[attack.weaponSkill.toLowerCase()])+'%');
+			row.find('.attack_damage').text(getAttackValConcat(attack.damage,baseWeapon.damage));
+			row.find('.attack_speed').text(getAttackValSum(attack.speed,baseWeapon.speed));
+			row.find('.attack_attacks').text(getAttackValSum(attack.attacks,1));
+			row.find('.attack_notes').html(getAttackValNotes(attack,baseWeapon));
+			row.find('.rollable_d100').click(rollable_d100);
+			row.find('.rollable_literal').click(rollable_literal);
+			row.show();
+		}
+	);
+};
+
+var getAttackValOverride = function(attackVal, baseVal) {
+	return attackVal ? attackVal : baseVal;
+};
+
+var getAttackValSum = function(attackVal, baseVal) {
+	if(attackVal && attackVal.startsWith('=')) {
+		return attackVal.substring(1);
+	}
+	baseVal = baseVal ? baseVal : 0;
+	attackVal = attackVal ? parseFloat(attackVal.replace('+','')) : 0;
+	return baseVal + attackVal;
+};
+
+var getAttackValConcat = function(attackVal, baseVal) {
+	if(attackVal && attackVal.startsWith('=')) {
+		return attackVal.substring(1);
+	}
+	var retVal ='';
+	if(baseVal) retVal += baseVal;
+	if(attackVal) retVal += attackVal;
+	return retVal;
+};
+
+var getAttackVal = function(attackVal, baseVal, combine) {
+	
+	if(combine && baseVal && attackVal) {
+		if(attackVal.startsWith('=')) {
+			return attackVal.substring(1);
+		} else {
+			if(attackVal.startsWith('+')){
+				attackVal = attackVal.substring(1);
+			}
+			return baseVal+parseInt(attackVal.substring(1));
+		}
+	} else {
+		return attackVal ? attackVal : baseVal;
+	}
+	
+};
+
+var getAttackValNotes = function(attack, baseWeapon) {
+	return attack.notes;
+}
 
 class CharacterProcessor {
 	init(){}
@@ -637,3 +697,31 @@ var WIT_TABLE = [
 	{weaponMod:27, aglMod:4, percMod:14, spellFailure:0},
 ];
 
+var UNSKILLED_TABLE = {
+	Fighter:	-10,
+	Priest:-15,
+	Rogue:-15,
+	Wizard:-20,
+	None:-25	
+};
+
+var WEAPON_GROUP_COST_TABLE = {
+	'Blades_Slashing':14,
+	'Blades_Stabbing':12,
+	'Blades_Two_Handed':16,
+	'Bows':14,
+	'Crossbows':6,
+	'Cleaving':10,
+	'Crushing':8,
+	'Flails':16,
+	'Lances':14,
+	'Polearms':14,
+	'Spears':10,
+	'Punching_Weapons':4,
+	'Rope_like':14,
+	'Slings':14,
+	'Small_Throwing':8,
+	'Quarter_Staff':12,
+	'Improvised':10,
+	'Shields	':4		
+};

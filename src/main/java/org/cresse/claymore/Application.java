@@ -2,13 +2,18 @@ package org.cresse.claymore;
 
 import org.cresse.claymore.model.AbilityCategory;
 import org.cresse.claymore.model.Attack;
+import org.cresse.claymore.model.DamageType;
 import org.cresse.claymore.model.Defense;
 import org.cresse.claymore.model.Gender;
 import org.cresse.claymore.model.Player;
 import org.cresse.claymore.model.Race;
+import org.cresse.claymore.model.Size;
+import org.cresse.claymore.model.Weapon;
+import org.cresse.claymore.model.WeaponGroup;
 import org.cresse.claymore.model.WeaponSkill;
 import org.cresse.claymore.model.XpBuy;
 import org.cresse.claymore.repository.CharacterRepository;
+import org.cresse.claymore.repository.WeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,8 +25,21 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private CharacterRepository characterRepository;
 
+	@Autowired
+	private WeaponRepository weaponRepository;
+
+	private Weapon sword;
+
+	private Weapon club;
+
 	@Override
 	public void run(String... args) throws Exception {
+		sword = new Weapon("Arming Sword",Size.Medium,WeaponGroup.Blades_Slashing,DamageType.Slashing,3,"2d8");
+		weaponRepository.save(sword);
+
+		club = new Weapon("2H Club",Size.Large,WeaponGroup.Crushing,DamageType.Bludgeoning,2,"3d10-H");
+		weaponRepository.save(club);
+
 		quin();
 		adny();
 	}
@@ -48,32 +66,36 @@ public class Application implements CommandLineRunner {
 		quin.setLeadership(18);
 		quin.setPrimaryWeaponSkill(WeaponSkill.MWS);
 		
-		Attack club = new Attack();
-		club.setName("2H Club");
-		club.setHit("103");
-		club.setDamage("2d12+8");
-		club.setAttacks(2.5f);
-		club.setSpeed(5);
-		club.setNotes("this is a <b>note</b>");
-		quin.addAttack(club);
+		Attack clubAttack = new Attack(this.club, WeaponSkill.MWS);
+		clubAttack.setNotes("this is a <b>note</b>");
+		quin.addAttack(clubAttack);
 		
-		Attack chain = new Attack();
-		chain.setName("Chain");
-		chain.setHit("100");
-		chain.setDamage("2d12+8");
-		chain.setAttacks(2.5f);
-		chain.setSpeed(5);
-		chain.setNotes("this is another <b>note</b>");
-		quin.addAttack(chain);
+		Attack swordAttack1 = new Attack(this.sword, WeaponSkill.MWS);
+		quin.addAttack(swordAttack1);
 		
-		Attack dagger = new Attack();
-		dagger.setName("Dagger");
-		dagger.setHit("100");
-		dagger.setDamage("d4");
-		dagger.setAttacks(2.5f);
-		dagger.setSpeed(5);
-		dagger.setNotes("this is another <b>note</b>");
-		quin.addAttack(dagger);
+		Attack swordAttack2 = new Attack(this.sword, WeaponSkill.MWS);
+		swordAttack2.setName("Sword2");
+		swordAttack2.setHit("+2");
+		swordAttack2.setDamage("+1");
+		swordAttack2.setSpeed("+1");
+		swordAttack2.setAttacks("+.5");
+		quin.addAttack(swordAttack2);
+		
+		Attack swordAttack3 = new Attack(this.sword, WeaponSkill.BWS);
+		swordAttack3.setName("Sword3");
+		swordAttack3.setHit("-1");
+		swordAttack3.setDamage("-2");
+		swordAttack3.setSpeed("-3");
+		swordAttack3.setAttacks("-1.5");
+		quin.addAttack(swordAttack3);
+		
+		Attack swordAttack4 = new Attack(this.sword, WeaponSkill.MWS);
+		swordAttack4.setName("Sword4");
+		swordAttack4.setHit("=10");
+		swordAttack4.setDamage("=3d12");
+		swordAttack4.setSpeed("=7");
+		swordAttack4.setAttacks("=2");
+		quin.addAttack(swordAttack4);
 		
 		Defense defense = new Defense();
 		defense.setName("Natural");
