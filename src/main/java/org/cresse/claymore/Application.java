@@ -35,10 +35,10 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		sword = new Weapon("Arming Sword",Size.Medium,WeaponGroup.Blades_Slashing,DamageType.Slashing,3,"2d8");
-		weaponRepository.save(sword);
+		//weaponRepository.save(sword);
 
 		club = new Weapon("2H Club",Size.Large,WeaponGroup.Crushing,DamageType.Bludgeoning,2,"3d10-H");
-		weaponRepository.save(club);
+		//weaponRepository.save(club);
 
 		quin();
 		adny();
@@ -68,6 +68,7 @@ public class Application implements CommandLineRunner {
 		
 		Attack clubAttack = new Attack(this.club, WeaponSkill.MWS);
 		clubAttack.setNotes("this is a <b>note</b>");
+		clubAttack.setDamage("+1");
 		quin.addAttack(clubAttack);
 		
 		Attack swordAttack1 = new Attack(this.sword, WeaponSkill.MWS);

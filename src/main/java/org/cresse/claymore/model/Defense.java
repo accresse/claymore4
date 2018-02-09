@@ -17,10 +17,6 @@ public class Defense {
     
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "character_id")
-	private Character character;
-	
 	private String notes;
 
 	public Long getDefenseId() {
@@ -37,14 +33,6 @@ public class Defense {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Character getCharacter() {
-		return character;
-	}
-
-	public void setCharacter(Character character) {
-		this.character = character;
 	}
 
 	public String getNotes() {

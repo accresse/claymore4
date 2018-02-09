@@ -1,3 +1,6 @@
+var path = window.location.pathname;
+var id = path.substring(path.lastIndexOf('/') + 1);
+
 var character = null;
 
 var attackTemplate;
@@ -9,11 +12,38 @@ $(document).ready(
 		
 		loadCharFromServer();
 		
+		$("#save_json_button").click(saveCharacter);
+		$("#clone_json_button").click(cloneCharacter);
+		
 		$('.rollable_d100').click(rollable_d100);
 		$('.rollable_literal').click(rollable_literal);
 		
 	}
 );
+
+var saveCharacter = function() {
+	var jqxhr = $.ajax({
+			type: "PUT",
+			url: "/claymore/api/characters/" + id, 
+			data: JSON.stringify(character, null, 2), 
+			success: function(data) {
+				alert('success');
+			},
+			contentType: "application/json"
+	});
+}
+
+var cloneCharacter = function() {
+	var jqxhr = $.ajax({
+			type: "POST",
+			url: "/claymore/api/characters", 
+			data: JSON.stringify(character, null, 2), 
+			success: function(data) {
+				alert('success');
+			},
+			contentType: "application/json"
+	});
+}
 
 var rollable_d100 = function(event){
 	var text = event.target.textContent;
@@ -36,40 +66,15 @@ var rollable_literal = function(event){
 };
 
 var loadCharFromServer = function() {
-	var path = window.location.pathname;
-	var id = path.substring(path.lastIndexOf('/') + 1);
 	var jqxhr = $.get(
 		"/claymore/api/characters/" + id, 
 		function(data) {
 			character = data;
-			var promises = [];
-			for (var link in character._links) {
-				if(link != "self" && link != "character") {
-					promises.push(getLink(character._links[link].href, link));
-				}
-			}
-			$.when.apply($, promises).then(
-				function() {
-					createFormFromModel();
-					updateJsonView();
-					updateDerivedFields();
-				}, 
-				function() {
-					alert("Error loading character");
-				}
-			);
+			createFormFromModel();
+			updateJsonView();
+			updateDerivedFields();
 		}
 	);
-};
-
-var getLink = function(href, prop) {
-	return $.get(href, function(data) {
-		if(data._embedded) {
-			character[prop] = data._embedded[prop];
-		} else {
-			character[prop] = data;
-		}
-	});
 };
 
 var createFormFromModel = function() {
@@ -94,7 +99,7 @@ var updateModel = function(event) {
 };
 
 var updateJsonView = function() {
-	$("#inventory_div").html("<pre>"+JSON.stringify(character, null, 2)+"</pre>");
+	$("#json_text").text(JSON.stringify(character, null, 2));
 };
 
 var updateDerivedFields = function() {
@@ -205,28 +210,20 @@ var updateAttacks = function() {
 	$('#attack_table').empty();
 	for(var i=0; i<character.attacks.length; i++) {
 		var attack = character.attacks[i];
+		var baseWeapon = attack.baseWeapon;
 		var row = attackTemplate.clone();
 		row.attr('id','attack.'+i);
+		row.find('.attack_name').text(getAttackValOverride(attack.name,baseWeapon.name));
+		row.find('.attack_hit').text(getAttackValSum(attack.hit,character[attack.weaponSkill.toLowerCase()])+'%');
+		row.find('.attack_damage').text(getAttackValConcat(attack.damage,baseWeapon.damage));
+		row.find('.attack_speed').text(getAttackValSum(attack.speed,baseWeapon.speed));
+		row.find('.attack_attacks').text(getAttackValSum(attack.attacks,1));
+		row.find('.attack_notes').html(getAttackValNotes(attack,baseWeapon));
+		row.find('.rollable_d100').click(rollable_d100);
+		row.find('.rollable_literal').click(rollable_literal);
 		row.appendTo('#attack_table');
-		getBaseWeapon(attack,row);
+		row.show();
 	}
-};
-
-var getBaseWeapon = function(attack, row) {
-	var jqxhr = $.get(
-		attack._links.baseWeapon.href, 
-		function(baseWeapon) {
-			row.find('.attack_name').text(getAttackValOverride(attack.name,baseWeapon.name));
-			row.find('.attack_hit').text(getAttackValSum(attack.hit,character[attack.weaponSkill.toLowerCase()])+'%');
-			row.find('.attack_damage').text(getAttackValConcat(attack.damage,baseWeapon.damage));
-			row.find('.attack_speed').text(getAttackValSum(attack.speed,baseWeapon.speed));
-			row.find('.attack_attacks').text(getAttackValSum(attack.attacks,1));
-			row.find('.attack_notes').html(getAttackValNotes(attack,baseWeapon));
-			row.find('.rollable_d100').click(rollable_d100);
-			row.find('.rollable_literal').click(rollable_literal);
-			row.show();
-		}
-	);
 };
 
 var getAttackValOverride = function(attackVal, baseVal) {

@@ -67,13 +67,16 @@
           <a data-toggle="tab" href="#summary" class="active nav-link">Summary</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#details" class="nav-link">Details</a>
-        </li>
-        <li>
           <a data-toggle="tab" href="#inventory" class="nav-link">Inventory</a>
         </li>
         <li>
           <a data-toggle="tab" href="#xpShop" class="nav-link">XP Shop</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#details" class="nav-link">Details</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#json" class="nav-link">JSON</a>
         </li>
       </ul>
       <div class="tab-content">
@@ -544,13 +547,26 @@
         </div>
         <div id="inventory" class="tab-pane">
 		  <div class="py-0">
-	          <div class="container" id="inventory_div"></div>
+	          <div class="container">
+	          	<p> Coming Soon 2</p>
+	          </div>
 	      </div>
         </div>
         <div id="xpShop" class="tab-pane">
 		  <div class="py-0">
-          	<p> Coming Soon 2</p>
+          	<p> Coming Soon 3</p>
           </div>
+        </div>
+        <div id="json" class="tab-pane">
+		  <div class="py-0">
+	          <div class="container">
+	          	<a id="save_json_button" href="#" class="btn btn-outline-primary" title="Save Character">Save</a>
+		        <a id="clone_json_button" href="#" class="btn btn-outline-primary" title="Save Character">Clone</a>
+		      </div>
+	          <div class="container">
+	          	<textarea class="form-control" id="json_text" style="min-height:600px;"></textarea>
+	          </div>
+	      </div>
         </div>
       </div>
     </div>

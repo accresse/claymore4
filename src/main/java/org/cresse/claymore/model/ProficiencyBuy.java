@@ -11,30 +11,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Skill {
+public class ProficiencyBuy {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long skillId;
+	private Long buyId;
     
     private int level;
     private int points;
     
     @Enumerated(EnumType.STRING)
-    private SkillType category;
+    private ProficiencyCategory category;
     
-    private String skillName;
+    private String ability;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "character_id")
-	private Character character;
+	public ProficiencyBuy() {}
 
-	public Long getSkillId() {
-		return skillId;
+	public ProficiencyBuy(int level, int points, ProficiencyCategory category, String ability) {
+		this.level = level;
+		this.points = points;
+		this.category = category;
+		this.ability = ability;
 	}
 
-	public void setSkillId(Long skillId) {
-		this.skillId = skillId;
+	public Long getBuyId() {
+		return buyId;
+	}
+
+	public void setBuyId(Long buyId) {
+		this.buyId = buyId;
 	}
 
 	public int getLevel() {
@@ -53,28 +58,19 @@ public class Skill {
 		this.points = points;
 	}
 
-	public SkillType getCategory() {
+	public ProficiencyCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(SkillType category) {
+	public void setCategory(ProficiencyCategory category) {
 		this.category = category;
 	}
 
-	public String getSkillName() {
-		return skillName;
+	public String getAbility() {
+		return ability;
 	}
 
-	public void setSkillName(String skillName) {
-		this.skillName = skillName;
+	public void setAbility(String ability) {
+		this.ability = ability;
 	}
-
-	public Character getCharacter() {
-		return character;
-	}
-
-	public void setCharacter(Character character) {
-		this.character = character;
-	}
-
 }

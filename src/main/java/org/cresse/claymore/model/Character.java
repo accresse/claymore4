@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 @Table(name="claymore_character")
 public class Character {
@@ -50,31 +52,26 @@ public class Character {
 	private WeaponSkill primaryWeaponSkill;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
+	@RestResource(exported=false)
 	private Player player;
 	
 	@OneToMany(
-	        mappedBy = "character", 
 	        cascade = CascadeType.ALL
 	    )
+	@RestResource(exported=false)
 	private List<Attack> attacks = new LinkedList<>();
 
 	@OneToMany(
-	        mappedBy = "character", 
 	        cascade = CascadeType.ALL
 	    )
+	@RestResource(exported=false)
 	private List<Defense> defenses = new LinkedList<>();
 
 	@OneToMany(
-	        mappedBy = "character", 
 	        cascade = CascadeType.ALL
 	    )
+	@RestResource(exported=false)
 	private List<XpBuy> xpBuys = new LinkedList<>();
-
-	@OneToMany(
-	        mappedBy = "character", 
-	        cascade = CascadeType.ALL
-	    )
-	private List<Skill> skills = new LinkedList<>();
 
 	public Long getCharacterId() {
 		return characterId;
@@ -226,12 +223,10 @@ public class Character {
 
 	public void addAttack(Attack attack) {
 		this.attacks.add(attack);
-		attack.setCharacter(this);
 	}
 	
 	public void removeAttack(Attack attack) {
 		this.attacks.remove(attack);
-		attack.setCharacter(null);
 	}
 
 	public List<Defense> getDefenses() {
@@ -240,12 +235,10 @@ public class Character {
 
 	public void addDefense(Defense defense) {
 		this.defenses.add(defense);
-		defense.setCharacter(this);
 	}
 	
 	public void removeDefense(Defense defense) {
 		this.defenses.remove(defense);
-		defense.setCharacter(null);
 	}
 
 	public List<XpBuy> getXpBuys() {
@@ -254,26 +247,10 @@ public class Character {
 
 	public void addXpBuy(XpBuy xpBuy) {
 		this.xpBuys.add(xpBuy);
-		xpBuy.setCharacter(this);
 	}
 	
 	public void removeXpBuy(XpBuy xpBuy) {
 		this.xpBuys.remove(xpBuy);
-		xpBuy.setCharacter(null);
-	}
-
-	public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void addSkill(Skill skill) {
-		this.skills.add(skill);
-		skill.setCharacter(this);
-	}
-	
-	public void removeSkill(Skill skill) {
-		this.skills.remove(skill);
-		skill.setCharacter(null);
 	}
 
 	@Override

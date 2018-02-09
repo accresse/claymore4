@@ -25,10 +25,6 @@ public class XpBuy {
     
     private String ability;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "character_id")
-	private Character character;
-
 	public XpBuy() {}
 
 	public XpBuy(int level, int points, AbilityCategory category, String ability) {
@@ -78,14 +74,4 @@ public class XpBuy {
 		this.ability = ability;
 	}
 
-	public Character getCharacter() {
-		return character;
-	}
-
-	public void setCharacter(Character character) {
-		this.character = character;
-	}
-	
-	
-		
 }

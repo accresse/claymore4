@@ -1,5 +1,6 @@
 package org.cresse.claymore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 public class Attack {
 	
@@ -19,7 +22,8 @@ public class Attack {
     
 	private String name;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@RestResource(exported=false)
 	private Weapon baseWeapon;
 	
 	@Enumerated(EnumType.STRING)
@@ -36,10 +40,6 @@ public class Attack {
 		this.setBaseWeapon(baseWeapon);
 		this.setWeaponSkill(weaponSkill);
 	}
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "character_id")
-	private Character character;
 	
 	private String notes;
 
@@ -113,14 +113,6 @@ public class Attack {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	public Character getCharacter() {
-		return character;
-	}
-
-	public void setCharacter(Character character) {
-		this.character = character;
 	}
 
 	@Override
