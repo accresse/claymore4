@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -20,26 +19,26 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @Entity
 @Table(name="claymore_character")
 public class Character {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long characterId;
-    
+
 	private String name;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Race race;
 
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	
+
 	private int age;//years
 	private int height;//inches
 	private int weight;//lbs
-	
-	private int currentHp;	
+
+	private int currentHp;
 	private int xp;
-	
+
 	private int strength;
 	private int constitution;
 	private int dexterity;
@@ -47,29 +46,23 @@ public class Character {
 	private int recall;
 	private int wit;
 	private int leadership;
-	
+
 	@Enumerated(EnumType.STRING)
 	private WeaponSkill primaryWeaponSkill;
-	
-	@ManyToOne(cascade = {CascadeType.ALL})
+
+	@ManyToOne
 	@RestResource(exported=false)
 	private Player player;
-	
-	@OneToMany(
-	        cascade = CascadeType.ALL
-	    )
+
+	@OneToMany(cascade = CascadeType.ALL)
 	@RestResource(exported=false)
 	private List<Attack> attacks = new LinkedList<>();
 
-	@OneToMany(
-	        cascade = CascadeType.ALL
-	    )
+	@OneToMany(cascade = CascadeType.ALL)
 	@RestResource(exported=false)
 	private List<Defense> defenses = new LinkedList<>();
 
-	@OneToMany(
-	        cascade = CascadeType.ALL
-	    )
+	@OneToMany(cascade = CascadeType.ALL)
 	@RestResource(exported=false)
 	private List<XpBuy> xpBuys = new LinkedList<>();
 
@@ -224,7 +217,7 @@ public class Character {
 	public void addAttack(Attack attack) {
 		this.attacks.add(attack);
 	}
-	
+
 	public void removeAttack(Attack attack) {
 		this.attacks.remove(attack);
 	}
@@ -236,7 +229,7 @@ public class Character {
 	public void addDefense(Defense defense) {
 		this.defenses.add(defense);
 	}
-	
+
 	public void removeDefense(Defense defense) {
 		this.defenses.remove(defense);
 	}
@@ -248,7 +241,7 @@ public class Character {
 	public void addXpBuy(XpBuy xpBuy) {
 		this.xpBuys.add(xpBuy);
 	}
-	
+
 	public void removeXpBuy(XpBuy xpBuy) {
 		this.xpBuys.remove(xpBuy);
 	}
@@ -277,5 +270,5 @@ public class Character {
 			return false;
 		return true;
 	}
-	
+
 }

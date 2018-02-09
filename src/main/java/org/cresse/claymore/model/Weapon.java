@@ -6,22 +6,21 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Weapon {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long weaponId;
-    
+
 	private String name;
-	
+
 	private float weight;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Size size;
-	
+
 	@Enumerated(EnumType.STRING)
 	private WeaponGroup weaponGroup;
 
@@ -34,9 +33,9 @@ public class Weapon {
 	private String range;
 	private String damage;
 	private String special;
-	
+
 	public Weapon() {}
-	
+
 	public Weapon(String name, Size size, WeaponGroup weaponGroup, DamageType type, int speed, String damage) {
 		this.name = name;
 		this.size = size;
@@ -45,7 +44,7 @@ public class Weapon {
 		this.speed = speed;
 		this.damage = damage;
 	}
-	
+
 	public Long getWeaponId() {
 		return weaponId;
 	}

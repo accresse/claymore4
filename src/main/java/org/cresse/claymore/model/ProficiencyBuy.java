@@ -3,28 +3,25 @@ package org.cresse.claymore.model;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class ProficiencyBuy {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long buyId;
-    
+
     private int level;
     private int points;
-    
+
     @Enumerated(EnumType.STRING)
     private ProficiencyCategory category;
-    
+
     private String ability;
-	
+
 	public ProficiencyBuy() {}
 
 	public ProficiencyBuy(int level, int points, ProficiencyCategory category, String ability) {

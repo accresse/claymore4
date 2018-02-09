@@ -13,6 +13,7 @@ import org.cresse.claymore.model.WeaponGroup;
 import org.cresse.claymore.model.WeaponSkill;
 import org.cresse.claymore.model.XpBuy;
 import org.cresse.claymore.repository.CharacterRepository;
+import org.cresse.claymore.repository.PlayerRepository;
 import org.cresse.claymore.repository.WeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +29,9 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private WeaponRepository weaponRepository;
 
+	@Autowired
+	private PlayerRepository playerRepository;
+
 	private Weapon sword;
 
 	private Weapon club;
@@ -35,17 +39,18 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		sword = new Weapon("Arming Sword",Size.Medium,WeaponGroup.Blades_Slashing,DamageType.Slashing,3,"2d8");
-		//weaponRepository.save(sword);
+		weaponRepository.save(sword);
 
 		club = new Weapon("2H Club",Size.Large,WeaponGroup.Crushing,DamageType.Bludgeoning,2,"3d10-H");
-		//weaponRepository.save(club);
+		weaponRepository.save(club);
 
 		quin();
 		adny();
 	}
 
 	private void quin() {
-		Player adam = new Player("adam");		
+		Player adam = new Player("adam");
+		playerRepository.save(adam);
 		
 		org.cresse.claymore.model.Character quin = new org.cresse.claymore.model.Character();
 		quin.setName("Quin");
@@ -125,6 +130,7 @@ public class Application implements CommandLineRunner {
 
 	private void adny() {
 		Player colin = new Player("colin");
+		playerRepository.save(colin);
 
 		org.cresse.claymore.model.Character adny = new org.cresse.claymore.model.Character();
 		adny.setName("Adny");
