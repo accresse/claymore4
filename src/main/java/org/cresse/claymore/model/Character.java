@@ -48,7 +48,7 @@ public class Character {
 	private int leadership;
 
 	@Enumerated(EnumType.STRING)
-	private WeaponSkill primaryWeaponSkill;
+	private WeaponSkillType primaryWeaponSkill;
 
 	@ManyToOne
 	@RestResource(exported=false)
@@ -65,6 +65,10 @@ public class Character {
 	@OneToMany(cascade = CascadeType.ALL)
 	@RestResource(exported=false)
 	private List<XpBuy> xpBuys = new LinkedList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@RestResource(exported=false)
+	private List<SkillBuy> skillBuys = new LinkedList<>();
 
 	public Long getCharacterId() {
 		return characterId;
@@ -194,11 +198,11 @@ public class Character {
 		this.leadership = leadership;
 	}
 
-	public WeaponSkill getPrimaryWeaponSkill() {
+	public WeaponSkillType getPrimaryWeaponSkill() {
 		return primaryWeaponSkill;
 	}
 
-	public void setPrimaryWeaponSkill(WeaponSkill primaryWeaponSkill) {
+	public void setPrimaryWeaponSkill(WeaponSkillType primaryWeaponSkill) {
 		this.primaryWeaponSkill = primaryWeaponSkill;
 	}
 
@@ -244,6 +248,18 @@ public class Character {
 
 	public void removeXpBuy(XpBuy xpBuy) {
 		this.xpBuys.remove(xpBuy);
+	}
+
+	public List<SkillBuy> getSkillBuys() {
+		return skillBuys;
+	}
+
+	public void addSkillBuy(SkillBuy skillBuy) {
+		this.skillBuys.add(skillBuy);
+	}
+
+	public void removeSkillBuy(SkillBuy skillBuy) {
+		this.skillBuys.remove(skillBuy);
 	}
 
 	@Override

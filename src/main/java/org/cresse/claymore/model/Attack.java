@@ -24,7 +24,7 @@ public class Attack {
 	private Weapon baseWeapon;
 	
 	@Enumerated(EnumType.STRING)
-	private WeaponSkill weaponSkill;
+	private WeaponSkillType weaponSkill;
 	
 	private String hit;
 	private String damage;
@@ -33,7 +33,7 @@ public class Attack {
 	
 	public Attack() {}
 	
-	public Attack(Weapon baseWeapon, WeaponSkill weaponSkill) {
+	public Attack(Weapon baseWeapon, WeaponSkillType weaponSkill) {
 		this.setBaseWeapon(baseWeapon);
 		this.setWeaponSkill(weaponSkill);
 	}
@@ -64,11 +64,11 @@ public class Attack {
 		this.baseWeapon = baseWeapon;
 	}
 
-	public WeaponSkill getWeaponSkill() {
+	public WeaponSkillType getWeaponSkill() {
 		return weaponSkill;
 	}
 
-	public void setWeaponSkill(WeaponSkill weaponSkill) {
+	public void setWeaponSkill(WeaponSkillType weaponSkill) {
 		this.weaponSkill = weaponSkill;
 	}
 

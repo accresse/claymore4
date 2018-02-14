@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ProficiencyBuy {
+public class SkillBuy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,17 +18,21 @@ public class ProficiencyBuy {
     private int points;
 
     @Enumerated(EnumType.STRING)
-    private ProficiencyCategory category;
+    private SkillCategory category;
 
     private String ability;
 
-	public ProficiencyBuy() {}
+	public SkillBuy() {}
 
-	public ProficiencyBuy(int level, int points, ProficiencyCategory category, String ability) {
+	public SkillBuy(int level, int points, SkillCategory category, String ability) {
 		this.level = level;
 		this.points = points;
 		this.category = category;
 		this.ability = ability;
+	}
+
+	public SkillBuy(int level, int points, WeaponGroup weaponGroup) {
+		this(level, points, SkillCategory.Weapon, weaponGroup.toString());
 	}
 
 	public Long getBuyId() {
@@ -55,11 +59,11 @@ public class ProficiencyBuy {
 		this.points = points;
 	}
 
-	public ProficiencyCategory getCategory() {
+	public SkillCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(ProficiencyCategory category) {
+	public void setCategory(SkillCategory category) {
 		this.category = category;
 	}
 

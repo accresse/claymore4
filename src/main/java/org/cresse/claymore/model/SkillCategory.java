@@ -1,6 +1,6 @@
 package org.cresse.claymore.model;
 
-public enum ProficiencyCategory {
+public enum SkillCategory {
 	
 	Weapon,
 	Martial,

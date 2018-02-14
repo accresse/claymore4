@@ -1,6 +1,6 @@
 package org.cresse.claymore.model;
 
-public enum WeaponSkill {
+public enum WeaponSkillType {
 	
 	MWS, BWS;
 

@@ -8,9 +8,10 @@ import org.cresse.claymore.model.Gender;
 import org.cresse.claymore.model.Player;
 import org.cresse.claymore.model.Race;
 import org.cresse.claymore.model.Size;
+import org.cresse.claymore.model.SkillBuy;
 import org.cresse.claymore.model.Weapon;
 import org.cresse.claymore.model.WeaponGroup;
-import org.cresse.claymore.model.WeaponSkill;
+import org.cresse.claymore.model.WeaponSkillType;
 import org.cresse.claymore.model.XpBuy;
 import org.cresse.claymore.repository.CharacterRepository;
 import org.cresse.claymore.repository.PlayerRepository;
@@ -22,7 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-	
+
 	@Autowired
 	private CharacterRepository characterRepository;
 
@@ -51,7 +52,7 @@ public class Application implements CommandLineRunner {
 	private void quin() {
 		Player adam = new Player("adam");
 		playerRepository.save(adam);
-		
+
 		org.cresse.claymore.model.Character quin = new org.cresse.claymore.model.Character();
 		quin.setName("Quin");
 		quin.setPlayer(adam);
@@ -69,50 +70,52 @@ public class Application implements CommandLineRunner {
 		quin.setRecall(18);
 		quin.setWit(18);
 		quin.setLeadership(18);
-		quin.setPrimaryWeaponSkill(WeaponSkill.MWS);
-		
-		Attack clubAttack = new Attack(this.club, WeaponSkill.MWS);
+		quin.setPrimaryWeaponSkill(WeaponSkillType.MWS);
+
+		Attack clubAttack = new Attack(this.club, WeaponSkillType.MWS);
 		clubAttack.setNotes("this is a <b>note</b>");
 		clubAttack.setDamage("+1");
 		quin.addAttack(clubAttack);
-		
-		Attack swordAttack1 = new Attack(this.sword, WeaponSkill.MWS);
+
+		Attack swordAttack1 = new Attack(this.sword, WeaponSkillType.MWS);
 		quin.addAttack(swordAttack1);
-		
-		Attack swordAttack2 = new Attack(this.sword, WeaponSkill.MWS);
+
+		Attack swordAttack2 = new Attack(this.sword, WeaponSkillType.MWS);
 		swordAttack2.setName("Sword2");
 		swordAttack2.setHit("+2");
 		swordAttack2.setDamage("+1");
 		swordAttack2.setSpeed("+1");
 		swordAttack2.setAttacks("+.5");
 		quin.addAttack(swordAttack2);
-		
-		Attack swordAttack3 = new Attack(this.sword, WeaponSkill.BWS);
+
+		Attack swordAttack3 = new Attack(this.sword, WeaponSkillType.BWS);
 		swordAttack3.setName("Sword3");
 		swordAttack3.setHit("-1");
 		swordAttack3.setDamage("-2");
 		swordAttack3.setSpeed("-3");
 		swordAttack3.setAttacks("-1.5");
 		quin.addAttack(swordAttack3);
-		
-		Attack swordAttack4 = new Attack(this.sword, WeaponSkill.MWS);
+
+		Attack swordAttack4 = new Attack(this.sword, WeaponSkillType.MWS);
 		swordAttack4.setName("Sword4");
 		swordAttack4.setHit("=10");
 		swordAttack4.setDamage("=3d12");
 		swordAttack4.setSpeed("=7");
 		swordAttack4.setAttacks("=2");
 		quin.addAttack(swordAttack4);
-		
+
 		Defense defense = new Defense();
 		defense.setName("Natural");
 		quin.addDefense(defense);
-		
+
 		//level 1
 		quin.addXpBuy(new XpBuy(1,1,AbilityCategory.Class,"Fighter"));
 		quin.addXpBuy(new XpBuy(1,5,AbilityCategory.HP,null));
 		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponSkill,"{\"mws\":2, \"bws\":1}"));
 		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponMastery,"['Blades, Slashing','Bows']"));
-		
+		quin.addSkillBuy(new SkillBuy(1,14, WeaponGroup.Blades_Slashing));
+		quin.addSkillBuy(new SkillBuy(1,5, WeaponGroup.Crushing));
+
 		//level 2
 		quin.addXpBuy(new XpBuy(2,5,AbilityCategory.HP,null));
 		quin.addXpBuy(new XpBuy(2,2,AbilityCategory.WeaponSkill,"{\"mws\":2,\"bws\":1}"));
@@ -141,7 +144,7 @@ public class Application implements CommandLineRunner {
 		adny.setWeight(140);
 		adny.setRace(Race.Halfling);
 		adny.setCurrentHp(150);
-		
+
 		characterRepository.save(adny);
 	}
 

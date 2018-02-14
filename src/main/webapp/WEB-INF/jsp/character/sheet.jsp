@@ -383,31 +383,31 @@
                         <tbody>
                           <tr>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                             </td>
                           </tr>
                         </tbody>
@@ -506,7 +506,7 @@
                           <a href="#">Strength of Character</a>
                         </td>
                         <td>
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                         </td>
                       </tr>
                       <tr>
@@ -514,7 +514,7 @@
                           <a href="#">Run</a>
                         </td>
                         <td>
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                         </td>
                       </tr>
                       <tr>
@@ -522,7 +522,7 @@
                           <a href="#">Mighty</a>
                         </td>
                         <td>
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                         </td>
                       </tr>
                       <tr>
@@ -530,7 +530,7 @@
                           <a href="#">Mountaineering</a>
                         </td>
                         <td>
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">40%</a>
+                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
                         </td>
                       </tr>
                     </tbody>
@@ -579,6 +579,9 @@
   <script src="../js/jqueryui-editable.min.js"></script>
    -->
   <script src="../js/dice-roller.js"></script>
+  <script src="../js/claymore_data.js"></script>
+  <script src="../js/claymore_xpbuy.js"></script>
+  <script src="../js/claymore_skillbuy.js"></script>
   <script src="../js/claymore.js"></script>
   <!-- 
    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;
