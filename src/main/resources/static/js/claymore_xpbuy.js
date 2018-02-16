@@ -147,6 +147,23 @@ class WeaponSkillProcessor extends CharacterProcessor {
 	}
 }
 
+class WeaponMasteryProcessor extends CharacterProcessor {
+	
+	init() {
+		character.weaponMasteryLevel = {};
+	}
+	
+	processBuy(xpBuy) {
+		var weaponGroups = JSON.parse(xpBuy.ability);
+		for(var i=0; i<weaponGroups.length; i++) {
+			var weaponGroup = weaponGroups[i];
+			var currentLevel = getWeaponMasteryLevel(weaponGroup);
+			character.weaponMasteryLevel[weaponGroup] = currentLevel + 1;
+		}
+	}
+
+}
+
 var xpBuyProcessors = {
 	XP: new XpProcessor(),
 	HP: new HpProcessor(),
@@ -154,5 +171,6 @@ var xpBuyProcessors = {
 	//SavingThrow and ClassSavingThrow need to stay in this order
 	SavingThrow: new SavingThrowProcessor(),
 	ClassSavingThrow: new ClassSavingThrowProcessor(),
-	WeaponSkill: new WeaponSkillProcessor()
+	WeaponSkill: new WeaponSkillProcessor(),
+	WeaponMastery: new WeaponMasteryProcessor()
 };

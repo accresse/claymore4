@@ -246,6 +246,40 @@ var WEAPON_GROUP_COST_TABLE = {
 	'Shields	':4		
 };
 
+var WEAPON_MASTERY_TABLE = [
+	{hit:0, damage:0, speed:0, attacks:0},
+	{hit:2, damage:1, speed:0, attacks:0},
+	{hit:4, damage:2, speed:0, attacks:0},
+	{hit:6, damage:3, speed:0, attacks:0},
+	{hit:8, damage:3, speed:0, attacks:0},
+	{hit:10, damage:4, speed:0, attacks:0},
+	{hit:11, damage:4, speed:0, attacks:.5},
+	{hit:12, damage:5, speed:0, attacks:.5},
+	{hit:13, damage:5, speed:1, attacks:.5},
+	{hit:14, damage:5, speed:1, attacks:.5},
+	{hit:15, damage:6, speed:1, attacks:.5},
+	{hit:16, damage:6, speed:1, attacks:.5},
+	{hit:17, damage:6, speed:1, attacks:.5},
+	{hit:18, damage:7, speed:1, attacks:.5},
+	{hit:19, damage:7, speed:1, attacks:.5},
+	{hit:20, damage:7, speed:1, attacks:1},
+	{hit:21, damage:7, speed:1, attacks:1},
+	{hit:21, damage:8, speed:1, attacks:1},
+	{hit:22, damage:8, speed:1, attacks:1},
+	{hit:22, damage:8, speed:1, attacks:1},
+	{hit:23, damage:8, speed:2, attacks:1},
+	{hit:23, damage:9, speed:2, attacks:1},
+	{hit:24, damage:9, speed:2, attacks:1},
+	{hit:24, damage:9, speed:2, attacks:1},
+	{hit:25, damage:9, speed:2, attacks:1},
+	{hit:25, damage:9, speed:2, attacks:1.5},
+	{hit:26, damage:10, speed:2, attacks:1.5},
+	{hit:26, damage:10, speed:2, attacks:1.5},
+	{hit:27, damage:10, speed:2, attacks:1.5},
+	{hit:27, damage:10, speed:2, attacks:1.5},
+	{hit:28, damage:10, speed:2, attacks:2}	
+];
+
 //helper methods
 var getStrengthMods = function() {
 	return STR_TABLE[character.strength];
@@ -269,6 +303,19 @@ var getRecallMods = function() {
 
 var getWitMods = function() {
 	return WIT_TABLE[character.wit];
+};
+
+var getWeaponMasteryLevel = function(weaponGroup) {
+	var masteryLevel = character.weaponMasteryLevel[weaponGroup];
+	if(!masteryLevel) {
+		masteryLevel = 0;
+	}
+	return masteryLevel;
+};
+
+var getWeaponMasteryMods = function(weaponGroup) {
+	var level = getWeaponMasteryLevel(weaponGroup);
+	return WEAPON_MASTERY_TABLE[level];
 };
 
 class CharacterProcessor {

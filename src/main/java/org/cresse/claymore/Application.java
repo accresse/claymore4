@@ -1,6 +1,5 @@
 package org.cresse.claymore;
 
-import org.cresse.claymore.model.AbilityCategory;
 import org.cresse.claymore.model.Attack;
 import org.cresse.claymore.model.DamageType;
 import org.cresse.claymore.model.Defense;
@@ -13,6 +12,7 @@ import org.cresse.claymore.model.Weapon;
 import org.cresse.claymore.model.WeaponGroup;
 import org.cresse.claymore.model.WeaponSkillType;
 import org.cresse.claymore.model.XpBuy;
+import org.cresse.claymore.model.XpBuyCategory;
 import org.cresse.claymore.repository.CharacterRepository;
 import org.cresse.claymore.repository.PlayerRepository;
 import org.cresse.claymore.repository.WeaponRepository;
@@ -37,6 +37,8 @@ public class Application implements CommandLineRunner {
 
 	private Weapon club;
 
+	private Weapon bow;
+
 	@Override
 	public void run(String... args) throws Exception {
 		sword = new Weapon("Arming Sword",Size.Medium,WeaponGroup.Blades_Slashing,DamageType.Slashing,3,"2d8");
@@ -44,6 +46,9 @@ public class Application implements CommandLineRunner {
 
 		club = new Weapon("2H Club",Size.Large,WeaponGroup.Crushing,DamageType.Bludgeoning,2,"3d10-H");
 		weaponRepository.save(club);
+
+		bow = new Weapon("Long Bow",Size.Medium,WeaponGroup.Bows,DamageType.Piercing,2,"2d6");
+		weaponRepository.save(bow);
 
 		quin();
 		adny();
@@ -72,14 +77,26 @@ public class Application implements CommandLineRunner {
 		quin.setLeadership(18);
 		quin.setPrimaryWeaponSkill(WeaponSkillType.MWS);
 
+		//hit=56 (mws) -10 (unskilled) +1 (prof) +0 (mastery)
+		//damage=3d10-H (base) +1 (attack) +0 (mastery)
+		//attacks=1 (base) +0 (mastery)
+		//speed=2 (base) +0 (mastery)
 		Attack clubAttack = new Attack(this.club, WeaponSkillType.MWS);
 		clubAttack.setNotes("this is a <b>note</b>");
 		clubAttack.setDamage("+1");
 		quin.addAttack(clubAttack);
 
+		//hit=56 (mws) -10 (unskilled) +10 (prof) +4 (L2 mastery)
+		//damage=2d8 (base) +0 (attack) +2 (L2 mastery)
+		//attacks=1 (base) +0 (mastery) +0 (L2 mastery)
+		//speed=3 (base) +0 (mastery) +0 (L2 mastery)
 		Attack swordAttack1 = new Attack(this.sword, WeaponSkillType.MWS);
 		quin.addAttack(swordAttack1);
 
+		//hit=56 (mws) +2 (attack) -10 (unskilled) +10 (prof) +4 (L2 mastery)
+		//damage=2d8 (base) +1 (attack) +2 (L2 mastery)
+		//attacks=1 (base) +.5 (attack) +0 (mastery) +0 (L2 mastery)
+		//speed=3 (base) +1 (attack) +0 (mastery) +0 (L2 mastery)
 		Attack swordAttack2 = new Attack(this.sword, WeaponSkillType.MWS);
 		swordAttack2.setName("Sword2");
 		swordAttack2.setHit("+2");
@@ -104,29 +121,39 @@ public class Application implements CommandLineRunner {
 		swordAttack4.setAttacks("=2");
 		quin.addAttack(swordAttack4);
 
+		Attack bowAttack = new Attack(this.bow, WeaponSkillType.BWS);
+		quin.addAttack(bowAttack);
+
 		Defense defense = new Defense();
 		defense.setName("Natural");
 		quin.addDefense(defense);
 
 		//level 1
-		quin.addXpBuy(new XpBuy(1,1,AbilityCategory.Class,"Fighter"));
-		quin.addXpBuy(new XpBuy(1,5,AbilityCategory.HP,null));
-		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponSkill,"{\"mws\":2, \"bws\":1}"));
-		quin.addXpBuy(new XpBuy(1,2,AbilityCategory.WeaponMastery,"['Blades, Slashing','Bows']"));
+		quin.addXpBuy(new XpBuy(1,1,XpBuyCategory.Class,"Fighter"));
+		quin.addXpBuy(new XpBuy(1,5,XpBuyCategory.HP,null));
+		quin.addXpBuy(new XpBuy(1,2,XpBuyCategory.WeaponSkill,"{\"mws\":2, \"bws\":1}"));
+		quin.addXpBuy(new XpBuy(1,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
 		quin.addSkillBuy(new SkillBuy(1,14, WeaponGroup.Blades_Slashing));
-		quin.addSkillBuy(new SkillBuy(1,5, WeaponGroup.Crushing));
+		quin.addSkillBuy(new SkillBuy(1,3, WeaponGroup.Crushing));
+		quin.addSkillBuy(new SkillBuy(1,14, WeaponGroup.Bows));
 
 		//level 2
-		quin.addXpBuy(new XpBuy(2,5,AbilityCategory.HP,null));
-		quin.addXpBuy(new XpBuy(2,2,AbilityCategory.WeaponSkill,"{\"mws\":2,\"bws\":1}"));
-		quin.addXpBuy(new XpBuy(2,1,AbilityCategory.ClassSavingThrow,"{\"fortitude\": 15, \"identity\": -5}"));
-		quin.addXpBuy(new XpBuy(2,2,AbilityCategory.WeaponMastery,"['Blades, Slashing','Bows']"));
+		quin.addXpBuy(new XpBuy(2,5,XpBuyCategory.HP,null));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponSkill,"{\"mws\":2,\"bws\":1}"));
+		quin.addXpBuy(new XpBuy(2,1,XpBuyCategory.ClassSavingThrow,"{\"fortitude\": 15, \"identity\": -5}"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
 
 		//level 3
-		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.SkillPoints,null));
-		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.SavingThrow,"{\"agility\":2,\"fortitude\":1}"));
-		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.ClassSavingThrow,"{\"might\": 10}"));
-		quin.addXpBuy(new XpBuy(3,1,AbilityCategory.FighterClassAbility,"Weapon Appraisal"));
+		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.SkillPoints,null));
+		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.SavingThrow,"{\"agility\":2,\"fortitude\":1}"));
+		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.ClassSavingThrow,"{\"might\": 10}"));
+		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.FighterClassAbility,"Weapon Appraisal"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
 
 		characterRepository.save(quin);
 	}

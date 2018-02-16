@@ -202,7 +202,7 @@
                       <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
                     </div>
                     <div class="col-md-1">
-                      <a href="#"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+                      <a href="#" data-toggle="modal" data-target="#attackModal" data-title="New Attack"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -221,7 +221,7 @@
                     <tbody id="attack_table">
                       <tr id="attack_template" class="text-center" style="display:none">
                         <td class="">
-                          <a href="#" class="attack_name"></a>
+                          <a href="#" class="attack_name" data-toggle="modal" data-target="#attackModal" data-title="Edit Attack"></a>
                         </td>
                         <td>
                           <button class="btn btn-outline-primary attack_hit rollable_d100" title="Press to Roll" value="--%"></button>
@@ -571,6 +571,70 @@
       </div>
     </div>
   </div>
+  
+      
+	<div class="modal fade" id="attackModal" tabindex="-1" role="dialog" aria-labelledby="attackModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Update Attack</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="container-fluid">
+	      		<input id="attackModal_index" type="hidden"/>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Name:</div>
+		      		<div class="col-md-8"><input id="attackModal_name" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Base Weapon:</div>
+		      		<div class="col-md-8"><select id="attackModal_baseWeapon"></select></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Weapon Skill:</div>
+		      		<div class="col-md-8">
+						<label class="radio-inline"><input id="attackModal_weaponSkill_MWS" type="radio" name="attackModal_weaponSkill" value="MWS" checked> MWS</label>
+						<label class="radio-inline"><input id="attackModal_weaponSkill_BWS" type="radio" name="attackModal_weaponSkill" value="BWS"> BWS</label>
+		      		</div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Hit:</div>
+		      		<div class="col-md-8"><input id="attackModal_hit" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Damage:</div>
+		      		<div class="col-md-8"><input id="attackModal_damage" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Speed:</div>
+		      		<div class="col-md-8"><input id="attackModal_speed" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Attacks:</div>
+		      		<div class="col-md-8"><input id="attackModal_attacks" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Notes:</div>
+		      	</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+		      		<div class="col-md-8"><textarea id="attackModal_notes"></textarea></div>
+		      	</div>
+		     </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button id="attackModal_save" type="button" class="btn btn-primary">Save changes</button>
+	        <button id="attackModal_delete" type="button" class="btn btn-danger">Delete</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  
+  
   <script src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
   <script src="../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script src="../js/popper.min.js"></script>

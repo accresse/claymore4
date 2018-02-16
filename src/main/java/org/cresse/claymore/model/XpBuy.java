@@ -18,13 +18,13 @@ public class XpBuy {
     private int points;
 
     @Enumerated(EnumType.STRING)
-    private AbilityCategory category;
+    private XpBuyCategory category;
 
     private String ability;
 
 	public XpBuy() {}
 
-	public XpBuy(int level, int points, AbilityCategory category, String ability) {
+	public XpBuy(int level, int points, XpBuyCategory category, String ability) {
 		this.level = level;
 		this.points = points;
 		this.category = category;
@@ -55,11 +55,11 @@ public class XpBuy {
 		this.points = points;
 	}
 
-	public AbilityCategory getCategory() {
+	public XpBuyCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(AbilityCategory category) {
+	public void setCategory(XpBuyCategory category) {
 		this.category = category;
 	}
 

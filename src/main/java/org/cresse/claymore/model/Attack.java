@@ -12,32 +12,32 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 public class Attack {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long attackId;
-    
+
 	private String name;
-	
+
 	@ManyToOne
 	@RestResource(exported=false)
 	private Weapon baseWeapon;
-	
+
 	@Enumerated(EnumType.STRING)
 	private WeaponSkillType weaponSkill;
-	
+
 	private String hit;
 	private String damage;
 	private String speed;
 	private String attacks;
-	
+
 	public Attack() {}
-	
+
 	public Attack(Weapon baseWeapon, WeaponSkillType weaponSkill) {
 		this.setBaseWeapon(baseWeapon);
 		this.setWeaponSkill(weaponSkill);
 	}
-	
+
 	private String notes;
 
 	public Long getAttackId() {
@@ -137,6 +137,6 @@ public class Attack {
 		return true;
 	}
 
-	
-	
+
+
 }
