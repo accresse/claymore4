@@ -1,0 +1,250 @@
+{
+  "name": "Quin",
+  "race": "Human",
+  "gender": "Male",
+  "age": 20,
+  "height": 72,
+  "weight": 200,
+  "currentHp": 8,
+  "xp": 30,
+  "strength": 18,
+  "constitution": 18,
+  "dexterity": 18,
+  "problemSolving": 18,
+  "recall": 18,
+  "wit": 18,
+  "leadership": 18,
+  "primaryWeaponSkill": "MWS",
+  "player": {
+    "playerId": 1,
+    "userName": "adam"
+  },
+  "attacks": [ {
+      "name": null,
+      "baseWeapon": {
+        "weaponId": 2,
+        "name": "2H Club",
+        "weight": 0.0,
+        "size": "Large",
+        "weaponGroup": "Crushing",
+        "type": "Bludgeoning",
+        "speed": 2,
+        "reach": 0,
+        "rateOfFire": null,
+        "range": null,
+        "damage": "3d10-H",
+        "special": null
+      },
+      "weaponSkill": "MWS",
+      "hit": null,
+      "damage": "+1",
+      "speed": null,
+      "attacks": null,
+      "notes": "this is a <b>note</b>"
+    }, {
+      "name": null,
+      "baseWeapon": {
+        "weaponId": 1,
+        "name": "Arming Sword",
+        "weight": 0.0,
+        "size": "Medium",
+        "weaponGroup": "Blades_Slashing",
+        "type": "Slashing",
+        "speed": 3,
+        "reach": 0,
+        "rateOfFire": null,
+        "range": null,
+        "damage": "2d8",
+        "special": null
+      },
+      "weaponSkill": "MWS",
+      "hit": null,
+      "damage": null,
+      "speed": null,
+      "attacks": null,
+      "notes": null
+    }, {
+      "name": "Sword3",
+      "baseWeapon": {
+        "weaponId": 1,
+        "name": "Arming Sword",
+        "weight": 0.0,
+        "size": "Medium",
+        "weaponGroup": "Blades_Slashing",
+        "type": "Slashing",
+        "speed": 3,
+        "reach": 0,
+        "rateOfFire": null,
+        "range": null,
+        "damage": "2d8",
+        "special": null
+      },
+      "weaponSkill": "BWS",
+      "hit": "-1",
+      "damage": "-2",
+      "speed": "-3",
+      "attacks": "-1.5",
+      "notes": null
+    }, {
+      "name": "Sword4",
+      "baseWeapon": {
+        "weaponId": 1,
+        "name": "Arming Sword",
+        "weight": 0.0,
+        "size": "Medium",
+        "weaponGroup": "Blades_Slashing",
+        "type": "Slashing",
+        "speed": 3,
+        "reach": 0,
+        "rateOfFire": null,
+        "range": null,
+        "damage": "2d8",
+        "special": null
+      },
+      "weaponSkill": "MWS",
+      "hit": "=10",
+      "damage": "=3d12",
+      "speed": "=7",
+      "attacks": "=2",
+      "notes": null
+    }, {
+      "name": null,
+      "baseWeapon": {
+        "weaponId": 3,
+        "name": "Long Bow",
+        "weight": 0.0,
+        "size": "Medium",
+        "weaponGroup": "Bows",
+        "type": "Piercing",
+        "speed": 2,
+        "reach": 0,
+        "rateOfFire": null,
+        "range": null,
+        "damage": "2d6",
+        "special": null
+      },
+      "weaponSkill": "BWS",
+      "hit": null,
+      "damage": null,
+      "speed": null,
+      "attacks": null,
+      "notes": null
+    } ],
+  "defenses": [ {
+      "name": "Natural",
+      "notes": null
+    } ],
+  "xpBuys": [ {
+      "level": 1,
+      "points": 1,
+      "category": "Class",
+      "ability": "Fighter"
+    }, {
+      "level": 1,
+      "points": 5,
+      "category": "HP",
+      "ability": null
+    }, {
+      "level": 1,
+      "points": 2,
+      "category": "WeaponSkill",
+      "ability": "{\"mws\":2, \"bws\":1}"
+    }, {
+      "level": 1,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 2,
+      "points": 5,
+      "category": "HP",
+      "ability": null
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponSkill",
+      "ability": "{\"mws\":2,\"bws\":1}"
+    }, {
+      "level": 2,
+      "points": 1,
+      "category": "ClassSavingThrow",
+      "ability": "{\"fortitude\": 15, \"identity\": -5}"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 3,
+      "points": 1,
+      "category": "SkillPoints",
+      "ability": null
+    }, {
+      "level": 3,
+      "points": 1,
+      "category": "SavingThrow",
+      "ability": "{\"agility\":2,\"fortitude\":1}"
+    }, {
+      "level": 3,
+      "points": 1,
+      "category": "ClassSavingThrow",
+      "ability": "{\"might\": 10}"
+    }, {
+      "level": 3,
+      "points": 1,
+      "category": "FighterClassAbility",
+      "ability": "Weapon Appraisal"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    }, {
+      "level": 2,
+      "points": 2,
+      "category": "WeaponMastery",
+      "ability": "[\"Blades_Slashing\",\"Bows\"]"
+    } ],
+  "skillBuys": [ {
+      "level": 1,
+      "points": 14,
+      "category": "Weapon",
+      "ability": "Blades_Slashing"
+    }, {
+      "level": 1,
+      "points": 3,
+      "category": "Weapon",
+      "ability": "Crushing"
+    }, {
+      "level": 1,
+      "points": 14,
+      "category": "Weapon",
+      "ability": "Bows"
+    } ],
+  "_links": {
+    "self": {
+    },
+    "character": {
+    }
+  }
+}
