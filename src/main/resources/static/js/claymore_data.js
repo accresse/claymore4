@@ -318,6 +318,10 @@ var getWeaponMasteryMods = function(weaponGroup) {
 	return WEAPON_MASTERY_TABLE[level];
 };
 
+var getWeapon = function(weaponId) {
+	return weaponMap[weaponId];
+};
+
 class CharacterProcessor {
 	init(){}
 	

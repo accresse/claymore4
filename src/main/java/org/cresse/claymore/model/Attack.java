@@ -6,9 +6,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 public class Attack {
@@ -19,9 +16,12 @@ public class Attack {
 
 	private String name;
 
-	@ManyToOne
-	@RestResource(exported=false)
-	private Weapon baseWeapon;
+//	@ManyToOne(cascade={})
+//	@RestResource(exported=false)
+//	private Weapon baseWeapon;
+
+	//use the id only until i can figure out why weapon attributes get updated when i delete an attack from a character
+	private Long baseWeaponId;
 
 	@Enumerated(EnumType.STRING)
 	private WeaponSkillType weaponSkill;
@@ -56,12 +56,24 @@ public class Attack {
 		this.name = name;
 	}
 
-	public Weapon getBaseWeapon() {
-		return baseWeapon;
+//	public Weapon getBaseWeapon() {
+//		return baseWeapon;
+//	}
+//
+//	public void setBaseWeapon(Weapon baseWeapon) {
+//		this.baseWeapon = baseWeapon;
+//	}
+//
+	public Long getBaseWeaponId() {
+		return baseWeaponId;
+	}
+
+	public void setBaseWeaponId(Long baseWeaponId) {
+		this.baseWeaponId = baseWeaponId;
 	}
 
 	public void setBaseWeapon(Weapon baseWeapon) {
-		this.baseWeapon = baseWeapon;
+		this.baseWeaponId = baseWeapon.getWeaponId();
 	}
 
 	public WeaponSkillType getWeaponSkill() {

@@ -1,5 +1,6 @@
 package org.cresse.claymore.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,6 +31,8 @@ public class Weapon {
 	private int speed;
 	private int reach;
 	private String rateOfFire;
+
+	@Column(name="weapon_range")
 	private String range;
 	private String damage;
 	private String special;

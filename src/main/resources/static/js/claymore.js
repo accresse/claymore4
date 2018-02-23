@@ -54,7 +54,7 @@ $(document).ready(
 			  
 			  if(index || index==0) {
 				  var attack = character.attacks[index];
-				  var baseWeapon = attack.baseWeapon;
+				  var baseWeapon = getWeapon(attack.baseWeaponId);
 				  
 				  $('#attackModal_index').val(index);
 				  
@@ -318,13 +318,13 @@ var updateAttacks = function() {
 	$('#attack_table').empty();
 	for(var i=0; i<character.attacks.length; i++) {
 		var attack = character.attacks[i];
-		var baseWeapon = attack.baseWeapon;
+		var baseWeapon = getWeapon(attack.baseWeaponId);
 		var row = attackTemplate.clone();
 		var masteryBonus = getWeaponMasteryMods(baseWeapon.weaponGroup);
 		row.attr('id','attack.'+i);
-		row.find('.attack_name').text(calculateNameForAttack(attack)).data('attackIndex',i);
-		row.find('.attack_hit').text(calculateHitForAttack(attack, masteryBonus)+'%');
-		row.find('.attack_damage').text(calculateDamageForAttack(attack, masteryBonus));
+		row.find('.attack_name').text(calculateNameForAttack(attack, baseWeapon)).data('attackIndex',i);
+		row.find('.attack_hit').text(calculateHitForAttack(attack, baseWeapon, masteryBonus)+'%');
+		row.find('.attack_damage').text(calculateDamageForAttack(attack, baseWeapon, masteryBonus));
 		row.find('.attack_speed').text(getAttackValSum(attack.speed,baseWeapon.speed, masteryBonus.speed));
 		row.find('.attack_attacks').text(getAttackValSum(attack.attacks,1,masteryBonus.attacks));
 		row.find('.attack_notes').html(getAttackValNotes(attack,baseWeapon));
@@ -335,17 +335,17 @@ var updateAttacks = function() {
 	}
 };
 
-var calculateNameForAttack = function(attack) {
-	return attack.name ? attack.name : attack.baseWeapon.name;
+var calculateNameForAttack = function(attack, baseWeapon) {
+	return attack.name ? attack.name : baseWeapon.name;
 };
 
-var calculateHitForAttack = function(attack, masteryBonus) {
+var calculateHitForAttack = function(attack, baseWeapon, masteryBonus) {
 	
 	//start with base MWS/BWS
 	var hit = character[attack.weaponSkill.toLowerCase()];
 	
 	//add bonus/penalty for weapon group proficiency
-	var wgs = character.weaponGroupSkill[attack.baseWeapon.weaponGroup]
+	var wgs = character.weaponGroupSkill[baseWeapon.weaponGroup]
 	if(wgs || wgs==0) {
 		hit += wgs;
 	} else {
@@ -359,12 +359,12 @@ var calculateHitForAttack = function(attack, masteryBonus) {
 	
 };
 
-var calculateDamageForAttack = function(attack, masteryBonus) {
+var calculateDamageForAttack = function(attack, baseWeapon, masteryBonus) {
 	var attackDamage = attack.damage;
 	if(attackDamage && attackDamage.startsWith('=')) {
 		return attackDamage.substring(1);
 	} 
-	var retVal = attack.baseWeapon.damage;
+	var retVal = baseWeapon.damage;
 	
 	var bonus = masteryBonus.damage;
 	if(attackDamage) {
