@@ -22,7 +22,31 @@ $(document).ready(
 		$('.rollable_literal').click(rollable_literal);
 		
 		$('#attackModal_save').click(function(){
-			alert("save");
+			var attack = {};
+			
+			attack.name = $('#attackModal_name').val();
+			if($('#attackModal_weaponSkill_MWS').prop('checked')) {
+				attack.weaponSkill = 'MWS';
+			} else {
+				attack.weaponSkill = 'BWS';
+			}
+			attack.hit = $('#attackModal_hit').val();
+			attack.damage = $('#attackModal_damage').val();
+			attack.speed = $('#attackModal_speed').val();
+			attack.attacks = $('#attackModal_attacks').val();
+			attack.baseWeaponId = $('#attackModal_baseWeapon').val();
+			attack.notes = $('#attackModal_notes').text();
+				  
+			var index = $('#attackModal_index').val();
+		    if(index!="") {
+		    		index=parseInt(index);
+		    		character.attacks[index] = attack;
+		    } else {
+		    		character.attacks.push(attack);
+		    }
+
+			updateJsonView();
+			updateDerivedFields();
 			$('#attackModal').modal('hide');
 		});
 
@@ -49,6 +73,7 @@ $(document).ready(
 			  $('#attackModal_damage').val("");
 			  $('#attackModal_speed').val("");
 			  $('#attackModal_attacks').val("");
+			  $('#attackModal_notes').text("");
 			  $('#attackModal_baseWeapon').change();
 			  $('#attackModal_delete').hide();
 			  
