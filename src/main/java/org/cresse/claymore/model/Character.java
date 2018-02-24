@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -54,19 +55,23 @@ public class Character {
 	@RestResource(exported=false)
 	private Player player;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "character_id")
 	@RestResource(exported=false)
 	private List<Attack> attacks = new LinkedList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "character_id")
 	@RestResource(exported=false)
 	private List<Defense> defenses = new LinkedList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "character_id")
 	@RestResource(exported=false)
 	private List<XpBuy> xpBuys = new LinkedList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "character_id")
 	@RestResource(exported=false)
 	private List<SkillBuy> skillBuys = new LinkedList<>();
 

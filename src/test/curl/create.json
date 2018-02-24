@@ -21,20 +21,7 @@
   },
   "attacks": [ {
       "name": null,
-      "baseWeapon": {
-        "weaponId": 2,
-        "name": "2H Club",
-        "weight": 0.0,
-        "size": "Large",
-        "weaponGroup": "Crushing",
-        "type": "Bludgeoning",
-        "speed": 2,
-        "reach": 0,
-        "rateOfFire": null,
-        "range": null,
-        "damage": "3d10-H",
-        "special": null
-      },
+      "baseWeaponId": 2,
       "weaponSkill": "MWS",
       "hit": null,
       "damage": "+1",
@@ -43,20 +30,7 @@
       "notes": "this is a <b>note</b>"
     }, {
       "name": null,
-      "baseWeapon": {
-        "weaponId": 1,
-        "name": "Arming Sword",
-        "weight": 0.0,
-        "size": "Medium",
-        "weaponGroup": "Blades_Slashing",
-        "type": "Slashing",
-        "speed": 3,
-        "reach": 0,
-        "rateOfFire": null,
-        "range": null,
-        "damage": "2d8",
-        "special": null
-      },
+      "baseWeaponId": 1,
       "weaponSkill": "MWS",
       "hit": null,
       "damage": null,
@@ -65,20 +39,7 @@
       "notes": null
     }, {
       "name": "Sword2",
-      "baseWeapon": {
-        "weaponId": 1,
-        "name": "Arming Sword",
-        "weight": 0.0,
-        "size": "Medium",
-        "weaponGroup": "Blades_Slashing",
-        "type": "Slashing",
-        "speed": 3,
-        "reach": 0,
-        "rateOfFire": null,
-        "range": null,
-        "damage": "2d8",
-        "special": null
-      },
+      "baseWeaponId": 1,
       "weaponSkill": "MWS",
       "hit": "+2",
       "damage": "+1",
@@ -87,20 +48,7 @@
       "notes": null
     }, {
       "name": "Sword3",
-      "baseWeapon": {
-        "weaponId": 1,
-        "name": "Arming Sword",
-        "weight": 0.0,
-        "size": "Medium",
-        "weaponGroup": "Blades_Slashing",
-        "type": "Slashing",
-        "speed": 3,
-        "reach": 0,
-        "rateOfFire": null,
-        "range": null,
-        "damage": "2d8",
-        "special": null
-      },
+      "baseWeaponId": 1,
       "weaponSkill": "BWS",
       "hit": "-1",
       "damage": "-2",
@@ -109,20 +57,7 @@
       "notes": null
     }, {
       "name": "Sword4",
-      "baseWeapon": {
-        "weaponId": 1,
-        "name": "Arming Sword",
-        "weight": 0.0,
-        "size": "Medium",
-        "weaponGroup": "Blades_Slashing",
-        "type": "Slashing",
-        "speed": 3,
-        "reach": 0,
-        "rateOfFire": null,
-        "range": null,
-        "damage": "2d8",
-        "special": null
-      },
+      "baseWeaponId": 1,
       "weaponSkill": "MWS",
       "hit": "=10",
       "damage": "=3d12",
@@ -131,20 +66,7 @@
       "notes": null
     }, {
       "name": null,
-      "baseWeapon": {
-        "weaponId": 3,
-        "name": "Long Bow",
-        "weight": 0.0,
-        "size": "Medium",
-        "weaponGroup": "Bows",
-        "type": "Piercing",
-        "speed": 2,
-        "reach": 0,
-        "rateOfFire": null,
-        "range": null,
-        "damage": "2d6",
-        "special": null
-      },
+      "baseWeaponId": 3,
       "weaponSkill": "BWS",
       "hit": null,
       "damage": null,
