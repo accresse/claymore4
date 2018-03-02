@@ -322,6 +322,10 @@ var getWeapon = function(weaponId) {
 	return weaponMap[weaponId];
 };
 
+var getDefenseFactor = function(defenseFactorId) {
+	return defenseFactorMap[defenseFactorId];
+};
+
 class CharacterProcessor {
 	init(){}
 	

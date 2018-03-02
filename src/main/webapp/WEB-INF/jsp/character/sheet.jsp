@@ -14,19 +14,13 @@
 <body>
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="/claymore"><i class="fa d-inline fa-lg fa-address-book"></i><b class="m-1">Claymore</b></a>
+      <a class="navbar-brand" href="/claymore"><i class="fa d-inline fa-lg fa-address-book"></i><b class="m-1">Claymore</b></a><span class="navbar-brand"> / </span><a class="navbar-brand" href="/claymore/character">Characters</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent"
         aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-bookmark-o"></i> Bookmarks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> Contacts</a>
-          </li>
-        </ul>
-        <a class="btn navbar-btn ml-2 text-white btn-secondary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> Sign in</a>
+        <a id="save_json_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</a>
+        <a id="clone_json_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</a>
+        <a id="delete_json_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</a>
       </div>
     </div>
   </nav>
@@ -252,8 +246,8 @@
                 <div class="card-header">
                   <div class="row">
                     <div class="col-md-11"> Defend </div>
-                    <div class="col-md-1">
-                      <a href="#"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+				    <div class="col-md-1">
+                      <a href="#" data-toggle="modal" data-target="#defenseModal" data-title="New Defense"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -264,92 +258,48 @@
                         <th>Active</th>
                         <th>Name</th>
                         <th>Ad</th>
+                        <th>Ad Mod</th>
                         <th>Aa</th>
                         <th>T</th>
                         <th>Notes</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr class="text-center">
+                    <tbody id="defense_table">
+                      <tr id="defense_template" class="text-center" style="display:none">
                         <td>
-                          <input type="checkbox" value="on"> </td>
-                        <td>
-                          <a href="#">Natural</a>
+                          <input type="checkbox" class="defense_active" value="on" checked="checked"> </td>
+                        <td class="defense_name_cell">
+                          <a href="#" class="defense_name" data-toggle="modal" data-target="#defenseModal" data-title="Edit Defense">--</a>
                         </td>
-                        <td>12</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>
+                        <td class="defense_ad">--</td>
+                        <td class="defense_adMod">--</td>
+                        <td class="defense_aa">--</td>
+                        <td class="defense_t">--</td>
+                        <td class="defense_notes_cell">
                           <div class="btn-group border border-primary">
                             <button class="btn dropdown-toggle btn-link" data-toggle="dropdown"> <i class="fa d-inline fa-lg fa-exclamation-circle"></i> </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">A really long note about all the things you can do, including:
-                                <ul>
-                                  <li>range</li>
-                                  <li>reach</li>
-                                  <li>magical properties</li>
-                                </ul>
-                              </a>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="text-center">
-                        <td>
-                          <input type="checkbox" value="on"> </td>
-                        <td>
-                          <a href="#">Armor</a>
-                        </td>
-                        <td>12</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>
-                          <div class="btn-group border border-primary">
-                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown"> <i class="fa d-inline fa-lg fa-exclamation-circle"></i> </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">A really long note about all the things you can do, including:
-                                <ul>
-                                  <li>range</li>
-                                  <li>reach</li>
-                                  <li>magical properties</li>
-                                </ul>
-                              </a>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="text-center">
-                        <td>
-                          <input type="checkbox" value="on"> </td>
-                        <td>
-                          <a href="#">Shield</a>
-                        </td>
-                        <td>12</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>
-                          <div class="btn-group border border-primary">
-                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown"> <i class="fa d-inline fa-lg fa-exclamation-circle"></i> </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">A really long note about all the things you can do, including:
-                                <ul>
-                                  <li>range</li>
-                                  <li>reach</li>
-                                  <li>magical properties</li>
-                                </ul>
-                              </a>
+                              <a class="dropdown-item class="defense_notes" href="#">--</a>
                             </div>
                           </div>
                         </td>
                       </tr>
                     </tbody>
                     <tfoot>
-                      <tr class="text-center table-active font-weight-bold">
-                        <td class=""></td>
+                      <tr id="defense_total" class="text-center table-active font-weight-bold">
+                        <td></td>
                         <td>TOTAL</td>
-                        <td>12</td>
-                        <td>0</td>
-                        <td>1</td>
+                        <td class="defense_ad">--</td>
+                        <td class="defense_adMod">--</td>
+                        <td class="defense_aa">--</td>
+                        <td class="defense_t">--</td>
+                        <td></td>
+                      </tr>
+                      <tr id="defense_total_sum" class="text-center table-active font-weight-bold text-primary">
+                        <td></td>
+                        <td></td>
+                        <td id="defense_sum_ad" colspan="2">--</td>
+                        <td id="defense_sum_reduction" colspan="2">--</td>
                         <td></td>
                       </tr>
                     </tfoot>
@@ -560,11 +510,7 @@
         <div id="json" class="tab-pane">
 		  <div class="py-0">
 	          <div class="container">
-	          	<a id="save_json_button" href="#" class="btn btn-outline-primary" title="Save Character">Save</a>
-		        <a id="clone_json_button" href="#" class="btn btn-outline-primary" title="Save Character">Clone</a>
-		      </div>
-	          <div class="container">
-	          	<textarea class="form-control" id="json_text" style="min-height:600px;"></textarea>
+	          	<textarea class="form-control" id="json_text" style="min-height:600px;" disabled="disabled"></textarea>
 	          </div>
 	      </div>
         </div>
@@ -635,6 +581,61 @@
 	</div>
   
   
+	<div class="modal fade" id="defenseModal" tabindex="-1" role="dialog" aria-labelledby="defenseModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Update Defense</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="container-fluid">
+	      		<input id="defenseModal_index" type="hidden"/>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Name:</div>
+		      		<div class="col-md-8"><input id="defenseModal_name" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Defense Factor:</div>
+		      		<div class="col-md-8"><select id="defenseModal_baseDefenseFactor"></select></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Ad:</div>
+		      		<div class="col-md-8"><input id="defenseModal_ad" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Ad Mod:</div>
+		      		<div class="col-md-8"><input id="defenseModal_adMod" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Aa:</div>
+		      		<div class="col-md-8"><input id="defenseModal_aa" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">T:</div>
+		      		<div class="col-md-8"><input id="defenseModal_t" type="text"></input></div>
+		      	</div>
+				<div class="row">
+		      		<div class="col-md-4 text-right">Notes:</div>
+		      	</div>
+				<div class="row">
+					<div class="col-md-4"></div>
+		      		<div class="col-md-8"><textarea id="defenseModal_notes"></textarea></div>
+		      	</div>
+		     </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button id="defenseModal_save" type="button" class="btn btn-primary">Save changes</button>
+	        <button id="defenseModal_delete" type="button" class="btn btn-danger">Delete</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  
+  
   <script src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
   <script src="../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script src="../js/popper.min.js"></script>
@@ -646,6 +647,8 @@
   <script src="../js/claymore_data.js"></script>
   <script src="../js/claymore_xpbuy.js"></script>
   <script src="../js/claymore_skillbuy.js"></script>
+  <script src="../js/claymore_attack.js"></script>
+  <script src="../js/claymore_defense.js"></script>
   <script src="../js/claymore.js"></script>
   <!-- 
    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;

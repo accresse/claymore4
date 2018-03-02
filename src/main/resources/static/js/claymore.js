@@ -1,120 +1,49 @@
 var path = window.location.pathname;
 var id = path.substring(path.lastIndexOf('/') + 1);
 
+var defenseFactorList = null;
+var defenseFactorMap = {};
+
 var weaponList = null;
 var weaponMap = {};
 
 var character = null;
 
 var attackTemplate;
+var defenseTemplate;
+
 var dice = new DiceRoller();
 
 $(document).ready(
 	function(){
 		attackTemplate = $('#attack_template').clone();
-		loadWeaponsFromServer();
-		loadCharFromServer();
-		
-		$("#save_json_button").click(saveCharacter);
-		$("#clone_json_button").click(cloneCharacter);
-		
-		$('.rollable_d100').click(rollable_d100);
-		$('.rollable_literal').click(rollable_literal);
-		
-		$('#attackModal_save').click(function(){
-			var attack = {};
-			
-			attack.name = $('#attackModal_name').val();
-			if($('#attackModal_weaponSkill_MWS').prop('checked')) {
-				attack.weaponSkill = 'MWS';
-			} else {
-				attack.weaponSkill = 'BWS';
-			}
-			attack.hit = $('#attackModal_hit').val();
-			attack.damage = $('#attackModal_damage').val();
-			attack.speed = $('#attackModal_speed').val();
-			attack.attacks = $('#attackModal_attacks').val();
-			attack.baseWeaponId = $('#attackModal_baseWeapon').val();
-			attack.notes = $('#attackModal_notes').text();
-				  
-			var index = $('#attackModal_index').val();
-		    if(index!="") {
-		    		index=parseInt(index);
-		    		character.attacks[index] = attack;
-		    } else {
-		    		character.attacks.push(attack);
-		    }
-
-			updateJsonView();
-			updateDerivedFields();
-			$('#attackModal').modal('hide');
+		defenseTemplate = $('#defense_template').clone();
+		var promises = [];
+		promises.push(loadWeaponsFromServer());
+		promises.push(loadDefenseFactorsFromServer());
+		promises.push(loadCharFromServer());
+		$.when.apply($, promises).then(layoutPageAfterDataDownload, function() {
+			alert("Error loading character");
 		});
-
-		$('#attackModal_delete').click(function(){
-			var index = $('#attackModal_index').val();
-			character.attacks.splice(index,1);
-			updateJsonView();
-			updateDerivedFields();
-			$('#attackModal').modal('hide')
-		});
-
-		$('#attackModal').on('show.bs.modal', 
-			function (event) {
-			  var button = $(event.relatedTarget); // Button that triggered the modal
-			  var title = button.data('title'); // Extract info from data-* attributes
-			  var index = button.data('attackIndex'); // Extract info from data-* attributes
-			  var modal = $(this)
-			  modal.find('.modal-title').text(title)
-
-			  $('#attackModal_index').val("");
-			  $('#attackModal_name').val("");
-			  $('#attackModal_weaponSkill_MWS').prop('checked',true);
-			  $('#attackModal_hit').val("");
-			  $('#attackModal_damage').val("");
-			  $('#attackModal_speed').val("");
-			  $('#attackModal_attacks').val("");
-			  $('#attackModal_notes').text("");
-			  $('#attackModal_baseWeapon').change();
-			  $('#attackModal_delete').hide();
-			  
-			  if(index || index==0) {
-				  var attack = character.attacks[index];
-				  var baseWeapon = getWeapon(attack.baseWeaponId);
-				  
-				  $('#attackModal_index').val(index);
-				  
-				  $('#attackModal_baseWeapon').val(baseWeapon.weaponId);
-				  $('#attackModal_baseWeapon').change();
-				  
-				  $('#attackModal_weaponSkill_'+attack.weaponSkill).prop('checked',true);
-				  $('#attackModal_name').val(attack.name);
-				  $('#attackModal_hit').val(attack.hit);
-				  $('#attackModal_damage').val(attack.damage);
-				  $('#attackModal_speed').val(attack.speed);
-				  $('#attackModal_attacks').val(attack.attacks);
-				  if(attack.notes) {
-					  $('#attackModal_notes').text(attack.notes);
-				  }
-				  $('#attackModal_delete').show();
-
-				  
-			  }
-			}
-		);
-		
-		$('#attackModal_baseWeapon').change(function(){
-			var weaponId = $('#attackModal_baseWeapon').val();
-			var weapon = weaponMap[weaponId];
-			$('#attackModal_name').attr('placeholder',weapon.name);
-			$('#attackModal_hit').attr('placeholder',weapon.hit);
-			$('#attackModal_damage').attr('placeholder',weapon.damage);
-			$('#attackModal_speed').attr('placeholder',weapon.speed);
-			$('#attackModal_attacks').attr('placeholder',weapon.attacks);
-			$('#attackModal_notes').attr('placeholder',weapon.notes);
-		});
-
 	}
 );
+
+var layoutPageAfterDataDownload = function() {
+	console.log("Layout page");
+	createFormFromModel();
+	updateJsonView();
+	updateDerivedFields();
+
+	$("#save_json_button").click(saveCharacter);
+	$("#clone_json_button").click(cloneCharacter);
+	
+	$('.rollable_d100').click(rollable_d100);
+	$('.rollable_literal').click(rollable_literal);
+	
+	setupAttackModal();
+	setupDefenseModal();
+
+};
 
 var saveCharacter = function() {
 	var jqxhr = $.ajax({
@@ -161,7 +90,7 @@ var rollable_literal = function(event){
 };
 
 var loadWeaponsFromServer = function() {
-	var jqxhr = $.get(
+	return $.get(
 		"/claymore/api/weapons?sort=name", 
 		function(data) {
 			weaponList = data._embedded.weapons;
@@ -170,18 +99,32 @@ var loadWeaponsFromServer = function() {
 				$('#attackModal_baseWeapon').append($('<option>').text(weapon.name).attr('value', weapon.weaponId));
 				weaponMap[weapon.weaponId] = weapon;
 			}
+			console.log('Done loading weapons');
+		}
+	);
+};
+
+var loadDefenseFactorsFromServer = function() {
+	return $.get(
+		"/claymore/api/defenseFactors?sort=name", 
+		function(data) {
+			defenseFactorList = data._embedded.defenseFactors;
+			for(var i=0; i< defenseFactorList.length; i++) {
+				var defenseFactor = defenseFactorList[i];
+				$('#defenseModal_baseDefenseFactor').append($('<option>').text(defenseFactor.name).attr('value', defenseFactor.defenseFactorId));
+				defenseFactorMap[defenseFactor.defenseFactorId] = defenseFactor;
+			}
+			console.log('Done loading defenseFactors');
 		}
 	);
 };
 
 var loadCharFromServer = function() {
-	var jqxhr = $.get(
+	return $.get(
 		"/claymore/api/characters/" + id, 
 		function(data) {
 			character = data;
-			createFormFromModel();
-			updateJsonView();
-			updateDerivedFields();
+			console.log('Done loading character');
 		}
 	);
 };
@@ -245,6 +188,7 @@ var updateDerivedFields = function() {
 	$("#character_bws").text(character.bws+"%");
 	
 	updateAttacks();
+	updateDefenses();
 
 };
 
@@ -329,8 +273,6 @@ var processSkillBuys = function() {
 
 };
 
-
-
 var getXpBuys = function(level, category) {
 	if(!character.levelToXpBuyMap[level] || !character.levelToXpBuyMap[level][category]) {
 		return null;
@@ -339,81 +281,7 @@ var getXpBuys = function(level, category) {
 	}
 };
 
-var updateAttacks = function() {
-	$('#attack_table').empty();
-	for(var i=0; i<character.attacks.length; i++) {
-		var attack = character.attacks[i];
-		var baseWeapon = getWeapon(attack.baseWeaponId);
-		var row = attackTemplate.clone();
-		var masteryBonus = getWeaponMasteryMods(baseWeapon.weaponGroup);
-		row.attr('id','attack.'+i);
-		row.find('.attack_name').text(calculateNameForAttack(attack, baseWeapon)).data('attackIndex',i);
-		row.find('.attack_hit').text(calculateHitForAttack(attack, baseWeapon, masteryBonus)+'%');
-		row.find('.attack_damage').text(calculateDamageForAttack(attack, baseWeapon, masteryBonus));
-		row.find('.attack_speed').text(getAttackValSum(attack.speed,baseWeapon.speed, masteryBonus.speed));
-		row.find('.attack_attacks').text(getAttackValSum(attack.attacks,1,masteryBonus.attacks));
-		row.find('.attack_notes').html(getAttackValNotes(attack,baseWeapon));
-		row.find('.rollable_d100').click(rollable_d100);
-		row.find('.rollable_literal').click(rollable_literal);
-		row.appendTo('#attack_table');
-		row.show();
-	}
-};
-
-var calculateNameForAttack = function(attack, baseWeapon) {
-	return attack.name ? attack.name : baseWeapon.name;
-};
-
-var calculateHitForAttack = function(attack, baseWeapon, masteryBonus) {
-	
-	//start with base MWS/BWS
-	var hit = character[attack.weaponSkill.toLowerCase()];
-	
-	//add bonus/penalty for weapon group proficiency
-	var wgs = character.weaponGroupSkill[baseWeapon.weaponGroup]
-	if(wgs || wgs==0) {
-		hit += wgs;
-	} else {
-		hit += character.unskilledPenalty;
-	}
-	
-	//add any bonus/override from this attack
-	hit = getAttackValSum(attack.hit, hit, masteryBonus.hit);
-	
-	return hit;
-	
-};
-
-var calculateDamageForAttack = function(attack, baseWeapon, masteryBonus) {
-	var attackDamage = attack.damage;
-	if(attackDamage && attackDamage.startsWith('=')) {
-		return attackDamage.substring(1);
-	} 
-	var retVal = baseWeapon.damage;
-	
-	var bonus = masteryBonus.damage;
-	if(attackDamage) {
-		attackDamage = parseInt(attackDamage.replace('+',''));
-		bonus += attackDamage;
-	}
-	if(bonus>0) {
-		retVal = retVal + '+' + bonus;
-	} else if(bonus<0) {
-		retVal = retVal + bonus;
-	}
-	return retVal;
-};
-
-var getAttackValSum = function(attackVal, baseVal, masteryVal) {
-	if(attackVal && attackVal.startsWith('=')) {
-		return attackVal.substring(1);
-	}
-	baseVal = baseVal ? baseVal : 0;
-	attackVal = attackVal ? parseFloat(attackVal.replace('+','')) : 0;
-	return baseVal + attackVal + masteryVal;
-};
-
-var getAttackValNotes = function(attack, baseWeapon) {
-	return attack.notes;
+var calculateValWithOverride = function(overrideVal, baseVal) {
+	return overrideVal ? overrideVal : baseVal;
 };
 

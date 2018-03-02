@@ -3,6 +3,7 @@ package org.cresse.claymore;
 import org.cresse.claymore.model.Attack;
 import org.cresse.claymore.model.DamageType;
 import org.cresse.claymore.model.Defense;
+import org.cresse.claymore.model.DefenseFactor;
 import org.cresse.claymore.model.Gender;
 import org.cresse.claymore.model.Player;
 import org.cresse.claymore.model.Race;
@@ -14,6 +15,7 @@ import org.cresse.claymore.model.WeaponSkillType;
 import org.cresse.claymore.model.XpBuy;
 import org.cresse.claymore.model.XpBuyCategory;
 import org.cresse.claymore.repository.CharacterRepository;
+import org.cresse.claymore.repository.DefenseFactorRepository;
 import org.cresse.claymore.repository.PlayerRepository;
 import org.cresse.claymore.repository.WeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class Application implements CommandLineRunner {
 	private CharacterRepository characterRepository;
 
 	@Autowired
+	private DefenseFactorRepository armorRepository;
+
+	@Autowired
 	private WeaponRepository weaponRepository;
 
 	@Autowired
@@ -39,6 +44,14 @@ public class Application implements CommandLineRunner {
 
 	private Weapon bow;
 
+	private DefenseFactor largeShield;
+
+	private DefenseFactor chainMail;
+
+	private DefenseFactor plateMail;
+
+	private DefenseFactor other;
+
 	@Override
 	public void run(String... args) throws Exception {
 		sword = new Weapon("Arming Sword",Size.Medium,WeaponGroup.Blades_Slashing,DamageType.Slashing,3,"2d8");
@@ -49,6 +62,19 @@ public class Application implements CommandLineRunner {
 
 		bow = new Weapon("Long Bow",Size.Medium,WeaponGroup.Bows,DamageType.Piercing,2,"2d6");
 		weaponRepository.save(bow);
+
+		chainMail = new DefenseFactor("Armor - Chain Mail","=16","+4","0");
+		armorRepository.save(chainMail);
+
+		plateMail = new DefenseFactor("Armor - Plate Mail","=24","+6","-8");
+		armorRepository.save(plateMail);
+
+		largeShield = new DefenseFactor("Shield - Large","+16","+0","-1");
+		armorRepository.save(largeShield);
+
+		other = new DefenseFactor("Other","+0","+0","0");
+		armorRepository.save(other);
+
 
 		quin();
 		adny();
@@ -124,9 +150,9 @@ public class Application implements CommandLineRunner {
 		Attack bowAttack = new Attack(this.bow, WeaponSkillType.BWS);
 		quin.addAttack(bowAttack);
 
-		Defense defense = new Defense();
-		defense.setName("Natural");
-		quin.addDefense(defense);
+		quin.addDefense(new Defense(chainMail));
+		quin.addDefense(new Defense(plateMail));
+		quin.addDefense(new Defense(largeShield));
 
 		//level 1
 		quin.addXpBuy(new XpBuy(1,1,XpBuyCategory.Class,"Fighter"));
