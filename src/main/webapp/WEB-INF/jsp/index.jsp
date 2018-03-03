@@ -45,13 +45,13 @@ body {
       <div class="row">
         <div class="col-md-4 p-4 text-center">
         	  <a href="/claymore/character">
-          <img class="img-fluid d-block rounded-circle mx-auto" src="/claymore/img/characters.png">
+          <img class="img-fluid d-block rounded-circle mx-auto img-thumbnail" src="/claymore/img/characters.png">
           <p><b>Character Sheets</b></p>
         	  </a>
         </div>
         <div class="col-md-4 p-4 text-center">
         	  <a href="http://cresse.org/claymore/map/">
-          <img class="img-fluid d-block rounded-circle mx-auto" src="/claymore/img/urna.png">
+          <img class="img-fluid d-block rounded-circle mx-auto img-thumbnail" src="/claymore/img/urna.png">
           <p><b>World Map</b></p>
         	  </a>
         </div>

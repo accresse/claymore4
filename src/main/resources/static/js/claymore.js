@@ -34,8 +34,9 @@ var layoutPageAfterDataDownload = function() {
 	updateJsonView();
 	updateDerivedFields();
 
-	$("#save_json_button").click(saveCharacter);
-	$("#clone_json_button").click(cloneCharacter);
+	$("#save_character_button").click(saveCharacter);
+	$("#clone_character_button").click(cloneCharacter);
+	$("#delete_character_button").click(deleteCharacter);
 	
 	$('.rollable_d100').click(rollable_d100);
 	$('.rollable_literal').click(rollable_literal);
@@ -51,7 +52,7 @@ var saveCharacter = function() {
 			url: "/claymore/api/characters/" + id, 
 			data: JSON.stringify(character, null, 2), 
 			success: function(data) {
-				alert('success');
+				alert('Character has been saved.');
 			},
 			contentType: "application/json"
 	});
@@ -63,10 +64,27 @@ var cloneCharacter = function() {
 			url: "/claymore/api/characters", 
 			data: JSON.stringify(character, null, 2), 
 			success: function(data) {
-				alert('success');
+				alert('Character has been cloned.');
 			},
 			contentType: "application/json"
 	});
+}
+
+var deleteCharacter = function() {
+	character.active=false;
+	var answer = confirm("Really delete character?");
+	if(!answer) return;
+	
+	var jqxhr = $.ajax({
+		type: "PUT",
+		url: "/claymore/api/characters/" + id, 
+		data: JSON.stringify(character, null, 2), 
+		success: function(data) {
+			alert('Character has been deleted.');
+			window.location.replace('/claymore/character');
+		},
+		contentType: "application/json"
+});
 }
 
 var rollable_d100 = function(event){

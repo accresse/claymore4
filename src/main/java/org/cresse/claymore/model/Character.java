@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -80,10 +80,16 @@ public class Character {
 	@RestResource(exported=false)
 	private List<SkillBuy> skillBuys = new LinkedList<>();
 
-	@Basic(optional = false)
-	@Column(insertable = false, updatable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastModifiedTs;
+
+	private boolean active = true;
+
+	@PreUpdate
+	@PrePersist
+	public void updateTimeStamp() {
+		lastModifiedTs = new Date();
+	}
 
 	public Long getCharacterId() {
 		return characterId;
@@ -283,6 +289,14 @@ public class Character {
 
 	public void setLastModifiedTs(Date lastModifiedTs) {
 		this.lastModifiedTs = lastModifiedTs;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	@Override
