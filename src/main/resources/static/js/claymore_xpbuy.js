@@ -40,10 +40,7 @@ class HpProcessor extends CharacterProcessor {
 					var hpBuy = levelHpBuys[i];
 					character.maxHp += getHpIncrease(level, hpBuy.points);
 				}
-			} else {
-				//add default hp increase, when spending 0 xp
-				character.maxHp += getHpIncrease(level, 0);
-			}
+			} 
 			//add con bonus
 			character.maxHp += getConstitutionMods().hpMod
 		}
@@ -84,6 +81,11 @@ class SavingThrowProcessor extends CharacterProcessor {
 	}
 	
 	processBuy(xpBuy) {
+		character.fortitude += 1;
+		character.agility += 1;
+		character.will += 1;
+		character.identity += 1;
+		
 		var saves = JSON.parse(xpBuy.ability);
 		for(var save in saves) {
 			character[save] += saves[save];
@@ -136,12 +138,6 @@ class WeaponSkillProcessor extends CharacterProcessor {
 					character.mws += ability['mws'];
 					character.bws += ability['bws'];
 				}
-			} else {
-				if(character.primaryWeaponSkill=='MWS') {
-					character.mws += 1;
-				} else {
-					character.bws += 1;
-				}
 			}
 		}
 	}
@@ -173,4 +169,26 @@ var xpBuyProcessors = {
 	ClassSavingThrow: new ClassSavingThrowProcessor(),
 	WeaponSkill: new WeaponSkillProcessor(),
 	WeaponMastery: new WeaponMasteryProcessor()
+};
+
+/**
+ * Start code for the XP Buy tab
+ */
+var updateXpBuyTab = function() {
+	$('#xp_history_table').empty();
+	
+	for(var i=0; i<character.xpBuys.length; i++) {
+		var xpBuy = character.xpBuys[i];
+		var row = xpHistoryTemplate.clone();
+		row.attr('id','xp_history_'+i);
+		row.find('.xp_history_level').text(xpBuy.level);
+		row.find('.xp_history_points').text(xpBuy.points);
+		row.find('.xp_history_category').text(xpBuy.category);
+		var ability = xpBuy.ability ? xpBuy.ability : "";
+		row.find('.xp_history_ability').text(ability);
+		row.appendTo('#xp_history_table');
+		row.show();
+	}
+	
+	calculateOverallDefense();
 };

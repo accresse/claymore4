@@ -2,25 +2,25 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-  <!-- 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+<!-- 
    <link rel="stylesheet" href="../css/jqueryui-editable.css" type="text/css"/>
    -->
-  <link rel="stylesheet" href="../jquery-ui-1.12.1.custom/jquery-ui.theme.css" type="text/css"/>
+<link rel="stylesheet" href="../jquery-ui-1.12.1.custom/jquery-ui.theme.css" type="text/css" />
 </head>
 <body>
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="/claymore"><i class="fa d-inline fa-lg fa-address-book"></i><b class="m-1">Claymore</b></a><span class="navbar-brand"> / </span><a class="navbar-brand" href="/claymore/character">Characters</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <a id="save_character_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</a>
-        <a id="clone_character_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</a>
-        <a id="delete_character_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</a>
+        <a id="save_character_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</a> <a id="clone_character_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</a> <a
+          id="delete_character_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</a>
       </div>
     </div>
   </nav>
@@ -28,7 +28,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="display-4 "><span id="character_name">----------</span></h1>
+          <h1 class="display-4 ">
+            <span id="character_name">----------</span>
+          </h1>
         </div>
       </div>
     </div>
@@ -37,19 +39,29 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2">
-          <p class="">Race: <span id="character_race">-----</span></p>
+          <p class="">
+            Race: <span id="character_race">-----</span>
+          </p>
         </div>
         <div class="col-md-2">
-          <p class="">Gender: <span id="character_gender">-----</span></p>
+          <p class="">
+            Gender: <span id="character_gender">-----</span>
+          </p>
         </div>
         <div class="col-md-2">
-          <p class="">Age: <span id="character_age">--</span></p>
+          <p class="">
+            Age: <span id="character_age">--</span>
+          </p>
         </div>
         <div class="col-md-2">
-          <p class="">Height: <span id="character_height">--</span></p>
+          <p class="">
+            Height: <span id="character_height">--</span>
+          </p>
         </div>
         <div class="col-md-2">
-          <p class="">Weight: <span id="character_weight">---</span> lbs</p>
+          <p class="">
+            Weight: <span id="character_weight">---</span> lbs
+          </p>
         </div>
       </div>
     </div>
@@ -57,32 +69,28 @@
   <div class="py-0">
     <div class="container">
       <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a data-toggle="tab" href="#summary" class="active nav-link">Summary</a>
-        </li>
+        <li class="nav-item"><a data-toggle="tab" href="#summary" class="active nav-link">Summary</a></li>
+        <li><a data-toggle="tab" href="#details" class="nav-link">Details</a></li>
+        <!-- 
         <li>
           <a data-toggle="tab" href="#inventory" class="nav-link">Inventory</a>
         </li>
-        <li>
-          <a data-toggle="tab" href="#xpShop" class="nav-link">XP Shop</a>
-        </li>
-        <li>
-          <a data-toggle="tab" href="#details" class="nav-link">Details</a>
-        </li>
-        <li>
-          <a data-toggle="tab" href="#json" class="nav-link">JSON</a>
-        </li>
+         -->
+        <li><a data-toggle="tab" href="#xpShop" class="nav-link">XP Shop <span class="badge badge-pill badge-danger remaining_xp"></span></a></li>
+        <li><a data-toggle="tab" href="#skillShop" class="nav-link">Skill Shop <span class="badge badge-pill badge-danger remaining_skill"></span></a></li>
+        <li><a data-toggle="tab" href="#rogueShop" class="nav-link">Rogue Shop <span class="badge badge-pill badge-danger remaining_rogue"></span></a></li>
+        <li><a data-toggle="tab" href="#json" class="nav-link">JSON</a></li>
       </ul>
       <div class="tab-content">
         <div id="summary" class="tab-pane in active">
           <div class="row my-1">
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header"> Level</div>
+                <div class="card-header">Level</div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-3">
-                      <h1 class="display-4 text-right" id="character_level">--</h1>
+                      <h1 class="display-4 text-right character_level" id="character_level">--</h1>
                     </div>
                     <div class="col-md-9">
                       <div class="row">
@@ -95,7 +103,7 @@
                       </div>
                       <div class="row">
                         <div class="col-md-10 text-right font-weight-bold">Spendable XP:</div>
-                        <div class="col-md-2 text-right" id="character_spendableXp">--</div>
+                        <div class="col-md-2 text-right remaining_xp" id="character_spendableXp">--</div>
                       </div>
                     </div>
                   </div>
@@ -104,7 +112,7 @@
             </div>
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header"> Health </div>
+                <div class="card-header">Health</div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-5">
@@ -131,7 +139,7 @@
           <div class="row my-1">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header"> Saves</div>
+                <div class="card-header">Saves</div>
                 <div class="card-body m-0">
                   <table class="table m-0">
                     <thead>
@@ -189,10 +197,12 @@
                 <div class="card-header">
                   <div class="row">
                     <div class="col-md-7">Attack</div>
-                    <div class="col-md-2">MWS:
+                    <div class="col-md-2">
+                      MWS:
                       <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
                     </div>
-                    <div class="col-md-2">BWS:
+                    <div class="col-md-2">
+                      BWS:
                       <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
                     </div>
                     <div class="col-md-1">
@@ -213,10 +223,8 @@
                       </tr>
                     </thead>
                     <tbody id="attack_table">
-                      <tr id="attack_template" class="text-center" style="display:none">
-                        <td class="">
-                          <a href="#" class="attack_name" data-toggle="modal" data-target="#attackModal" data-title="Edit Attack"></a>
-                        </td>
+                      <tr id="attack_template" class="text-center" style="display: none">
+                        <td class=""><a href="#" class="attack_name" data-toggle="modal" data-target="#attackModal" data-title="Edit Attack"></a></td>
                         <td>
                           <button class="btn btn-outline-primary attack_hit rollable_d100" title="Press to Roll" value="--%"></button>
                         </td>
@@ -227,7 +235,9 @@
                         <td class="attack_attacks">--</td>
                         <td>
                           <div class="btn-group border border-primary">
-                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown"> <i class="fa d-inline fa-lg fa-exclamation-circle"></i> </button>
+                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown">
+                              <i class="fa d-inline fa-lg fa-exclamation-circle"></i>
+                            </button>
                             <div class="dropdown-menu">
                               <a class="dropdown-item attack_notes" href="#"></a>
                             </div>
@@ -245,8 +255,8 @@
               <div class="card">
                 <div class="card-header">
                   <div class="row">
-                    <div class="col-md-11"> Defend </div>
-				    <div class="col-md-1">
+                    <div class="col-md-11">Defend</div>
+                    <div class="col-md-1">
                       <a href="#" data-toggle="modal" data-target="#defenseModal" data-title="New Defense"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
                     </div>
                   </div>
@@ -265,21 +275,20 @@
                       </tr>
                     </thead>
                     <tbody id="defense_table">
-                      <tr id="defense_template" class="text-center" style="display:none">
-                        <td>
-                          <input type="checkbox" class="defense_active" value="on" checked="checked"> </td>
-                        <td class="defense_name_cell">
-                          <a href="#" class="defense_name" data-toggle="modal" data-target="#defenseModal" data-title="Edit Defense">--</a>
-                        </td>
+                      <tr id="defense_template" class="text-center" style="display: none">
+                        <td><input type="checkbox" class="defense_active" value="on" checked="checked"></td>
+                        <td class="defense_name_cell"><a href="#" class="defense_name" data-toggle="modal" data-target="#defenseModal" data-title="Edit Defense">--</a></td>
                         <td class="defense_ad">--</td>
                         <td class="defense_adMod">--</td>
                         <td class="defense_aa">--</td>
                         <td class="defense_t">--</td>
                         <td class="defense_notes_cell">
                           <div class="btn-group border border-primary">
-                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown"> <i class="fa d-inline fa-lg fa-exclamation-circle"></i> </button>
+                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown">
+                              <i class="fa d-inline fa-lg fa-exclamation-circle"></i>
+                            </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item class="defense_notes" href="#">--</a>
+                              <a class="dropdown-item defense_notes" href="#">--</a>
                             </div>
                           </div>
                         </td>
@@ -308,11 +317,11 @@
               </div>
             </div>
           </div>
-          <div id="section_Fighter" style="display:none;"></div>
-          <div id="section_Thief" class="row my-1" style="display:none;">
+          <div id="section_Fighter" style="display: none;"></div>
+          <div id="section_Thief" class="row my-1" style="display: none;">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header"> Thief</div>
+                <div class="card-header">Thief</div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
@@ -332,33 +341,15 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                            </td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                           </tr>
                         </tbody>
                       </table>
@@ -368,7 +359,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="row">
-                        <div class="col-md-2 text-right font-weight-bold">Hit Bonus: </div>
+                        <div class="col-md-2 text-right font-weight-bold">Hit Bonus:</div>
                         <div class="col-md-2 text-left">+10%</div>
                         <div class="col-md-2 text-right font-weight-bold">Multiplier:</div>
                         <div class="col-md-2 text-left">x2</div>
@@ -383,22 +374,22 @@
               </div>
             </div>
           </div>
-          <div id="section_Wizard" class="row my-1" style="display:none;">
+          <div id="section_Wizard" class="row my-1" style="display: none;">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header"> Wizard</div>
+                <div class="card-header">Wizard</div>
                 <div class="card-body">
-                  <p class=" p-y-1">(Pencil and paper for now) </p>
+                  <p class=" p-y-1">(Pencil and paper for now)</p>
                 </div>
               </div>
             </div>
           </div>
-          <div id="section_Priest" class="row my-1" style="display:none;">
+          <div id="section_Priest" class="row my-1" style="display: none;">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header"> Priest</div>
+                <div class="card-header">Priest</div>
                 <div class="card-body">
-                  <p class=" p-y-1">(Pencil and paper for now) </p>
+                  <p class=" p-y-1">(Pencil and paper for now)</p>
                 </div>
               </div>
             </div>
@@ -406,7 +397,7 @@
           <div class="row my-1">
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header"> Martial Skills</div>
+                <div class="card-header">Martial Skills</div>
                 <div class="card-body">
                   <table class="table">
                     <thead>
@@ -417,21 +408,15 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>
-                          <a href="#">Fighting Blind</a>
-                        </td>
+                        <td><a href="#">Fighting Blind</a></td>
                         <td>10</td>
                       </tr>
                       <tr>
-                        <td>
-                          <a href="#">Brute Fighting</a>
-                        </td>
+                        <td><a href="#">Brute Fighting</a></td>
                         <td>10</td>
                       </tr>
                       <tr>
-                        <td>
-                          <a href="#">2 Handed Weapons</a>
-                        </td>
+                        <td><a href="#">2 Handed Weapons</a></td>
                         <td>10</td>
                       </tr>
                     </tbody>
@@ -441,7 +426,7 @@
             </div>
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header"> Non-Martial Skills</div>
+                <div class="card-header">Non-Martial Skills</div>
                 <div class="card-body">
                   <table class="table">
                     <thead>
@@ -452,36 +437,20 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>
-                          <a href="#">Strength of Character</a>
-                        </td>
-                        <td>
-                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                        </td>
+                        <td><a href="#">Strength of Character</a></td>
+                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                       </tr>
                       <tr>
-                        <td>
-                          <a href="#">Run</a>
-                        </td>
-                        <td>
-                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                        </td>
+                        <td><a href="#">Run</a></td>
+                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                       </tr>
                       <tr>
-                        <td>
-                          <a href="#">Mighty</a>
-                        </td>
-                        <td>
-                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                        </td>
+                        <td><a href="#">Mighty</a></td>
+                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                       </tr>
                       <tr>
-                        <td>
-                          <a href="#">Mountaineering</a>
-                        </td>
-                        <td>
-                          <a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a>
-                        </td>
+                        <td><a href="#">Mountaineering</a></td>
+                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -491,151 +460,697 @@
           </div>
         </div>
         <div id="details" class="tab-pane">
-		  <div class="py-0">
-		    <div class="container" id="raw_div"></div>
-		  </div>
-        </div>
-        <div id="inventory" class="tab-pane">
-		  <div class="py-0">
-	          <div class="container">
-	          	<p> Coming Soon 2</p>
-	          </div>
-	      </div>
-        </div>
-        <div id="xpShop" class="tab-pane">
-		  <div class="py-0">
-          	<p> Coming Soon 3</p>
+          <div class="py-0">
+            <div class="container" id="raw_div"></div>
           </div>
         </div>
+        <div id="inventory" class="tab-pane">
+          <div class="py-0">
+            <div class="container">
+              <p>Coming Soon 2</p>
+            </div>
+          </div>
+        </div>
+        <div id="xpShop" class="tab-pane">
+          <div class="py-0">
+            <div class="row my-4">
+              <div class="col-md-3"><h3>Current Level: <span class="character_level">-</span></h3></div>
+              <div class="col-md-2">
+                <a id="level_up_button" class="btn ml-2 text-white btn-primary"><i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-0">
+            <div class="row my-2">
+
+              <div class="col-md-3">
+                <div class="card" style="height: 100%">
+                  <div class="card-header">Hit Points</div>
+                  <div class="card-body m-0">
+                    <table class="table table-sm m-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center"></th>
+                          <th class="text-center">XP</th>
+                          <th class="text-center">HP</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_hp_0" type="radio" name="xpShop_hp" checked="checked" /></td>
+                          <td class="text-center">0</td>
+                          <td class="text-center">1</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_hp_2" type="radio" name="xpShop_hp" /></td>
+                          <td class="text-center">2</td>
+                          <td class="text-center">3</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_hp_5" type="radio" name="xpShop_hp" /></td>
+                          <td class="text-center">5</td>
+                          <td class="text-center">6</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">Resistances</div>
+                  <div class="card-body m-0">
+                    <table class="table table-sm m-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center"></th>
+                          <th class="text-center">XP</th>
+                          <td class="text-center"><select id="xpShop_resist_score1">
+                              <option value="agility">Agl</option>
+                              <option value="fortitude">Fot</option>
+                              <option value="will">Wil</option>
+                              <option value="identity">Idn</option>
+                          </select></td>
+                          <td class="text-center"><select id="xpShop_resist_score2">
+                              <option value="might">Mit</option>
+                              <option value="agility">Agl</option>
+                              <option value="fortitude">Fot</option>
+                              <option value="will">Wil</option>
+                              <option value="identity">Idn</option>
+                          </select></td>
+                          <td class="text-center"><select id="xpShop_resist_score3">
+                              <option value="might">Mit</option>
+                              <option value="agility">Agl</option>
+                              <option value="fortitude">Fot</option>
+                              <option value="will">Wil</option>
+                              <option value="identity">Idn</option>
+                          </select></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_resist_0" type="radio" name="xpShop_resist" value="0" checked="checked" /></td>
+                          <td class="text-center">0</td>
+                          <td class="text-center">+0%</td>
+                          <td class="text-center">+0%</td>
+                          <td class="text-center">+0%</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_resist_1" type="radio" name="xpShop_resist" value="1" /></td>
+                          <td class="text-center">1</td>
+                          <td class="text-center">+2%</td>
+                          <td class="text-center">+1%</td>
+                          <td class="text-center">+0%</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_resist_2" type="radio" name="xpShop_resist" value="2" /></td>
+                          <td class="text-center">2</td>
+                          <td class="text-center">+3%</td>
+                          <td class="text-center">+2%</td>
+                          <td class="text-center">+1%</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_resist_3" type="radio" name="xpShop_resist" value="3" /></td>
+                          <td class="text-center">3</td>
+                          <td class="text-center">+4%</td>
+                          <td class="text-center">+3%</td>
+                          <td class="text-center">+2%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row my-2">
+
+              <div class="col-md-3">
+                <div class="card" style="height: 100%">
+                  <div class="card-header">Skill Points</div>
+                  <div class="card-body m-0">
+                    <table class="table table-sm m-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center"></th>
+                          <th class="text-center">XP</th>
+                          <th class="text-center">Skill Points</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_skill_0" type="radio" name="xpShop_skill" checked="checked"></td>
+                          <td class="text-center">0</td>
+                          <td class="text-center">2</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_skill_1" type="radio" name="xpShop_skill"></td>
+                          <td class="text-center">1</td>
+                          <td class="text-center">10</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">Weapon Skill Points</div>
+                  <div class="card-body m-0">
+                    <table class="table table-sm m-0">
+                      <thead>
+                        <tr>
+                          <th class="text-center"></th>
+                          <th class="text-center">XP</th>
+                          <th class="text-center"><select id="xpShop_weapon_primary">
+                              <option value="MWS">MWS</option>
+                              <option value="BWS">BWS</option>
+                          </select></th>
+                          <th class="text-center" id="xpShop_weapon_secondary">BWS</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_weapon_0" type="radio" name="xpShop_weapon" checked="checked"></td>
+                          <td class="text-center">0</td>
+                          <td class="text-center">+1%</td>
+                          <td class="text-center">+0%</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_weapon_1" type="radio" name="xpShop_weapon"></td>
+                          <td class="text-center">1</td>
+                          <td class="text-center">+1%</td>
+                          <td class="text-center">+1%</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_weapon_2" type="radio" name="xpShop_weapon"></td>
+                          <td class="text-center">2</td>
+                          <td class="text-center">+2%</td>
+                          <td class="text-center">+1%</td>
+                        </tr>
+                        <tr>
+                          <td class="text-center"><input id="xpShop_weapon_3" type="radio" name="xpShop_weapon"></td>
+                          <td class="text-center">3</td>
+                          <td class="text-center">+3%</td>
+                          <td class="text-center">+2%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row my-1">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <input id="xpShop_class_fighter" type="checkbox" /> Fighter - 1 XP
+                  </div>
+                  <div class="card-body m-0" id="xpShop_class_fighter_body">
+                    <div class="row my-1">
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Fighter Class Ability
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Weapon Mastery 1</th>
+                              <th class="text-center">Weapon Mastery 2</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_0" name="xpShop_class_fighter_mastery" checked="checked" /></td>
+                              <td class="text-center">0</td>
+                              <td class="text-center">None</td>
+                              <td class="text-center">None</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_1" name="xpShop_class_fighter_mastery" /></td>
+                              <td class="text-center">1</td>
+                              <td class="text-center">+1 to <select></select></td>
+                              <td class="text-center">None</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_2" name="xpShop_class_fighter_mastery" /></td>
+                              <td class="text-center">2</td>
+                              <td class="text-center">+1 to <select></select></td>
+                              <td class="text-center">+1 to <select></select></td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Fighter Miscellaneous Abilities
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Ability</th>
+                              <th class="text-center">Prereq.</th>
+                            </tr>
+                          </thead>
+                          <tbody id="xpShop_class_fighter_misc">
+                            <tr id="xpShop_fighter_misc_row_template" style="display: none;">
+                              <td class="text-center"><input id="xpShop_fighter_misc_" type="checkbox"></td>
+                              <td class="text-center xpShop_fighter_misc_xp">xp</td>
+                              <td class="text-center xpShop_fighter_misc_ability">Ability</td>
+                              <td class="text-center xpShop_fighter_misc_prereq">None</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-1">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <input id="xpShop_class_priest" type="checkbox" /> Priest - 6 XP
+                  </div>
+                  <div class="card-body m-0" id="xpShop_class_priest_body">
+                    <div class="row my-1">
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Priest Class Ability
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Casting Level</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_spheres_0" name="xpShop_class_priest_spheres" checked="checked" /></td>
+                              <td class="text-center">0</td>
+                              <td class="text-center">None</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_spheres_2" name="xpShop_class_priest_spheres" /></td>
+                              <td class="text-center">2</td>
+                              <td class="text-center">+1 to <select></select></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_spheres_5" name="xpShop_class_priest_spheres" /></td>
+                              <td class="text-center">5</td>
+                              <td class="text-center">+1 to all spheres</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Priest Miscellaneous Abilities
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Ability</th>
+                              <th class="text-center">Prereq.</th>
+                            </tr>
+                          </thead>
+                          <tbody id="xpShop_class_priest_misc">
+                            <tr id="xpShop_priest_misc_row_template" style="display: none;">
+                              <td class="text-center"><input id="xpShop_priest_misc_" type="checkbox"></td>
+                              <td class="text-center xpShop_priest_misc_xp">xp</td>
+                              <td class="text-center xpShop_priest_misc_ability">Ability</td>
+                              <td class="text-center xpShop_priest_misc_prereq">None</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-1">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <input id="xpShop_class_rogue" type="checkbox" /> Rogue - 3 XP
+                  </div>
+                  <div class="card-body m-0" id="xpShop_class_rogue_body">
+                    <div class="row my-1">
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Rogue Class Ability
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Rogue Ability Points</th>
+                              <th class="text-center">Back Stab Level</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_rogue_points_0" name="xpShop_class_rogue_points" checked="checked" /></td>
+                              <td class="text-center">0</td>
+                              <td class="text-center">0</td>
+                              <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_rogue_points_1" name="xpShop_class_rogue_points" /></td>
+                              <td class="text-center">1</td>
+                              <td class="text-center">+3</td>
+                              <td class="text-center">+1</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_rogue_points_2" name="xpShop_class_rogue_points" /></td>
+                              <td class="text-center">2</td>
+                              <td class="text-center">+6</td>
+                              <td class="text-center">+1</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_rogue_points_3" name="xpShop_class_rogue_points" /></td>
+                              <td class="text-center">3</td>
+                              <td class="text-center">+9</td>
+                              <td class="text-center">+1</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_rogue_points_4" name="xpShop_class_rogue_points" /></td>
+                              <td class="text-center">4</td>
+                              <td class="text-center">+12</td>
+                              <td class="text-center">+1</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Rogue Miscellaneous Abilities
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Ability</th>
+                              <th class="text-center">Prereq.</th>
+                            </tr>
+                          </thead>
+                          <tbody id="xpShop_class_rogue_misc">
+                            <tr id="xpShop_rogue_misc_row_template" style="display: none;">
+                              <td class="text-center"><input id="xpShop_rogue_misc_" type="checkbox"></td>
+                              <td class="text-center xpShop_rogue_misc_xp">xp</td>
+                              <td class="text-center xpShop_rogue_misc_ability">Ability</td>
+                              <td class="text-center xpShop_rogue_misc_prereq">None</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-1">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <input id="xpShop_class_wizard" type="checkbox" /> Wizard - 10 XP
+                  </div>
+                  <div class="card-body m-0" id="xpShop_class_wizard_body">
+                    <div class="row my-1">
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Wizard Class Ability
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Casting Level</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_schools_0" name="xpShop_class_wizard_schools" checked="checked" /></td>
+                              <td class="text-center">0</td>
+                              <td class="text-center">None</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_schools_4" name="xpShop_class_wizard_schools" /></td>
+                              <td class="text-center">4</td>
+                              <td class="text-center">+1 to <select></select></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_schools_8" name="xpShop_class_wizard_schools" /></td>
+                              <td class="text-center">8</td>
+                              <td class="text-center">+1 to all schools</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                      <div class="col-md-6">
+                        <table class="table table-sm m-0">
+                          <thead>
+                            <tr>Wizard Miscellaneous Abilities
+                            </tr>
+                            <tr>
+                              <th class="text-center"></th>
+                              <th class="text-center">XP</th>
+                              <th class="text-center">Ability</th>
+                              <th class="text-center">Prereq.</th>
+                            </tr>
+                          </thead>
+                          <tbody id="xpShop_class_wizard_misc">
+                            <tr id="xpShop_wizard_misc_row_template" style="display: none;">
+                              <td class="text-center"><input id="xpShop_wizard_misc_" type="checkbox"></td>
+                              <td class="text-center xpShop_wizard_misc_xp">xp</td>
+                              <td class="text-center xpShop_wizard_misc_ability">Ability</td>
+                              <td class="text-center xpShop_wizard_misc_prereq">None</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-5">
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h3 class="display-5">XP History</h3>
+                <table class="table m-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Level</th>
+                      <th class="text-center">Points</th>
+                      <th class="text-center">Category</th>
+                      <th class="text-center">Ability</th>
+                    </tr>
+                  </thead>
+                  <tbody id="xp_history_table">
+                    <tr id="xp_history_template" style="display: none">
+                      <td class="text-center xp_history_level">--</td>
+                      <td class="text-center xp_history_points">--</td>
+                      <td class="text-center xp_history_category">--</td>
+                      <td class="text-center xp_history_ability">--</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="skillShop" class="tab-pane">
+          <div class="py-0">
+            <div class="container">Coming Soon</div>
+          </div>
+        </div>
+
+        <div id="rogueShop" class="tab-pane">
+          <div class="py-0">
+            <div class="container">Coming Soon</div>
+          </div>
+        </div>
+
         <div id="json" class="tab-pane">
-		  <div class="py-0">
-	          <div class="container">
-	          	<textarea class="form-control" id="json_text" style="min-height:600px;" disabled="disabled"></textarea>
-	          </div>
-	      </div>
+          <div class="py-0">
+            <div class="container">
+              <textarea class="form-control" id="json_text" style="min-height: 600px;" disabled="disabled"></textarea>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
-      
-	<div class="modal fade" id="attackModal" tabindex="-1" role="dialog" aria-labelledby="attackModal" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Update Attack</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="container-fluid">
-	      		<input id="attackModal_index" type="hidden"/>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Name:</div>
-		      		<div class="col-md-8"><input id="attackModal_name" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Base Weapon:</div>
-		      		<div class="col-md-8"><select id="attackModal_baseWeapon"></select></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Weapon Skill:</div>
-		      		<div class="col-md-8">
-						<label class="radio-inline"><input id="attackModal_weaponSkill_MWS" type="radio" name="attackModal_weaponSkill" value="MWS" checked> MWS</label>
-						<label class="radio-inline"><input id="attackModal_weaponSkill_BWS" type="radio" name="attackModal_weaponSkill" value="BWS"> BWS</label>
-		      		</div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Hit:</div>
-		      		<div class="col-md-8"><input id="attackModal_hit" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Damage:</div>
-		      		<div class="col-md-8"><input id="attackModal_damage" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Speed:</div>
-		      		<div class="col-md-8"><input id="attackModal_speed" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Attacks:</div>
-		      		<div class="col-md-8"><input id="attackModal_attacks" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Notes:</div>
-		      	</div>
-				<div class="row">
-					<div class="col-md-4"></div>
-		      		<div class="col-md-8"><textarea id="attackModal_notes"></textarea></div>
-		      	</div>
-		     </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button id="attackModal_save" type="button" class="btn btn-primary">Save changes</button>
-	        <button id="attackModal_delete" type="button" class="btn btn-danger">Delete</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-  
-  
-	<div class="modal fade" id="defenseModal" tabindex="-1" role="dialog" aria-labelledby="defenseModal" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Update Defense</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="container-fluid">
-	      		<input id="defenseModal_index" type="hidden"/>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Name:</div>
-		      		<div class="col-md-8"><input id="defenseModal_name" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Defense Factor:</div>
-		      		<div class="col-md-8"><select id="defenseModal_baseDefenseFactor"></select></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Ad:</div>
-		      		<div class="col-md-8"><input id="defenseModal_ad" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Ad Mod:</div>
-		      		<div class="col-md-8"><input id="defenseModal_adMod" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Aa:</div>
-		      		<div class="col-md-8"><input id="defenseModal_aa" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">T:</div>
-		      		<div class="col-md-8"><input id="defenseModal_t" type="text"></input></div>
-		      	</div>
-				<div class="row">
-		      		<div class="col-md-4 text-right">Notes:</div>
-		      	</div>
-				<div class="row">
-					<div class="col-md-4"></div>
-		      		<div class="col-md-8"><textarea id="defenseModal_notes"></textarea></div>
-		      	</div>
-		     </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button id="defenseModal_save" type="button" class="btn btn-primary">Save changes</button>
-	        <button id="defenseModal_delete" type="button" class="btn btn-danger">Delete</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-  
-  
+
+
+  <div class="modal fade" id="attackModal" tabindex="-1" role="dialog" aria-labelledby="attackModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Attack</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <input id="attackModal_index" type="hidden" />
+            <div class="row">
+              <div class="col-md-4 text-right">Name:</div>
+              <div class="col-md-8">
+                <input id="attackModal_name" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Base Weapon:</div>
+              <div class="col-md-8">
+                <select id="attackModal_baseWeapon"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Weapon Skill:</div>
+              <div class="col-md-8">
+                <label class="radio-inline"><input id="attackModal_weaponSkill_MWS" type="radio" name="attackModal_weaponSkill" value="MWS" checked> MWS</label> <label class="radio-inline"><input id="attackModal_weaponSkill_BWS" type="radio" name="attackModal_weaponSkill" value="BWS">
+                  BWS</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Hit:</div>
+              <div class="col-md-8">
+                <input id="attackModal_hit" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Damage:</div>
+              <div class="col-md-8">
+                <input id="attackModal_damage" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Speed:</div>
+              <div class="col-md-8">
+                <input id="attackModal_speed" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Attacks:</div>
+              <div class="col-md-8">
+                <input id="attackModal_attacks" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Notes:</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-8">
+                <textarea id="attackModal_notes"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="attackModal_save" type="button" class="btn btn-primary">Save changes</button>
+          <button id="attackModal_delete" type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="defenseModal" tabindex="-1" role="dialog" aria-labelledby="defenseModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Defense</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <input id="defenseModal_index" type="hidden" />
+            <div class="row">
+              <div class="col-md-4 text-right">Name:</div>
+              <div class="col-md-8">
+                <input id="defenseModal_name" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Defense Factor:</div>
+              <div class="col-md-8">
+                <select id="defenseModal_baseDefenseFactor"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Ad:</div>
+              <div class="col-md-8">
+                <input id="defenseModal_ad" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Ad Mod:</div>
+              <div class="col-md-8">
+                <input id="defenseModal_adMod" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Aa:</div>
+              <div class="col-md-8">
+                <input id="defenseModal_aa" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">T:</div>
+              <div class="col-md-8">
+                <input id="defenseModal_t" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Notes:</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-8">
+                <textarea id="defenseModal_notes"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="defenseModal_save" type="button" class="btn btn-primary">Save changes</button>
+          <button id="defenseModal_delete" type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <script src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
   <script src="../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script src="../js/popper.min.js"></script>

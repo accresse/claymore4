@@ -11,6 +11,7 @@ var character = null;
 
 var attackTemplate;
 var defenseTemplate;
+var xpHistoryTemplate;
 
 var dice = new DiceRoller();
 
@@ -18,6 +19,8 @@ $(document).ready(
 	function(){
 		attackTemplate = $('#attack_template').clone();
 		defenseTemplate = $('#defense_template').clone();
+		xpHistoryTemplate = $('#xp_history_template').clone();
+		
 		var promises = [];
 		promises.push(loadWeaponsFromServer());
 		promises.push(loadDefenseFactorsFromServer());
@@ -43,7 +46,7 @@ var layoutPageAfterDataDownload = function() {
 	
 	setupAttackModal();
 	setupDefenseModal();
-
+	updateXpBuyTab();
 };
 
 var saveCharacter = function() {
@@ -163,7 +166,11 @@ var createFormFromModel = function() {
 
 var updateModel = function(event) {
 	var prop = event.target.id.substring(4);
-	character[prop] = event.target.value;
+	var value = event.target.value;
+	if($.isNumeric(value)) {
+		value = parseInt(value);
+	}
+	character[prop] = value;
 	updateJsonView();
 	updateDerivedFields();
 };
@@ -184,10 +191,10 @@ var updateDerivedFields = function() {
 	$("#character_height").text(Math.floor(character.height/12)+"' "+character.height%12+'"');
 	$("#character_weight").text(character.weight);
 	
-	$("#character_level").text(character.level);
+	$(".character_level").text(character.level);
 	$("#character_xp").text(character.xp);	
 	$("#character_unspentXp").text(character.unspentXp);
-	$("#character_spendableXp").text(character.spendableXp);
+	$(".remaining_xp").text(character.spendableXp);
 	
 	updateHpCard();
 	
