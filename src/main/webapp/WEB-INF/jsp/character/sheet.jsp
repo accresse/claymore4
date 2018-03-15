@@ -85,7 +85,7 @@
         <div id="summary" class="tab-pane in active">
           <div class="row my-1">
             <div class="col-md-6">
-              <div class="card">
+              <div class="card" style="height: 100%;">
                 <div class="card-header">Level</div>
                 <div class="card-body">
                   <div class="row">
@@ -317,11 +317,30 @@
               </div>
             </div>
           </div>
-          <div id="section_Fighter" style="display: none;"></div>
-          <div id="section_Thief" class="row my-1" style="display: none;">
+          <div id="section_Fighter" class="row my-1 visible_Fighter" style="display: none;">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header">Thief</div>
+                <div class="card-header">Fighter</div>
+                <div class="card-body">
+                  <p class=" p-y-1">(Pencil and paper for now)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="section_Priest" class="row my-1 visible_Priest" style="display: none;">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">Priest</div>
+                <div class="card-body">
+                  <p class=" p-y-1">(Pencil and paper for now)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="section_Rogue" class="row my-1 visible_Rogue" style="display: none;">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">Rogue</div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
@@ -374,20 +393,10 @@
               </div>
             </div>
           </div>
-          <div id="section_Wizard" class="row my-1" style="display: none;">
+          <div id="section_Wizard" class="row my-1 visible_Wizard" style="display: none;">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">Wizard</div>
-                <div class="card-body">
-                  <p class=" p-y-1">(Pencil and paper for now)</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="section_Priest" class="row my-1" style="display: none;">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">Priest</div>
                 <div class="card-body">
                   <p class=" p-y-1">(Pencil and paper for now)</p>
                 </div>
@@ -474,9 +483,15 @@
         <div id="xpShop" class="tab-pane">
           <div class="py-0">
             <div class="row my-4">
-              <div class="col-md-3"><h3>Current Level: <span class="character_level">-</span></h3></div>
+              <div class="col-md-3">
+                <h3>
+                  Current Level: <span class="character_level">-</span>
+                </h3>
+              </div>
               <div class="col-md-2">
-                <a id="level_up_button" class="btn ml-2 text-white btn-primary"><i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up</a>
+                <button id="level_up_button" class="btn ml-2 text-white btn-primary">
+                  <i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up
+                </button>
               </div>
             </div>
           </div>
@@ -498,17 +513,17 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_hp_0" type="radio" name="xpShop_hp" checked="checked" /></td>
+                          <td class="text-center"><input id="xpShop_hp_0" class="xpBuyInput" type="radio" name="xpShop_hp" data-category="HP" data-points="0" checked="checked" /></td>
                           <td class="text-center">0</td>
                           <td class="text-center">1</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_hp_2" type="radio" name="xpShop_hp" /></td>
+                          <td class="text-center"><input id="xpShop_hp_2" class="xpBuyInput" type="radio" name="xpShop_hp" data-category="HP" data-points="2" /></td>
                           <td class="text-center">2</td>
                           <td class="text-center">3</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_hp_5" type="radio" name="xpShop_hp" /></td>
+                          <td class="text-center"><input id="xpShop_hp_5" class="xpBuyInput" type="radio" name="xpShop_hp" data-category="HP" data-points="5" /></td>
                           <td class="text-center">5</td>
                           <td class="text-center">6</td>
                         </tr>
@@ -527,20 +542,20 @@
                         <tr>
                           <th class="text-center"></th>
                           <th class="text-center">XP</th>
-                          <td class="text-center"><select id="xpShop_resist_score1">
+                          <td class="text-center"><select id="xpShop_resist_score1" class="xpBuyInput" disabled="disabled">
                               <option value="agility">Agl</option>
                               <option value="fortitude">Fot</option>
                               <option value="will">Wil</option>
                               <option value="identity">Idn</option>
                           </select></td>
-                          <td class="text-center"><select id="xpShop_resist_score2">
+                          <td class="text-center"><select id="xpShop_resist_score2" class="xpBuyInput" disabled="disabled">
                               <option value="might">Mit</option>
                               <option value="agility">Agl</option>
                               <option value="fortitude">Fot</option>
                               <option value="will">Wil</option>
                               <option value="identity">Idn</option>
                           </select></td>
-                          <td class="text-center"><select id="xpShop_resist_score3">
+                          <td class="text-center"><select id="xpShop_resist_score3" class="xpBuyInput" disabled="disabled">
                               <option value="might">Mit</option>
                               <option value="agility">Agl</option>
                               <option value="fortitude">Fot</option>
@@ -551,28 +566,28 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_0" type="radio" name="xpShop_resist" value="0" checked="checked" /></td>
+                          <td class="text-center"><input id="xpShop_resist_0" class="xpBuyInput" type="radio" name="xpShop_resist" value="0" data-category="SavingThrow" data-points="0" checked="checked" /></td>
                           <td class="text-center">0</td>
                           <td class="text-center">+0%</td>
                           <td class="text-center">+0%</td>
                           <td class="text-center">+0%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_1" type="radio" name="xpShop_resist" value="1" /></td>
+                          <td class="text-center"><input id="xpShop_resist_1" class="xpBuyInput" type="radio" name="xpShop_resist" value="1" data-category="SavingThrow" data-points="1" /></td>
                           <td class="text-center">1</td>
                           <td class="text-center">+2%</td>
                           <td class="text-center">+1%</td>
                           <td class="text-center">+0%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_2" type="radio" name="xpShop_resist" value="2" /></td>
+                          <td class="text-center"><input id="xpShop_resist_2" class="xpBuyInput" type="radio" name="xpShop_resist" value="2" data-category="SavingThrow" data-points="2" /></td>
                           <td class="text-center">2</td>
                           <td class="text-center">+3%</td>
                           <td class="text-center">+2%</td>
                           <td class="text-center">+1%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_3" type="radio" name="xpShop_resist" value="3" /></td>
+                          <td class="text-center"><input id="xpShop_resist_3" class="xpBuyInput" type="radio" name="xpShop_resist" value="3" data-category="SavingThrow" data-points="3" /></td>
                           <td class="text-center">3</td>
                           <td class="text-center">+4%</td>
                           <td class="text-center">+3%</td>
@@ -601,12 +616,12 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_skill_0" type="radio" name="xpShop_skill" checked="checked"></td>
+                          <td class="text-center"><input id="xpShop_skill_0" class="xpBuyInput" type="radio" name="xpShop_skill" data-category="SkillPoints" data-points="0" checked="checked"></td>
                           <td class="text-center">0</td>
                           <td class="text-center">2</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_skill_1" type="radio" name="xpShop_skill"></td>
+                          <td class="text-center"><input id="xpShop_skill_1" class="xpBuyInput" type="radio" data-category="SkillPoints" data-points="1" name="xpShop_skill"></td>
                           <td class="text-center">1</td>
                           <td class="text-center">10</td>
                         </tr>
@@ -625,7 +640,7 @@
                         <tr>
                           <th class="text-center"></th>
                           <th class="text-center">XP</th>
-                          <th class="text-center"><select id="xpShop_weapon_primary">
+                          <th class="text-center"><select id="xpShop_weapon_primary" class="xpBuyInput">
                               <option value="MWS">MWS</option>
                               <option value="BWS">BWS</option>
                           </select></th>
@@ -634,25 +649,25 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_0" type="radio" name="xpShop_weapon" checked="checked"></td>
+                          <td class="text-center"><input id="xpShop_weapon_0" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="0" checked="checked"></td>
                           <td class="text-center">0</td>
                           <td class="text-center">+1%</td>
                           <td class="text-center">+0%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_1" type="radio" name="xpShop_weapon"></td>
+                          <td class="text-center"><input id="xpShop_weapon_1" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="1"></td>
                           <td class="text-center">1</td>
                           <td class="text-center">+1%</td>
                           <td class="text-center">+1%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_2" type="radio" name="xpShop_weapon"></td>
+                          <td class="text-center"><input id="xpShop_weapon_2" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="2"></td>
                           <td class="text-center">2</td>
                           <td class="text-center">+2%</td>
                           <td class="text-center">+1%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_3" type="radio" name="xpShop_weapon"></td>
+                          <td class="text-center"><input id="xpShop_weapon_3" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="3"></td>
                           <td class="text-center">3</td>
                           <td class="text-center">+3%</td>
                           <td class="text-center">+2%</td>
@@ -671,7 +686,7 @@
                   <div class="card-header">
                     <input id="xpShop_class_fighter" type="checkbox" /> Fighter - 1 XP
                   </div>
-                  <div class="card-body m-0" id="xpShop_class_fighter_body">
+                  <div class="card-body m-0 visible_Fighter" id="xpShop_class_fighter_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">
@@ -681,28 +696,28 @@
                             <tr>
                               <th class="text-center"></th>
                               <th class="text-center">XP</th>
-                              <th class="text-center">Weapon Mastery 1</th>
-                              <th class="text-center">Weapon Mastery 2</th>
+                              <th class="text-center"><select id="xpShop_class_fighter_mastery_weapon_1" class="xpBuyInput"></select></th>
+                              <th class="text-center"><select id="xpShop_class_fighter_mastery_weapon_2" class="xpBuyInput"></select></th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_0" name="xpShop_class_fighter_mastery" checked="checked" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_0" class="xpBuyInput" name="xpShop_class_fighter_mastery" data-category="WeaponMastery" data-points="0" checked="checked" /></td>
                               <td class="text-center">0</td>
-                              <td class="text-center">None</td>
-                              <td class="text-center">None</td>
+                              <td class="text-center">+0</td>
+                              <td class="text-center">+0</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_1" name="xpShop_class_fighter_mastery" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_1" class="xpBuyInput" name="xpShop_class_fighter_mastery" data-category="WeaponMastery" data-points="1" /></td>
                               <td class="text-center">1</td>
-                              <td class="text-center">+1 to <select></select></td>
-                              <td class="text-center">None</td>
+                              <td class="text-center">+1</td>
+                              <td class="text-center">+0</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_2" name="xpShop_class_fighter_mastery" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_2" class="xpBuyInput" name="xpShop_class_fighter_mastery" data-category="WeaponMastery" data-points="2" /></td>
                               <td class="text-center">2</td>
-                              <td class="text-center">+1 to <select></select></td>
-                              <td class="text-center">+1 to <select></select></td>
+                              <td class="text-center">+1</td>
+                              <td class="text-center">+1</td>
                             </tr>
                           </tbody>
                         </table>
@@ -742,7 +757,7 @@
                   <div class="card-header">
                     <input id="xpShop_class_priest" type="checkbox" /> Priest - 6 XP
                   </div>
-                  <div class="card-body m-0" id="xpShop_class_priest_body">
+                  <div class="card-body m-0 visible_Priest" id="xpShop_class_priest_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">
@@ -809,7 +824,7 @@
                   <div class="card-header">
                     <input id="xpShop_class_rogue" type="checkbox" /> Rogue - 3 XP
                   </div>
-                  <div class="card-body m-0" id="xpShop_class_rogue_body">
+                  <div class="card-body m-0 visible_Rogue" id="xpShop_class_rogue_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">
@@ -892,7 +907,7 @@
                   <div class="card-header">
                     <input id="xpShop_class_wizard" type="checkbox" /> Wizard - 10 XP
                   </div>
-                  <div class="card-body m-0" id="xpShop_class_wizard_body">
+                  <div class="card-body m-0 visible_Wizard" id="xpShop_class_wizard_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">

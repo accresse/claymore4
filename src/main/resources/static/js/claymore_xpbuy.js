@@ -13,11 +13,8 @@ class XpProcessor extends CharacterProcessor {
 			var currentLevelBuys = character.levelToXpBuyMap[level];
 			if (currentLevelBuys) {
 				for (var category in currentLevelBuys) {
-					var xpBuys = currentLevelBuys[category];
-					for (var i = 0; i<xpBuys.length; i++) {
-						var xpBuy = xpBuys[i];
-						levelSpent += xpBuy.points;
-					}
+					var xpBuy = currentLevelBuys[category];
+					levelSpent += xpBuy.points;
 				}
 			}
 			character.unspentXp -= levelSpent;
@@ -34,12 +31,9 @@ class HpProcessor extends CharacterProcessor {
 	
 	postProcess() {
 		for(var level=1; level<=character.level; level++) {
-			var levelHpBuys = getXpBuys(level, 'HP');
-			if(levelHpBuys) {				
-				for (var i = 0; i<levelHpBuys.length; i++) {
-					var hpBuy = levelHpBuys[i];
-					character.maxHp += getHpIncrease(level, hpBuy.points);
-				}
+			var hpBuy = getXpBuy(level, 'HP');
+			if(hpBuy) {				
+				character.maxHp += getHpIncrease(level, hpBuy.points);
 			} 
 			//add con bonus
 			character.maxHp += getConstitutionMods().hpMod
@@ -130,14 +124,11 @@ class WeaponSkillProcessor extends CharacterProcessor {
 	postProcess() {		
 
 		for(var level=1; level<=character.level; level++) {
-			var levelWeaponSkillBuys = getXpBuys(level, 'WeaponSkill');
-			if(levelWeaponSkillBuys) {				
-				for (var i = 0; i<levelWeaponSkillBuys.length; i++) {
-					var weaponSkillBuy = levelWeaponSkillBuys[i];
-					var ability = JSON.parse(weaponSkillBuy.ability);
-					character.mws += ability['mws'];
-					character.bws += ability['bws'];
-				}
+			var weaponSkillBuy = getXpBuy(level, 'WeaponSkill');
+			if(weaponSkillBuy) {
+				var ability = JSON.parse(weaponSkillBuy.ability);
+				character.mws += ability['mws'];
+				character.bws += ability['bws'];
 			}
 		}
 	}
@@ -174,6 +165,27 @@ var xpBuyProcessors = {
 /**
  * Start code for the XP Buy tab
  */
+var initXpBuyTab = function() {
+	$('#level_up_button').click(
+		function(){
+			character.xpBuys.push({level: character.level+1, points: 0, category: "HP", ability: null});
+			character.xpBuys.push({level: character.level+1, points: 0, category: "SavingThrow", ability: '{}'});
+			character.xpBuys.push({level: character.level+1, points: 0, category: "SkillPoints", ability: null});
+			character.xpBuys.push({level: character.level+1, points: 0, category: "WeaponSkill", ability: '{"mws":1,"bws":0}'});
+			updateJsonView();
+			updateDerivedFields();
+		}
+	);
+	
+	$('.xpBuyInput').change(
+		function(event){
+			var points = $('#'+event.target.id).data('points');
+			var category = $('#'+event.target.id).data('category');
+			alert(category+'='+points);
+		}
+	);
+};
+
 var updateXpBuyTab = function() {
 	$('#xp_history_table').empty();
 	
@@ -190,5 +202,17 @@ var updateXpBuyTab = function() {
 		row.show();
 	}
 	
-	calculateOverallDefense();
+	//have to have at least 10 xp and must have spent at least 1 xp to level
+	if(character.unspentXp<10 || character.spendableXp >= 10) {
+		$('#level_up_button').attr('disabled','disabled');
+	} else {
+		$('#level_up_button').removeAttr('disabled');
+	}
+	
+	var currentHpPoints = getXpBuy(character.level,'HP').points;
+	$('#xpShop_hp+'+currentHpPoints).prop('checked',true);
+	
+	var currentSavingThrow = getXpBuy(character.level,'SavingThrow');
+	$('#xpShop_resist_+'+currentSavingThrow.points).prop('checked',true);
+	
 };

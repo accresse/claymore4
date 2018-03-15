@@ -46,7 +46,7 @@ var layoutPageAfterDataDownload = function() {
 	
 	setupAttackModal();
 	setupDefenseModal();
-	updateXpBuyTab();
+	initXpBuyTab();
 };
 
 var saveCharacter = function() {
@@ -214,12 +214,13 @@ var updateDerivedFields = function() {
 	
 	updateAttacks();
 	updateDefenses();
+	updateXpBuyTab();
 
 };
 
 var showRelaventClassSections = function() {
 	for (var className in character.classes) {
-		$("#section_"+className).show();
+		$(".visible_"+className).show();
 	}
 };
 
@@ -270,10 +271,7 @@ var indexXpBuy = function(xpBuy) {
 	if(!character.levelToXpBuyMap[level]) {
 		character.levelToXpBuyMap[level] = {};
 	}
-	if(!character.levelToXpBuyMap[level][category]) {
-		character.levelToXpBuyMap[level][category] = [];
-	}
-	character.levelToXpBuyMap[level][category].push(xpBuy);
+	character.levelToXpBuyMap[level][category] = xpBuy;
 };
 
 var processSkillBuys = function() {
@@ -298,7 +296,7 @@ var processSkillBuys = function() {
 
 };
 
-var getXpBuys = function(level, category) {
+var getXpBuy = function(level, category) {
 	if(!character.levelToXpBuyMap[level] || !character.levelToXpBuyMap[level][category]) {
 		return null;
 	} else {
