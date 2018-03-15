@@ -193,11 +193,35 @@ var initXpBuyTab = function() {
 	
 	$('.xpBuyInput').change(
 		function(event){
-			var points = $('#'+event.target.id).data('points');
-			var category = $('#'+event.target.id).data('category');
-			alert(category+'='+points);
+			clearCurrentLevelXpBuys();
+			addCurrentXpBuys();
+			updateJsonView();
+			updateDerivedFields();
 		}
 	);
+};
+
+var clearCurrentLevelXpBuys = function() {
+	var newXpBuys = [];
+	for(var i = 0; i< character.xpBuys.length; i++) {
+		var xpBuy = character.xpBuys[i];
+		if(xpBuy.level != character.level) {
+			newXpBuys.push(xpBuy);
+		}
+	}
+	character.xpBuys = newXpBuys;
+};
+
+var addCurrentXpBuys = function() {
+	var selectedHp = parseInt($('input[name=xpShop_hp]:checked').val());
+	var selectedResist = parseInt($('input[name=xpShop_resist]:checked').val());
+	var selectedSkill = parseInt($('input[name=xpShop_skill]:checked').val());
+	var selectedWeapon = parseInt($('input[name=xpShop_weapon]:checked').val());
+
+	character.xpBuys.push({level: character.level, points: selectedHp, category: "HP", ability: null});
+	character.xpBuys.push({level: character.level, points: selectedResist, category: "SavingThrow", ability: null});
+	character.xpBuys.push({level: character.level, points: selectedSkill, category: "SkillPoints", ability: null});
+	character.xpBuys.push({level: character.level, points: selectedWeapon, category: "WeaponSkill", ability: character.primaryWeaponSkill});
 };
 
 var updateXpBuyTab = function() {
@@ -215,18 +239,44 @@ var updateXpBuyTab = function() {
 		row.appendTo('#xp_history_table');
 		row.show();
 	}
-	
-	//have to have at least 10 xp and must have spent at least 1 xp to level
-	if(character.unspentXp<10 || character.spendableXp >= 10) {
+
+	//validate if you can level now
+	if(character.unspentXp<10) {
 		$('#level_up_button').attr('disabled','disabled');
+		$('#level_up_button').prop('title','You must have at least 10 unspent XP to level.');
+	} else if(character.spendableXp >= 10) {
+		$('#level_up_button').attr('disabled','disabled');
+		$('#level_up_button').prop('title','You must spend at least 1 XP to level.');
+	} else if(character.spendableXp < 0) {
+		$('#level_up_button').attr('disabled','disabled');
+		$('#level_up_button').prop('title','You spent too much XP this level.  Adjust your purchases before leveling.');
 	} else {
 		$('#level_up_button').removeAttr('disabled');
+		$('#level_up_button').prop('title',"Let's do this!");
 	}
 	
-	var currentHpPoints = getXpBuy(character.level,'HP').points;
-	$('#xpShop_hp+'+currentHpPoints).prop('checked',true);
+	//don't allow user to buy more than they have xp
+//	$('input.xpBuyInput').each(
+//		function(){
+//			var input = $("#"+this.id);
+//			if(input.val() > character.spendableXp) {
+//				input.attr('disabled','disabled');
+//			} else {
+//				input.removeAttr('disabled');
+//			}
+//		}
+//	);
+	
+	var currentHp = getXpBuy(character.level,'HP');
+	$('#xpShop_hp_'+currentHp.points).prop('checked',true);
 	
 	var currentSavingThrow = getXpBuy(character.level,'SavingThrow');
-	$('#xpShop_resist_+'+currentSavingThrow.points).prop('checked',true);
+	$('#xpShop_resist_'+currentSavingThrow.points).prop('checked',true);
+	
+	var currentSkillPoints = getXpBuy(character.level,'SkillPoints');
+	$('#xpShop_skill_'+currentSkillPoints.points).prop('checked',true);
+	
+	var currentWeaponSkill = getXpBuy(character.level,'WeaponSkill');
+	$('#xpShop_weapon_'+currentWeaponSkill.points).prop('checked',true);
 	
 };

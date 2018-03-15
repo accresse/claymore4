@@ -513,17 +513,17 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_hp_0" class="xpBuyInput" type="radio" name="xpShop_hp" data-category="HP" data-points="0" checked="checked" /></td>
+                          <td class="text-center"><input id="xpShop_hp_0" class="xpBuyInput" type="radio" name="xpShop_hp" value="0" checked="checked" /></td>
                           <td class="text-center">0</td>
                           <td class="text-center">1</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_hp_2" class="xpBuyInput" type="radio" name="xpShop_hp" data-category="HP" data-points="2" /></td>
+                          <td class="text-center"><input id="xpShop_hp_2" class="xpBuyInput" type="radio" name="xpShop_hp" value="2" /></td>
                           <td class="text-center">2</td>
                           <td class="text-center">3</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_hp_5" class="xpBuyInput" type="radio" name="xpShop_hp" data-category="HP" data-points="5" /></td>
+                          <td class="text-center"><input id="xpShop_hp_5" class="xpBuyInput" type="radio" name="xpShop_hp" value="5" /></td>
                           <td class="text-center">5</td>
                           <td class="text-center">6</td>
                         </tr>
@@ -566,28 +566,28 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_0" class="xpBuyInput" type="radio" name="xpShop_resist" value="0" data-category="SavingThrow" data-points="0" checked="checked" /></td>
+                          <td class="text-center"><input id="xpShop_resist_0" class="xpBuyInput" type="radio" name="xpShop_resist" value="0" checked="checked" /></td>
                           <td class="text-center">0</td>
                           <td class="text-center">+0%</td>
                           <td class="text-center">+0%</td>
                           <td class="text-center">+0%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_1" class="xpBuyInput" type="radio" name="xpShop_resist" value="1" data-category="SavingThrow" data-points="1" /></td>
+                          <td class="text-center"><input id="xpShop_resist_1" class="xpBuyInput" type="radio" name="xpShop_resist" value="1" /></td>
                           <td class="text-center">1</td>
                           <td class="text-center">+2%</td>
                           <td class="text-center">+1%</td>
                           <td class="text-center">+0%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_2" class="xpBuyInput" type="radio" name="xpShop_resist" value="2" data-category="SavingThrow" data-points="2" /></td>
+                          <td class="text-center"><input id="xpShop_resist_2" class="xpBuyInput" type="radio" name="xpShop_resist" value="2" /></td>
                           <td class="text-center">2</td>
                           <td class="text-center">+3%</td>
                           <td class="text-center">+2%</td>
                           <td class="text-center">+1%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_resist_3" class="xpBuyInput" type="radio" name="xpShop_resist" value="3" data-category="SavingThrow" data-points="3" /></td>
+                          <td class="text-center"><input id="xpShop_resist_3" class="xpBuyInput" type="radio" name="xpShop_resist" value="3" /></td>
                           <td class="text-center">3</td>
                           <td class="text-center">+4%</td>
                           <td class="text-center">+3%</td>
@@ -616,12 +616,12 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_skill_0" class="xpBuyInput" type="radio" name="xpShop_skill" data-category="SkillPoints" data-points="0" checked="checked"></td>
+                          <td class="text-center"><input id="xpShop_skill_0" class="xpBuyInput" type="radio" name="xpShop_skill" value="0" checked="checked"></td>
                           <td class="text-center">0</td>
                           <td class="text-center">2</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_skill_1" class="xpBuyInput" type="radio" data-category="SkillPoints" data-points="1" name="xpShop_skill"></td>
+                          <td class="text-center"><input id="xpShop_skill_1" class="xpBuyInput" type="radio" name="xpShop_skill" value="1" ></td>
                           <td class="text-center">1</td>
                           <td class="text-center">10</td>
                         </tr>
@@ -649,25 +649,25 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_0" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="0" checked="checked"></td>
+                          <td class="text-center"><input id="xpShop_weapon_0" class="xpBuyInput" type="radio" name="xpShop_weapon" value="0" checked="checked"></td>
                           <td class="text-center">0</td>
                           <td class="text-center">+1%</td>
                           <td class="text-center">+0%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_1" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="1"></td>
+                          <td class="text-center"><input id="xpShop_weapon_1" class="xpBuyInput" type="radio" name="xpShop_weapon" value="1"></td>
                           <td class="text-center">1</td>
                           <td class="text-center">+1%</td>
                           <td class="text-center">+1%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_2" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="2"></td>
+                          <td class="text-center"><input id="xpShop_weapon_2" class="xpBuyInput" type="radio" name="xpShop_weapon" value="2"></td>
                           <td class="text-center">2</td>
                           <td class="text-center">+2%</td>
                           <td class="text-center">+1%</td>
                         </tr>
                         <tr>
-                          <td class="text-center"><input id="xpShop_weapon_3" class="xpBuyInput" type="radio" name="xpShop_weapon" data-category="WeaponSkill" data-points="3"></td>
+                          <td class="text-center"><input id="xpShop_weapon_3" class="xpBuyInput" type="radio" name="xpShop_weapon" value="3"></td>
                           <td class="text-center">3</td>
                           <td class="text-center">+3%</td>
                           <td class="text-center">+2%</td>
