@@ -326,6 +326,28 @@ var getDefenseFactor = function(defenseFactorId) {
 	return defenseFactorMap[defenseFactorId];
 };
 
+var SAVING_BONUS_TABLE = [
+	[],
+	[2,1],
+	[3,2,1],
+	[4,3,2]
+];
+
+var getSavingThrowBonus = function(index, points) {
+	return SAVING_BONUS_TABLE[points][index];
+}
+
+var WEAPON_SKILL_BONUS_TABLE = [
+	[1,0],
+	[1,1],
+	[2,1],
+	[3,2]
+];
+
+var getWeaponSkillBonus = function(index, points) {
+	return WEAPON_SKILL_BONUS_TABLE[points][index];
+};
+
 class CharacterProcessor {
 	init(){}
 	

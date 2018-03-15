@@ -156,34 +156,34 @@ public class Application implements CommandLineRunner {
 
 		//level 1
 		quin.addXpBuy(new XpBuy(1,5,XpBuyCategory.HP,null));
-		quin.addXpBuy(new XpBuy(1,2,XpBuyCategory.WeaponSkill,"{\"mws\":2, \"bws\":1}"));
+		quin.addXpBuy(new XpBuy(1,2,XpBuyCategory.WeaponSkill,"MWS"));
 		quin.addXpBuy(new XpBuy(1,0,XpBuyCategory.SkillPoints,null));
-		quin.addXpBuy(new XpBuy(1,0,XpBuyCategory.SavingThrow,"{}"));
+		quin.addXpBuy(new XpBuy(1,0,XpBuyCategory.SavingThrow,null));
 
 		quin.addXpBuy(new XpBuy(1,1,XpBuyCategory.Class,"Fighter"));
-		quin.addXpBuy(new XpBuy(1,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(1,2,XpBuyCategory.WeaponMastery,WeaponGroup.Blades_Slashing+","+WeaponGroup.Bows));
 		quin.addSkillBuy(new SkillBuy(1,14, WeaponGroup.Blades_Slashing));
 		quin.addSkillBuy(new SkillBuy(1,3, WeaponGroup.Crushing));
 		quin.addSkillBuy(new SkillBuy(1,14, WeaponGroup.Bows));
 
 		//level 2
 		quin.addXpBuy(new XpBuy(2,5,XpBuyCategory.HP,null));
-		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponSkill,"{\"mws\":2,\"bws\":1}"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponSkill,"MWS"));
 		quin.addXpBuy(new XpBuy(2,0,XpBuyCategory.SkillPoints,null));
-		quin.addXpBuy(new XpBuy(2,0,XpBuyCategory.SavingThrow,"{}"));
+		quin.addXpBuy(new XpBuy(2,0,XpBuyCategory.SavingThrow,null));
 
-		quin.addXpBuy(new XpBuy(2,1,XpBuyCategory.ClassSavingThrow,"{\"fortitude\": 15, \"identity\": -5}"));
-		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(2,1,XpBuyCategory.ClassSavingThrow,"fortitude,identity"));
+		quin.addXpBuy(new XpBuy(2,2,XpBuyCategory.WeaponMastery,WeaponGroup.Blades_Slashing+","+WeaponGroup.Bows));
 
 		//level 3
 		quin.addXpBuy(new XpBuy(3,5,XpBuyCategory.HP,null));
-		quin.addXpBuy(new XpBuy(3,0,XpBuyCategory.WeaponSkill,"{\"mws\":2,\"bws\":1}"));
+		quin.addXpBuy(new XpBuy(3,0,XpBuyCategory.WeaponSkill,"MWS"));
 		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.SkillPoints,null));
-		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.SavingThrow,"{\"agility\":2,\"fortitude\":1}"));
+		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.SavingThrow,"agility,fortitude"));
 
-		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.ClassSavingThrow,"{\"might\": 10}"));
+		quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.ClassSavingThrow,"might"));
 		//quin.addXpBuy(new XpBuy(3,1,XpBuyCategory.FighterClassAbility,"Weapon Appraisal"));
-		quin.addXpBuy(new XpBuy(3,2,XpBuyCategory.WeaponMastery,"[\""+WeaponGroup.Blades_Slashing+"\",\""+WeaponGroup.Bows+"\"]"));
+		quin.addXpBuy(new XpBuy(3,2,XpBuyCategory.WeaponMastery,WeaponGroup.Blades_Slashing+","+WeaponGroup.Bows));
 
 		characterRepository.save(quin);
 	}

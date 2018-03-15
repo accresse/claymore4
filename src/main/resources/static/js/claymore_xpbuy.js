@@ -80,9 +80,14 @@ class SavingThrowProcessor extends CharacterProcessor {
 		character.will += 1;
 		character.identity += 1;
 		
-		var saves = JSON.parse(xpBuy.ability);
-		for(var save in saves) {
-			character[save] += saves[save];
+		var savePoints = xpBuy.points;
+		var saveAbility = xpBuy.ability;
+		
+		if(savePoints && saveAbility) {
+			var saves = saveAbility.split(',');
+			for(var i = 0; i < saves.length; i++) {
+				character[saves[i]] += getSavingThrowBonus(i, savePoints);
+			}
 		}
 	}
 	
@@ -93,9 +98,12 @@ class SavingThrowProcessor extends CharacterProcessor {
 class ClassSavingThrowProcessor extends CharacterProcessor {
 	
 	processBuy(xpBuy) {
-		var saves = JSON.parse(xpBuy.ability);
-		for(var save in saves) {
-			character[save] += saves[save];
+		var saveAbility = xpBuy.ability;
+		
+		if(saveAbility) {
+			var saves = saveAbility.split(',');
+			character[saves[0]] += 15;
+			character[saves[1]] -= 5;
 		}
 	}
 	
@@ -126,9 +134,15 @@ class WeaponSkillProcessor extends CharacterProcessor {
 		for(var level=1; level<=character.level; level++) {
 			var weaponSkillBuy = getXpBuy(level, 'WeaponSkill');
 			if(weaponSkillBuy) {
-				var ability = JSON.parse(weaponSkillBuy.ability);
-				character.mws += ability['mws'];
-				character.bws += ability['bws'];
+				var points = weaponSkillBuy.points;
+				var ability = weaponSkillBuy.ability;
+				if(ability == 'MWS') {
+					character.mws += getWeaponSkillBonus(0,points);
+					character.bws += getWeaponSkillBonus(1,points);
+				} else {
+					character.bws += getWeaponSkillBonus(0,points);
+					character.mws += getWeaponSkillBonus(1,points);
+				}
 			}
 		}
 	}
@@ -141,7 +155,7 @@ class WeaponMasteryProcessor extends CharacterProcessor {
 	}
 	
 	processBuy(xpBuy) {
-		var weaponGroups = JSON.parse(xpBuy.ability);
+		var weaponGroups = xpBuy.ability.split(',');
 		for(var i=0; i<weaponGroups.length; i++) {
 			var weaponGroup = weaponGroups[i];
 			var currentLevel = getWeaponMasteryLevel(weaponGroup);
@@ -169,9 +183,9 @@ var initXpBuyTab = function() {
 	$('#level_up_button').click(
 		function(){
 			character.xpBuys.push({level: character.level+1, points: 0, category: "HP", ability: null});
-			character.xpBuys.push({level: character.level+1, points: 0, category: "SavingThrow", ability: '{}'});
+			character.xpBuys.push({level: character.level+1, points: 0, category: "SavingThrow", ability: null});
 			character.xpBuys.push({level: character.level+1, points: 0, category: "SkillPoints", ability: null});
-			character.xpBuys.push({level: character.level+1, points: 0, category: "WeaponSkill", ability: '{"mws":1,"bws":0}'});
+			character.xpBuys.push({level: character.level+1, points: 0, category: "WeaponSkill", ability: character.primaryWeaponSkill});
 			updateJsonView();
 			updateDerivedFields();
 		}
