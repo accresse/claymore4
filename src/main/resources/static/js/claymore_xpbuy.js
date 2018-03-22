@@ -195,13 +195,7 @@ var initXpBuyTab = function() {
 		function(event){
 			clearCurrentLevelXpBuys();
 			addCurrentXpBuys();
-			
-			if(getSelectedWeaponSkill() == 'MWS') {
-				$('#xpShop_weapon_secondary').text("BWS");
-			} else {
-				$('#xpShop_weapon_secondary').text("MWS");				
-			}
-
+			updateSecondaryWeapon();
 			updateValidResists();
 			updateJsonView();
 			updateDerivedFields();
@@ -212,6 +206,14 @@ var initXpBuyTab = function() {
 
 var getSelectedWeaponSkill = function() {
 	return $('#xpShop_weapon_primary_MWS').prop('selected') ? 'MWS' : 'BWS';
+};
+
+var updateSecondaryWeapon = function() {
+	if(getSelectedWeaponSkill() == 'MWS') {
+		$('#xpShop_weapon_secondary').text("BWS");
+	} else {
+		$('#xpShop_weapon_secondary').text("MWS");				
+	}	
 };
 
 var clearCurrentLevelXpBuys = function() {
@@ -312,13 +314,29 @@ var updateXpBuyTab = function() {
 	
 	var currentSavingThrow = getXpBuy(character.level,'SavingThrow');
 	$('#xpShop_resist_'+currentSavingThrow.points).prop('checked',true);
-	
+	if(currentSavingThrow.ability && currentSavingThrow.points) {
+		var resists = currentSavingThrow.ability.split(',');
+		$("#xpShop_resist_score1").val(resists[0]);
+		if(resists.length>1){
+			$("#xpShop_resist_score2").val(resists[1]);			
+		}
+		if(resists.length>2) {			
+			$("#xpShop_resist_score3").val(resists[2]);
+		}
+	}
+	updateValidResists();
+
 	var currentSkillPoints = getXpBuy(character.level,'SkillPoints');
 	$('#xpShop_skill_'+currentSkillPoints.points).prop('checked',true);
 	
 	var currentWeaponSkill = getXpBuy(character.level,'WeaponSkill');
 	$('#xpShop_weapon_'+currentWeaponSkill.points).prop('checked',true);
-	
-	updateValidResists();
+	if(currentWeaponSkill.ability=='MWS') {
+		$('#xpShop_weapon_primary_MWS').prop('selected',true);
+	} else {
+		$('#xpShop_weapon_primary_BWS').prop('selected',true);
+	}
+	updateSecondaryWeapon();
+		
 	
 };
