@@ -542,25 +542,25 @@
                         <tr>
                           <th class="text-center"></th>
                           <th class="text-center">XP</th>
-                          <td class="text-center"><select id="xpShop_resist_score1" class="xpBuyInput" disabled="disabled">
-                              <option value="agility">Agl</option>
-                              <option value="fortitude">Fot</option>
-                              <option value="will">Wil</option>
-                              <option value="identity">Idn</option>
+                          <td class="text-center"><select id="xpShop_resist_score1" class="xpBuyInput">
+                              <option class="xpShop_resist_agl" value="agility">Agl</option>
+                              <option class="xpShop_resist_fot" value="fortitude">Fot</option>
+                              <option class="xpShop_resist_wil" value="will">Wil</option>
+                              <option class="xpShop_resist_idn" value="identity">Idn</option>
                           </select></td>
-                          <td class="text-center"><select id="xpShop_resist_score2" class="xpBuyInput" disabled="disabled">
-                              <option value="might">Mit</option>
-                              <option value="agility">Agl</option>
-                              <option value="fortitude">Fot</option>
-                              <option value="will">Wil</option>
-                              <option value="identity">Idn</option>
+                          <td class="text-center"><select id="xpShop_resist_score2" class="xpBuyInput">
+                              <option class="xpShop_resist_mit" value="might">Mit</option>
+                              <option class="xpShop_resist_agl" value="agility">Agl</option>
+                              <option class="xpShop_resist_fot" value="fortitude">Fot</option>
+                              <option class="xpShop_resist_wil" value="will">Wil</option>
+                              <option class="xpShop_resist_idn" value="identity">Idn</option>
                           </select></td>
-                          <td class="text-center"><select id="xpShop_resist_score3" class="xpBuyInput" disabled="disabled">
-                              <option value="might">Mit</option>
-                              <option value="agility">Agl</option>
-                              <option value="fortitude">Fot</option>
-                              <option value="will">Wil</option>
-                              <option value="identity">Idn</option>
+                          <td class="text-center"><select id="xpShop_resist_score3" class="xpBuyInput">
+                              <option class="xpShop_resist_mit" value="might">Mit</option>
+                              <option class="xpShop_resist_agl" value="agility">Agl</option>
+                              <option class="xpShop_resist_fot" value="fortitude">Fot</option>
+                              <option class="xpShop_resist_wil" value="will">Wil</option>
+                              <option class="xpShop_resist_idn" value="identity">Idn</option>
                           </select></td>
                         </tr>
                       </thead>
@@ -641,8 +641,8 @@
                           <th class="text-center"></th>
                           <th class="text-center">XP</th>
                           <th class="text-center"><select id="xpShop_weapon_primary" class="xpBuyInput">
-                              <option value="MWS">MWS</option>
-                              <option value="BWS">BWS</option>
+                              <option id="xpShop_weapon_primary_MWS" value="MWS">MWS</option>
+                              <option id="xpShop_weapon_primary_BWS" value="BWS">BWS</option>
                           </select></th>
                           <th class="text-center" id="xpShop_weapon_secondary">BWS</th>
                         </tr>

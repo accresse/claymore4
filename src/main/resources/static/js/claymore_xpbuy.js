@@ -195,10 +195,23 @@ var initXpBuyTab = function() {
 		function(event){
 			clearCurrentLevelXpBuys();
 			addCurrentXpBuys();
+			
+			if(getSelectedWeaponSkill() == 'MWS') {
+				$('#xpShop_weapon_secondary').text("BWS");
+			} else {
+				$('#xpShop_weapon_secondary').text("MWS");				
+			}
+
+			updateValidResists();
 			updateJsonView();
 			updateDerivedFields();
 		}
 	);
+	
+};
+
+var getSelectedWeaponSkill = function() {
+	return $('#xpShop_weapon_primary_MWS').prop('selected') ? 'MWS' : 'BWS';
 };
 
 var clearCurrentLevelXpBuys = function() {
@@ -213,15 +226,54 @@ var clearCurrentLevelXpBuys = function() {
 };
 
 var addCurrentXpBuys = function() {
-	var selectedHp = parseInt($('input[name=xpShop_hp]:checked').val());
-	var selectedResist = parseInt($('input[name=xpShop_resist]:checked').val());
-	var selectedSkill = parseInt($('input[name=xpShop_skill]:checked').val());
-	var selectedWeapon = parseInt($('input[name=xpShop_weapon]:checked').val());
+	var selectedHpPoints = parseInt($('input[name=xpShop_hp]:checked').val());
+	var selectedResistPoints = parseInt($('input[name=xpShop_resist]:checked').val());
+	var selectedSkillPoints = parseInt($('input[name=xpShop_skill]:checked').val());
+	var selectedWeaponPoints = parseInt($('input[name=xpShop_weapon]:checked').val());
 
-	character.xpBuys.push({level: character.level, points: selectedHp, category: "HP", ability: null});
-	character.xpBuys.push({level: character.level, points: selectedResist, category: "SavingThrow", ability: null});
-	character.xpBuys.push({level: character.level, points: selectedSkill, category: "SkillPoints", ability: null});
-	character.xpBuys.push({level: character.level, points: selectedWeapon, category: "WeaponSkill", ability: character.primaryWeaponSkill});
+	character.xpBuys.push({level: character.level, points: selectedHpPoints, category: "HP", ability: null});
+	character.xpBuys.push({level: character.level, points: selectedResistPoints, category: "SavingThrow", ability: getSelectedResists(selectedResistPoints).toString()});
+	character.xpBuys.push({level: character.level, points: selectedSkillPoints, category: "SkillPoints", ability: null});
+	character.xpBuys.push({level: character.level, points: selectedWeaponPoints, category: "WeaponSkill", ability: getSelectedWeaponSkill()});
+};
+
+var getSelectedResists = function(selectedResistPoints) {
+	var resists = [$("#xpShop_resist_score1").val(),$("#xpShop_resist_score2").val(),$("#xpShop_resist_score3").val()];
+	var length = SAVING_BONUS_TABLE[selectedResistPoints].length;
+	return resists.splice(0,length);
+};
+
+var updateValidResists = function(){
+	var needsRefresh = false;
+
+	var class1 = $("#xpShop_resist_score1 option:selected").attr('class');
+	
+	//disable option in second select if it was used in first select
+	$("#xpShop_resist_score2 ."+class1).attr('disabled','disabled').siblings().removeAttr('disabled');
+	
+	//update second select if it is currently selecting a disabled option
+	if($("#xpShop_resist_score2 option:selected").attr('disabled')) {
+		$('#xpShop_resist_score2').children('option:enabled').eq(0).prop('selected',true);
+		needsRefresh = true;
+	}
+	
+	var class2 = $("#xpShop_resist_score2 option:selected").attr('class');
+	
+	//disable options in third select if it was used in first two selects
+	$("#xpShop_resist_score3 ."+class1).attr('disabled','disabled').siblings().removeAttr('disabled');
+	$("#xpShop_resist_score3 ."+class2).attr('disabled','disabled');
+	
+	//update third select if it is currently selecting a disabled option
+	if($("#xpShop_resist_score3 option:selected").attr('disabled')) {
+		$('#xpShop_resist_score3').children('option:enabled').eq(0).prop('selected',true);
+		needsRefresh = true;
+	}
+	
+	//if we had to change the selected value in second two selects, fire an event to update again
+	if(needsRefresh) {
+		$('#xpShop_resist_score1').change();
+	}
+	
 };
 
 var updateXpBuyTab = function() {
@@ -254,19 +306,7 @@ var updateXpBuyTab = function() {
 		$('#level_up_button').removeAttr('disabled');
 		$('#level_up_button').prop('title',"Let's do this!");
 	}
-	
-	//don't allow user to buy more than they have xp
-//	$('input.xpBuyInput').each(
-//		function(){
-//			var input = $("#"+this.id);
-//			if(input.val() > character.spendableXp) {
-//				input.attr('disabled','disabled');
-//			} else {
-//				input.removeAttr('disabled');
-//			}
-//		}
-//	);
-	
+		
 	var currentHp = getXpBuy(character.level,'HP');
 	$('#xpShop_hp_'+currentHp.points).prop('checked',true);
 	
@@ -278,5 +318,7 @@ var updateXpBuyTab = function() {
 	
 	var currentWeaponSkill = getXpBuy(character.level,'WeaponSkill');
 	$('#xpShop_weapon_'+currentWeaponSkill.points).prop('checked',true);
+	
+	updateValidResists();
 	
 };
