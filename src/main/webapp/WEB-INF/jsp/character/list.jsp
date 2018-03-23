@@ -20,6 +20,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent"
         aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <a id="new_character_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user-plus"></i> New</a>
       </div>
     </div>
   </nav>
@@ -30,7 +31,7 @@
         <div class="col-md-12">
         		<ul>
         		<c:forEach items="${characters}" var="character">
-        			<li><a href="character/${character.characterId}">${character.name}</a> - ${character.lastModifiedTs} (${character.player.userName})</li>
+        			<li><a href="character/${character.characterId}">${character.name}</a> - ${character.lastModifiedTs}</li>
         		</c:forEach>
         		</ul>
         </div>
@@ -41,6 +42,7 @@
   <script src="./jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script src="./js/popper.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/claymore_list.js"></script>
   <!-- 
   <script src="./js/jqueryui-editable.min.js"></script>
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;

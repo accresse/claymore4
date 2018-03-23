@@ -83,7 +83,6 @@ var deleteCharacter = function() {
 		url: "/claymore/api/characters/" + id, 
 		data: JSON.stringify(character, null, 2), 
 		success: function(data) {
-			alert('Character has been deleted.');
 			window.location.replace('/claymore/character');
 		},
 		contentType: "application/json"

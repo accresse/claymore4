@@ -76,8 +76,41 @@ public class Application implements CommandLineRunner {
 		armorRepository.save(other);
 
 
+		template();
 		quin();
 		adny();
+	}
+
+	private void template() {
+		Player system = new Player("system");
+		playerRepository.save(system);
+
+		org.cresse.claymore.model.Character template = new org.cresse.claymore.model.Character();
+		template.setName("Template");
+		template.setPlayer(system);
+		template.setGender(Gender.Male);
+		template.setAge(20);
+		template.setHeight(68);
+		template.setWeight(160);
+		template.setRace(Race.Human);
+		template.setCurrentHp(0);
+		template.setXp(0);
+		template.setStrength(15);
+		template.setDexterity(15);
+		template.setConstitution(15);
+		template.setProblemSolving(15);
+		template.setRecall(15);
+		template.setWit(15);
+		template.setLeadership(15);
+		template.setPrimaryWeaponSkill(WeaponSkillType.MWS);
+		template.setActive(false);
+
+		template.addXpBuy(new XpBuy(1,0,XpBuyCategory.HP,null));
+		template.addXpBuy(new XpBuy(1,0,XpBuyCategory.WeaponSkill,"MWS"));
+		template.addXpBuy(new XpBuy(1,0,XpBuyCategory.SkillPoints,null));
+		template.addXpBuy(new XpBuy(1,0,XpBuyCategory.SavingThrow,null));
+
+		characterRepository.save(template);
 	}
 
 	private void quin() {
