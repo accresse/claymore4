@@ -684,9 +684,9 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <input id="xpShop_class_fighter" type="checkbox" /> Fighter - 1 XP
+                    <input id="xpShop_class_Fighter" class="xpBuyInput" type="checkbox" /> Fighter - <span id="xpShop_class_cost_Fighter"></span> XP
                   </div>
-                  <div class="card-body m-0 visible_Fighter" id="xpShop_class_fighter_body" style="display: none;">
+                  <div class="card-body m-0 visible_Fighter" id="xpShop_class_Fighter_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">
@@ -755,9 +755,9 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <input id="xpShop_class_priest" type="checkbox" /> Priest - 6 XP
+                    <input id="xpShop_class_Priest" class="xpBuyInput" type="checkbox" /> Priest - <span id="xpShop_class_cost_Priest"></span> XP
                   </div>
-                  <div class="card-body m-0 visible_Priest" id="xpShop_class_priest_body" style="display: none;">
+                  <div class="card-body m-0 visible_Priest" id="xpShop_class_Priest_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">
@@ -822,9 +822,9 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <input id="xpShop_class_rogue" type="checkbox" /> Rogue - 3 XP
+                    <input id="xpShop_class_Rogue" class="xpBuyInput" type="checkbox" /> Rogue - <span id="xpShop_class_cost_Rogue"></span> XP
                   </div>
-                  <div class="card-body m-0 visible_Rogue" id="xpShop_class_rogue_body" style="display: none;">
+                  <div class="card-body m-0 visible_Rogue" id="xpShop_class_Rogue_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">
@@ -905,9 +905,9 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <input id="xpShop_class_wizard" type="checkbox" /> Wizard - 10 XP
+                    <input id="xpShop_class_Wizard" class="xpBuyInput" type="checkbox" /> Wizard - <span id="xpShop_class_cost_Wizard"></span> XP
                   </div>
-                  <div class="card-body m-0 visible_Wizard" id="xpShop_class_wizard_body" style="display: none;">
+                  <div class="card-body m-0 visible_Wizard" id="xpShop_class_Wizard_body" style="display: none;">
                     <div class="row my-1">
                       <div class="col-md-6">
                         <table class="table table-sm m-0">

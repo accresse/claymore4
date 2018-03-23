@@ -58,7 +58,10 @@ class ClassProcessor extends CharacterProcessor {
 	}
 	
 	processBuy(xpBuy) {
-		character.classes[xpBuy.ability]=true;
+		var classes = xpBuy.ability.split(',');
+		for(var i=0; i<classes.length; i++){			
+			character.classes[classes[i]]=true;
+		}
 	}
 }
 
@@ -176,9 +179,7 @@ var xpBuyProcessors = {
 	WeaponMastery: new WeaponMasteryProcessor()
 };
 
-/**
- * Start code for the XP Buy tab
- */
+//Start code for the XP Buy tab
 var initXpBuyTab = function() {
 	$('#level_up_button').click(
 		function(){
@@ -193,6 +194,7 @@ var initXpBuyTab = function() {
 	
 	$('.xpBuyInput').change(
 		function(event){
+			console.log('change: '+event.target.id);
 			clearCurrentLevelXpBuys();
 			addCurrentXpBuys();
 			updateSecondaryWeapon();
@@ -201,7 +203,9 @@ var initXpBuyTab = function() {
 			updateDerivedFields();
 		}
 	);
-	
+	for(var className in CLASS_COST_TABLE) {
+		var checkbox = $('#xpShop_class_cost_'+className).text(CLASS_COST_TABLE[className]);
+	}
 };
 
 var getSelectedWeaponSkill = function() {
@@ -237,6 +241,20 @@ var addCurrentXpBuys = function() {
 	character.xpBuys.push({level: character.level, points: selectedResistPoints, category: "SavingThrow", ability: getSelectedResists(selectedResistPoints).toString()});
 	character.xpBuys.push({level: character.level, points: selectedSkillPoints, category: "SkillPoints", ability: null});
 	character.xpBuys.push({level: character.level, points: selectedWeaponPoints, category: "WeaponSkill", ability: getSelectedWeaponSkill()});
+
+	var addedClasses = [];
+	var totalXp = 0;
+	
+	for(var className in CLASS_COST_TABLE) {
+		var checkbox = $('#xpShop_class_'+className);
+		if(!checkbox.prop('disabled') && checkbox.prop('checked')) {
+			addedClasses.push(className);
+			totalXp += CLASS_COST_TABLE[className];
+		}		
+	}
+	if(totalXp) {		
+		character.xpBuys.push({level: character.level, points: totalXp, category: "Class", ability: addedClasses.toString()});			
+	}
 };
 
 var getSelectedResists = function(selectedResistPoints) {
@@ -337,6 +355,19 @@ var updateXpBuyTab = function() {
 		$('#xpShop_weapon_primary_BWS').prop('selected',true);
 	}
 	updateSecondaryWeapon();
-		
 	
+	for(var charClass in character.classes) {
+		//disable all the class checkboxes for classes we already have
+		$('#xpShop_class_'+charClass).prop('checked',true).prop('disabled','disabled');
+	}
+	//but if class was added this level, then enable checkbox
+	var currentLevelClassBuy = getXpBuy(character.level,'Class');
+	if(currentLevelClassBuy) {
+		var currentLevelClasses = currentLevelClassBuy.ability.split(',');
+		for(var i=0; i<currentLevelClasses.length; i++) {
+			var charClass = currentLevelClasses[i];
+			$('#xpShop_class_'+charClass).removeProp('disabled');
+		}
+	}
+
 };

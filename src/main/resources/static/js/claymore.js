@@ -219,6 +219,9 @@ var updateDerivedFields = function() {
 };
 
 var showRelaventClassSections = function() {
+	for (var className in CLASS_COST_TABLE) {
+		$(".visible_"+className).hide();
+	}
 	for (var className in character.classes) {
 		$(".visible_"+className).show();
 	}

@@ -218,11 +218,18 @@ var WIT_TABLE = [
 ];
 
 var UNSKILLED_TABLE = {
-	Fighter:	-10,
-	Priest:-15,
-	Rogue:-15,
-	Wizard:-20,
-	None:-25	
+		Fighter:	-10,
+		Priest:-15,
+		Rogue:-15,
+		Wizard:-20,
+		None:-25	
+};
+
+var CLASS_COST_TABLE = {
+		Fighter:1,
+		Priest:6,
+		Rogue:3,
+		Wizard:10
 };
 
 var WEAPON_GROUP_COST_TABLE = {
