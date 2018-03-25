@@ -75,7 +75,7 @@ public class Application implements CommandLineRunner {
 		other = new DefenseFactor("Other","+0","+0","0");
 		armorRepository.save(other);
 
-		if(characterRepository.findFirstCharacterByName("Template") != null) {
+		if(characterRepository.findFirstCharacterByName("Template") == null) {
 			template();
 		}
 		//quin();
