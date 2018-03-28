@@ -111,12 +111,12 @@ var rollable_literal = function(event){
 
 var loadWeaponsFromServer = function() {
 	return $.get(
-		"/claymore/api/weapons?sort=name", 
+		"/claymore/api/weapons?sort=weaponGroup,name&size=1000", 
 		function(data) {
 			weaponList = data._embedded.weapons;
 			for(var i=0; i< weaponList.length; i++) {
 				var weapon = weaponList[i];
-				$('#attackModal_baseWeapon').append($('<option>').text(weapon.name).attr('value', weapon.weaponId));
+				$('#attackModal_baseWeapon').append($('<option>').text(weapon.weaponGroup+" / "+weapon.name).attr('value', weapon.weaponId));
 				weaponMap[weapon.weaponId] = weapon;
 			}
 			console.log('Done loading weapons');
@@ -126,7 +126,7 @@ var loadWeaponsFromServer = function() {
 
 var loadDefenseFactorsFromServer = function() {
 	return $.get(
-		"/claymore/api/defenseFactors?sort=name", 
+		"/claymore/api/defenseFactors?sort=name&size=1000", 
 		function(data) {
 			defenseFactorList = data._embedded.defenseFactors;
 			for(var i=0; i< defenseFactorList.length; i++) {

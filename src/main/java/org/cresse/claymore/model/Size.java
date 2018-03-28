@@ -1,5 +1,5 @@
 package org.cresse.claymore.model;
 
 public enum Size {
-	Small, SmallPlus, Medium, MediumPlus, Large, LargePlus;
+	SmallMinus, Small, SmallPlus, MediumMinus, Medium, MediumPlus, LargeMinus, Large, LargePlus;
 }
