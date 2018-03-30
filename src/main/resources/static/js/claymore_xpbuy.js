@@ -199,6 +199,7 @@ var initXpBuyTab = function() {
 			addCurrentXpBuys();
 			updateSecondaryWeapon();
 			updateValidResists();
+			updateValidMastery();
 			updateJsonView();
 			updateDerivedFields();
 		}
@@ -242,24 +243,40 @@ var addCurrentXpBuys = function() {
 	character.xpBuys.push({level: character.level, points: selectedSkillPoints, category: "SkillPoints", ability: null});
 	character.xpBuys.push({level: character.level, points: selectedWeaponPoints, category: "WeaponSkill", ability: getSelectedWeaponSkill()});
 
+	var selectedClasses = {};
 	var addedClasses = [];
 	var totalXp = 0;
 	
 	for(var className in CLASS_COST_TABLE) {
 		var checkbox = $('#xpShop_class_'+className);
-		if(!checkbox.prop('disabled') && checkbox.prop('checked')) {
-			addedClasses.push(className);
-			totalXp += CLASS_COST_TABLE[className];
-		}		
+		if(checkbox.prop('checked')) {
+			selectedClasses[className] = true;
+			
+			if(!checkbox.prop('disabled')) {
+				addedClasses.push(className);
+				totalXp += CLASS_COST_TABLE[className];
+			}
+		}
 	}
 	if(totalXp) {		
 		character.xpBuys.push({level: character.level, points: totalXp, category: "Class", ability: addedClasses.toString()});			
+	}
+	
+	if(selectedClasses.Fighter) {
+		var selectedMasteryPoints = parseInt($('input[name=xpShop_class_fighter_mastery]:checked').val());
+		character.xpBuys.push({level: character.level, points: selectedMasteryPoints, category: "WeaponMastery", ability: getSelectedMastery(selectedMasteryPoints).toString()});
 	}
 };
 
 var getSelectedResists = function(selectedResistPoints) {
 	var resists = [$("#xpShop_resist_score1").val(),$("#xpShop_resist_score2").val(),$("#xpShop_resist_score3").val()];
 	var length = SAVING_BONUS_TABLE[selectedResistPoints].length;
+	return resists.splice(0,length);
+};
+
+var getSelectedMastery = function(selectedMasteryPoints) {
+	var resists = [$("#xpShop_class_fighter_mastery_weapon_1").val(),$("#xpShop_class_fighter_mastery_weapon_2").val()];
+	var length = selectedMasteryPoints;
 	return resists.splice(0,length);
 };
 
@@ -292,6 +309,27 @@ var updateValidResists = function(){
 	//if we had to change the selected value in second two selects, fire an event to update again
 	if(needsRefresh) {
 		$('#xpShop_resist_score1').change();
+	}
+	
+};
+
+var updateValidMastery = function(){
+	var needsRefresh = false;
+
+	var weapon1 = $("#xpShop_class_fighter_mastery_weapon_1 option:selected").val();
+	
+	//disable option in second select if it was used in first select
+	$("#xpShop_class_fighter_mastery_weapon_2 .weaponGroup_option_"+weapon1).attr('disabled','disabled').siblings().removeAttr('disabled');
+	
+	//update second select if it is currently selecting a disabled option
+	if($("#xpShop_class_fighter_mastery_weapon_2 option:selected").attr('disabled')) {
+		$('#xpShop_class_fighter_mastery_weapon_2').children('option:enabled').eq(0).prop('selected',true);
+		needsRefresh = true;
+	}
+	
+	//if we had to change the selected value in second select, fire an event to update again
+	if(needsRefresh) {
+		$('#xpShop_class_fighter_mastery_weapon_2').change();
 	}
 	
 };
@@ -368,6 +406,24 @@ var updateXpBuyTab = function() {
 			var charClass = currentLevelClasses[i];
 			$('#xpShop_class_'+charClass).removeProp('disabled');
 		}
+	}
+	
+	if(character.classes.Fighter) {		
+		var weaponMasteryBuy = getXpBuy(character.level,'WeaponMastery');
+		if(weaponMasteryBuy) {
+			var weapons = weaponMasteryBuy.ability.split(",");
+			if(weapons){
+				if(weapons.length > 0) {
+					$('#xpShop_class_fighter_mastery_weapon_1').val(weapons[0]);
+				}
+				if(weapons.length > 1) {
+					$('#xpShop_class_fighter_mastery_weapon_2').val(weapons[1]);
+				}
+			}
+			
+			$('#xpShop_class_fighter_mastery_'+weaponMasteryBuy.points).prop('checked',true);
+		}
+		updateValidMastery();
 	}
 
 };

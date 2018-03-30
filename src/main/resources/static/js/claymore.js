@@ -7,6 +7,8 @@ var defenseFactorMap = {};
 var weaponList = null;
 var weaponMap = {};
 
+var weaponGroupList = null;
+
 var character = null;
 
 var attackTemplate;
@@ -114,16 +116,24 @@ var loadWeaponsFromServer = function() {
 		"/claymore/api/weapons?sort=weaponGroup,name&size=1000", 
 		function(data) {
 			weaponList = data._embedded.weapons;
+			var weaponGroupMap = {};
 			var previousWeaponGroup = null;
 			for(var i=0; i< weaponList.length; i++) {
 				var weapon = weaponList[i];
 				if(weapon.weaponGroup != previousWeaponGroup) {
 					previousWeaponGroup = weapon.weaponGroup;
+					weaponGroupMap[previousWeaponGroup] = true;
 					$('#attackModal_baseWeapon').append($('<option>').text('--'+weapon.weaponGroup+'--').attr('disabled', true));
 				}
 				$('#attackModal_baseWeapon').append($('<option>').text(weapon.name).attr('value', weapon.weaponId));
 				weaponMap[weapon.weaponId] = weapon;
 			}
+			weaponGroupList = Object.keys(weaponGroupMap).sort();
+			for(var i=0; i< weaponGroupList.length; i++) {
+				var weaponGroup = weaponGroupList[i];
+				$('.weaponGroup_select').append($('<option>').text(weaponGroup).attr('value', weaponGroup).attr('class','weaponGroup_option_'+weaponGroup));
+			}
+			
 			console.log('Done loading weapons');
 		}
 	);

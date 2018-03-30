@@ -417,15 +417,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><a href="#">Fighting Blind</a></td>
-                        <td>10</td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">Brute Fighting</a></td>
-                        <td>10</td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">2 Handed Weapons</a></td>
+                        <td><a href="#">Future Skill Here</a></td>
                         <td>10</td>
                       </tr>
                     </tbody>
@@ -446,19 +438,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><a href="#">Strength of Character</a></td>
-                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">Run</a></td>
-                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">Mighty</a></td>
-                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">Mountaineering</a></td>
+                        <td><a href="#">Future Skill Here</a></td>
                         <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                       </tr>
                     </tbody>
@@ -696,25 +676,25 @@
                             <tr>
                               <th class="text-center"></th>
                               <th class="text-center">XP</th>
-                              <th class="text-center"><select id="xpShop_class_fighter_mastery_weapon_1" class="xpBuyInput"></select></th>
-                              <th class="text-center"><select id="xpShop_class_fighter_mastery_weapon_2" class="xpBuyInput"></select></th>
+                              <th class="text-center"><select id="xpShop_class_fighter_mastery_weapon_1" class="xpBuyInput weaponGroup_select"></select></th>
+                              <th class="text-center"><select id="xpShop_class_fighter_mastery_weapon_2" class="xpBuyInput weaponGroup_select"></select></th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_0" class="xpBuyInput" name="xpShop_class_fighter_mastery" data-category="WeaponMastery" data-points="0" checked="checked" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_0" class="xpBuyInput" name="xpShop_class_fighter_mastery" value="0" checked="checked" /></td>
                               <td class="text-center">0</td>
                               <td class="text-center">+0</td>
                               <td class="text-center">+0</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_1" class="xpBuyInput" name="xpShop_class_fighter_mastery" data-category="WeaponMastery" data-points="1" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_1" class="xpBuyInput" name="xpShop_class_fighter_mastery" value="1" /></td>
                               <td class="text-center">1</td>
                               <td class="text-center">+1</td>
                               <td class="text-center">+0</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_2" class="xpBuyInput" name="xpShop_class_fighter_mastery" data-category="WeaponMastery" data-points="2" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_fighter_mastery_2" class="xpBuyInput" name="xpShop_class_fighter_mastery" value="2" /></td>
                               <td class="text-center">2</td>
                               <td class="text-center">+1</td>
                               <td class="text-center">+1</td>
