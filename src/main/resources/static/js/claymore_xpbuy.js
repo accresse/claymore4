@@ -187,6 +187,11 @@ var initXpBuyTab = function() {
 			character.xpBuys.push({level: character.level+1, points: 0, category: "SavingThrow", ability: null});
 			character.xpBuys.push({level: character.level+1, points: 0, category: "SkillPoints", ability: null});
 			character.xpBuys.push({level: character.level+1, points: 0, category: "WeaponSkill", ability: character.primaryWeaponSkill});
+			
+			//reset fighter upgrades to zero
+			$('#xpShop_class_fighter_mastery_0').prop('checked',true);
+			
+			
 			updateJsonView();
 			updateDerivedFields();
 		}
@@ -410,7 +415,7 @@ var updateXpBuyTab = function() {
 	
 	if(character.classes.Fighter) {		
 		var weaponMasteryBuy = getXpBuy(character.level,'WeaponMastery');
-		if(weaponMasteryBuy) {
+		if(weaponMasteryBuy && weaponMasteryBuy.ability) {
 			var weapons = weaponMasteryBuy.ability.split(",");
 			if(weapons){
 				if(weapons.length > 0) {
