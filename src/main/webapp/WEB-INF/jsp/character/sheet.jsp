@@ -198,11 +198,11 @@
                   <div class="row">
                     <div class="col-md-7">Attack</div>
                     <div class="col-md-2">
-                      MWS:
+                      MWS<a id="character_mws_plan" href="#"><sup>[?]</sup></a>:
                       <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
                     </div>
                     <div class="col-md-2">
-                      BWS:
+                      BWS<a id="character_bws_plan" href="#"><sup>[?]</sup></a>:
                       <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
                     </div>
                     <div class="col-md-1">
@@ -224,7 +224,7 @@
                     </thead>
                     <tbody id="attack_table">
                       <tr id="attack_template" class="text-center" style="display: none">
-                        <td class=""><a href="#" class="attack_name" data-toggle="modal" data-target="#attackModal" data-title="Edit Attack"></a></td>
+                        <td class=""><a href="#" class="attack_name" data-toggle="modal" data-target="#attackModal" data-title="Edit Attack"></a><a href="#"><sup class="attack_plan">[?]</sup></a></td>
                         <td>
                           <button class="btn btn-outline-primary attack_hit rollable_d100" title="Press to Roll" value="--%"></button>
                         </td>

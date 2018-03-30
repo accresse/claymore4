@@ -46,10 +46,30 @@ var layoutPageAfterDataDownload = function() {
 	$('.rollable_d100').click(rollable_d100);
 	$('.rollable_literal').click(rollable_literal);
 	
+	$("#character_mws_plan").click(function(){
+		alert(formatPlanMessage(character.mwsPlan));
+		return false;
+	});	
+	
+	$("#character_bws_plan").click(function(){
+		alert(formatPlanMessage(character.bwsPlan));
+		return false;
+	});	
+	
 	setupAttackModal();
 	setupDefenseModal();
 	initXpBuyTab();
 };
+
+var formatPlanMessage = function(plan) {
+	var message = "";
+	
+	for(var i=0; i<plan.length; i++) {
+		message += plan[i][0] + "\t" + plan[i][1] + "\n";
+	}
+	
+	return message;
+}
 
 var saveCharacter = function() {
 	var jqxhr = $.ajax({

@@ -119,16 +119,24 @@ class ClassSavingThrowProcessor extends CharacterProcessor {
 class WeaponSkillProcessor extends CharacterProcessor {
 	
 	init() {
+		character.mwsPlan = [];
+		character.bwsPlan = [];
 		if(character.primaryWeaponSkill=='MWS') {
 			character.mws = PWS_BASE;
 			character.bws = SWS_BASE;
+			character.mwsPlan.push([PWS_BASE,'Base value for primary skill']);
+			character.bwsPlan.push([SWS_BASE,'Base value for secondary skill']);
 		} else {
 			character.mws = SWS_BASE;
 			character.bws = PWS_BASE;
+			character.mwsPlan.push([SWS_BASE,'Base value for primary skill']);
+			character.bwsPlan.push([PWS_BASE,'Base value for secondary skill']);
 		}
 
 		character.mws += getStrengthMods().mwsMod;
 		character.bws += getDexterityMods().bwsMod;
+		character.mwsPlan.push(['+'+getStrengthMods().mwsMod,'STR bonus']);
+		character.bwsPlan.push(['+'+getDexterityMods().bwsMod,'DEX bonus']);
 		
 	}
 	
@@ -142,9 +150,13 @@ class WeaponSkillProcessor extends CharacterProcessor {
 				if(ability == 'MWS') {
 					character.mws += getWeaponSkillBonus(0,points);
 					character.bws += getWeaponSkillBonus(1,points);
+					character.mwsPlan.push(['+'+getWeaponSkillBonus(0,points),'Level '+level+' WeaponSkill Bonus']);
+					character.bwsPlan.push(['+'+getWeaponSkillBonus(1,points),'Level '+level+' WeaponSkill Bonus']);
 				} else {
 					character.bws += getWeaponSkillBonus(0,points);
 					character.mws += getWeaponSkillBonus(1,points);
+					character.bwsPlan.push(['+'+getWeaponSkillBonus(0,points),'Level '+level+' WeaponSkill Bonus']);
+					character.mwsPlan.push(['+'+getWeaponSkillBonus(1,points),'Level '+level+' WeaponSkill Bonus']);
 				}
 			}
 		}
