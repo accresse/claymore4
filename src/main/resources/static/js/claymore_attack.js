@@ -103,16 +103,21 @@ var updateAttacks = function() {
 		row.find('.attack_name').text(calculateValWithOverride(attack.name, baseWeapon.name)).data('attackIndex',i);
 		var hit = calculateHitForAttack(attack, baseWeapon, masteryBonus);
 		row.find('.attack_hit').text(hit.value+'%');
-		row.find('.attack_plan').attr('id','attack_plan_'+i).data('plan',formatPlanMessage(hit.plan)).click(
-			function(event){
-				alert($('#'+event.target.id).data('plan'));
-				return false;
-			}
-		);
-		row.find('.attack_damage').text(calculateDamageForAttack(attack, baseWeapon, masteryBonus));
-		row.find('.attack_speed').text(getAttackValSum(attack.speed,baseWeapon.speed, masteryBonus.speed,[]));
-		row.find('.attack_attacks').text(getAttackValSum(attack.attacks,1,masteryBonus.attacks,[]));
+		var damage = calculateDamageForAttack(attack, baseWeapon, masteryBonus);
+		row.find('.attack_damage').text(damage.value);
+		var speed = calculateSpeedForAttack(attack, baseWeapon, masteryBonus);
+		row.find('.attack_speed').text(speed.value);
+		var attacks = calculateAttacksForAttack(attack,baseWeapon,masteryBonus);
+		row.find('.attack_attacks').text(attacks.value);
 		row.find('.attack_notes').html(getAttackValNotes(attack,baseWeapon));
+		var plan = formatPlanMessage(hit.plan, 'Hit') +
+		   		   formatPlanMessage(damage.plan, 'Damage') +
+		   		   formatPlanMessage(speed.plan, 'Speed') +
+		   		   formatPlanMessage(attacks.plan, 'Attacks');
+		row.find('.attack_plan').attr('id','attack_plan_'+i)
+                     .data('plan',plan)
+                     .click(function(event){showMessage($('#'+event.target.id).data('plan')); return false;});
+
 		row.find('.rollable_d100').click(rollable_d100);
 		row.find('.rollable_literal').click(rollable_literal);
 		row.appendTo('#attack_table');
@@ -120,61 +125,96 @@ var updateAttacks = function() {
 	}
 };
 
-var calculateHitForAttack = function(attack, baseWeapon, masteryBonus) {
+var calculateDamageForAttack = function(attack, baseWeapon, masteryBonus) {
 	var plan = [];
 	
-	//start with base MWS/BWS
-	var hit = character[attack.weaponSkill.toLowerCase()];
-	plan.push([hit,"Base "+attack.weaponSkill]);
-	
-	//add bonus/penalty for weapon group proficiency
-	var wgs = character.weaponGroupSkill[baseWeapon.weaponGroup]
-	if(wgs || wgs==0) {
-		hit += wgs;
-		plan.push([wgs,"WeaponGroup Bonus"]);
-	} else {
-		hit += character.unskilledPenalty;
-		plan.push([character.unskilledPenalty,"Unskilled"]);
-	}
-	
-	//add any bonus/override from this attack
-	hit = getAttackValSum(attack.hit, hit, masteryBonus.hit, plan);
-	
-	return {value:hit,plan:plan};
-	
-};
-
-var calculateDamageForAttack = function(attack, baseWeapon, masteryBonus) {
 	var attackDamage = attack.damage;
 	if(attackDamage && attackDamage.startsWith('=')) {
-		return attackDamage.substring(1);
+		plan.push([attackDamage.substring(1),"Weapon Hardcoded Value"])
+		return {value:attackDamage.substring(1), plan:plan, hardcoded:true};
 	} 
 	var retVal = baseWeapon.damage;
+	plan.push([retVal,"Base Weapon"])
 	
-	var bonus = masteryBonus.damage;
+	var bonus = 0;
+	plan.push([bonus,"Mastery Bonus"])
 	if(attackDamage) {
 		attackDamage = parseInt(attackDamage.replace('+',''));
 		bonus += attackDamage;
+		plan.push([attackDamage,"Weapon Bonus"])
 	}
+	bonus += masteryBonus.damage;
+	plan.push([masteryBonus.damage,"Mastery Bonus"])
+
+	var strBonus = getStrengthMods().damMod;
+	bonus += strBonus;
+	plan.push([strBonus,"STR Bonus"])
+	
 	if(bonus>0) {
 		retVal = retVal + '+' + bonus;
 	} else if(bonus<0) {
 		retVal = retVal + bonus;
 	}
+	return {value:retVal,plan:plan,hardcoded:false};
+};
+
+var calculateHitForAttack = function(attack, baseWeapon, masteryBonus) {
+	//start with base MWS/BWS
+	var hit = character[attack.weaponSkill.toLowerCase()];
+
+	var retVal = getAttackValSum(attack.hit, hit, masteryBonus.hit);
+	if(!retVal.hardcoded) {
+		//add bonus/penalty for weapon group proficiency
+		var wgs = character.weaponGroupSkill[baseWeapon.weaponGroup]
+		if(wgs || wgs==0) {
+			retVal.value += wgs;
+			retVal.plan.push([wgs,"Weapon Group Bonus"]);
+		} else {
+			retValue.value += character.unskilledPenalty;
+			retVal.plan.push([character.unskilledPenalty,"Unskilled"]);
+		}		
+	}
+	
 	return retVal;
 };
 
-var getAttackValSum = function(attackVal, baseVal, masteryVal, plan) {
+var calculateSpeedForAttack = function(attack, baseWeapon, masteryBonus) {
+	var retVal = getAttackValSum(attack.speed, baseWeapon.speed, masteryBonus.speed);
+	if(!retVal.hardcoded) {
+		var dexBonus = getDexterityMods().iMod;
+		retVal.value += dexBonus;
+		retVal.plan.push([dexBonus,"DEX Bonus"]);		
+	}
+	
+	return retVal;
+};
+
+var calculateAttacksForAttack = function(attack, baseWeapon, masteryBonus) {
+	return getAttackValSum(attack.attacks, 1, masteryBonus.attacks);
+};
+
+var getAttackValSum = function(attackVal, baseVal, masteryVal) {
+	var value;
+	var plan = [];
+	var hardcoded;
+	
 	if(attackVal && attackVal.startsWith('=')) {
 		plan.splice(0,plan.length);
 		plan.push([attackVal.substring(1),"Weapon Hardcoded Value"])
-		return attackVal.substring(1);
+		value = parseFloat(attackVal.substring(1));
+		hardcoded = true;
+	} else {		
+		baseVal = baseVal ? baseVal : 0;
+		plan.push([baseVal,"Base Weapon"])
+	
+		attackVal = attackVal ? parseFloat(attackVal.replace('+','')) : 0;
+		plan.push([attackVal,"Weapon Bonus"])
+		
+		plan.push([masteryVal,"Mastery Bonus"])
+		value = baseVal + attackVal + masteryVal;
+		hardcoded = false;
 	}
-	baseVal = baseVal ? baseVal : 0;
-	attackVal = attackVal ? parseFloat(attackVal.replace('+','')) : 0;
-	plan.push([attackVal,"Weapon Bonus"])
-	plan.push([masteryVal,"Mastery Bonus"])
-	return baseVal + attackVal + masteryVal;
+	return {value:value,plan:plan,hardcoded:hardcoded};
 };
 
 var getAttackValNotes = function(attack, baseWeapon) {

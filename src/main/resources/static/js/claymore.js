@@ -47,12 +47,12 @@ var layoutPageAfterDataDownload = function() {
 	$('.rollable_literal').click(rollable_literal);
 	
 	$("#character_mws_plan").click(function(){
-		alert(formatPlanMessage(character.mwsPlan));
+		showMessage(formatPlanMessage(character.mwsPlan,'MWS'));
 		return false;
 	});	
 	
 	$("#character_bws_plan").click(function(){
-		alert(formatPlanMessage(character.bwsPlan));
+		showMessage(formatPlanMessage(character.bwsPlan,'BWS'));
 		return false;
 	});	
 	
@@ -61,15 +61,21 @@ var layoutPageAfterDataDownload = function() {
 	initXpBuyTab();
 };
 
-var formatPlanMessage = function(plan) {
-	var message = "";
+var formatPlanMessage = function(plan, title) {
+	var message = '<h3>'+title+'</h3><table class="table table-sm"><thead><tr><th>Reason</th><th class="text-right">Value</th></tr></thead><tbody>';
 	
 	for(var i=0; i<plan.length; i++) {
-		message += plan[i][0] + "\t" + plan[i][1] + "\n";
+		message += '<tr><td>' + plan[i][1] + '</td><td class="text-right">'+plan[i][0] + '</td></tr>';
 	}
 	
+	message += '</tbody></table>';
 	return message;
 }
+
+var showMessage = function(message) {
+	$('#alertModal_content').html(message);
+	$('#alertModal').modal('show');
+};
 
 var saveCharacter = function() {
 	var jqxhr = $.ajax({

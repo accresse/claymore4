@@ -141,7 +141,7 @@
               <div class="card">
                 <div class="card-header">Saves</div>
                 <div class="card-body m-0">
-                  <table class="table m-0">
+                  <table class="table table-sm m-0">
                     <thead>
                       <tr>
                         <th class="text-center">Might</th>
@@ -211,7 +211,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <table class="table">
+                  <table class="table table-sm">
                     <thead>
                       <tr class="text-center">
                         <th>Name</th>
@@ -262,7 +262,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <table class="table">
+                  <table class="table table-sm">
                     <thead>
                       <tr class="text-center">
                         <th>Active</th>
@@ -344,7 +344,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
-                      <table class="table m-0">
+                      <table class="table table-sm m-0">
                         <thead>
                           <tr>
                             <th class="text-center">Prest.</th>
@@ -408,7 +408,7 @@
               <div class="card">
                 <div class="card-header">Martial Skills</div>
                 <div class="card-body">
-                  <table class="table">
+                  <table class="table table-sm">
                     <thead>
                       <tr>
                         <th>Skill</th>
@@ -429,7 +429,7 @@
               <div class="card">
                 <div class="card-header">Non-Martial Skills</div>
                 <div class="card-body">
-                  <table class="table">
+                  <table class="table table-sm">
                     <thead>
                       <tr>
                         <th>Skill</th>
@@ -953,7 +953,7 @@
             <div class="row my-1">
               <div class="col-md-12">
                 <h3 class="display-5">XP History</h3>
-                <table class="table m-0">
+                <table class="table table-sm m-0">
                   <thead>
                     <tr>
                       <th class="text-center">Level</th>
@@ -1144,6 +1144,26 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+<!-- 
+           <h5 class="modal-title">Alert</h5>
+ -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="alertModal_content" class="container-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
   <script src="../jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>

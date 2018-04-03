@@ -363,6 +363,9 @@ var updateXpBuyTab = function() {
 		row.find('.xp_history_category').text(xpBuy.category);
 		var ability = xpBuy.ability ? xpBuy.ability : "";
 		row.find('.xp_history_ability').text(ability);
+		if(xpBuy.level%2==0) {
+			row.attr('class','table-active');
+		}
 		row.appendTo('#xp_history_table');
 		row.show();
 	}
