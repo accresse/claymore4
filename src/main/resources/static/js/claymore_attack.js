@@ -170,7 +170,7 @@ var calculateHitForAttack = function(attack, baseWeapon, masteryBonus) {
 			retVal.value += wgs;
 			retVal.plan.push([wgs,"Weapon Group Bonus"]);
 		} else {
-			retValue.value += character.unskilledPenalty;
+			retVal.value += character.unskilledPenalty;
 			retVal.plan.push([character.unskilledPenalty,"Unskilled"]);
 		}		
 	}
