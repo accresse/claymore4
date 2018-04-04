@@ -1,11 +1,30 @@
 var MAX_HP_BUY_PER_LEVEL = 10;
 var HP_BASE = 6;
+var SKILL_POINTS_BASE = 40;
 var PWS_BASE = 50;
 var SWS_BASE = 45;
 
 var HP_BUY_TABLE = {
 	lowLevel:  {0:1,2:3,5:6},
 	highLevel: {0:1,2:2,5:3}
+};
+
+var getHpIncrease = function(level, points) {
+	var hpMap = {};
+	if(level>20) {
+		hpMap = HP_BUY_TABLE['highLevel'];
+	} else {
+		hpMap = HP_BUY_TABLE['lowLevel'];
+	}
+	return hpMap[points];
+};
+
+var getSkillPointIncrease = function(points) {
+	if(points==0) {
+		return 2;
+	} else {
+		return 10;
+	}
 };
 
 var STR_TABLE = [

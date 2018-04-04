@@ -978,9 +978,33 @@
         </div>
 
         <div id="skillShop" class="tab-pane">
-          <div class="py-0">
-            <div class="container">Coming Soon</div>
+        
+          <div class="py-5">
+            <div class="row my-1">
+              <div class="col-md-12">
+                <h3 class="display-5">Skill History</h3>
+                <table class="table table-sm m-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Level</th>
+                      <th class="text-center">Points</th>
+                      <th class="text-center">Category</th>
+                      <th class="text-center">Ability</th>
+                    </tr>
+                  </thead>
+                  <tbody id="skill_history_table">
+                    <tr id="skill_history_template" style="display: none">
+                      <td class="text-center skill_history_level">--</td>
+                      <td class="text-center skill_history_points">--</td>
+                      <td class="text-center skill_history_category">--</td>
+                      <td class="text-center skill_history_ability">--</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+          
         </div>
 
         <div id="rogueShop" class="tab-pane">

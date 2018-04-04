@@ -14,6 +14,7 @@ var character = null;
 var attackTemplate;
 var defenseTemplate;
 var xpHistoryTemplate;
+var skillHistoryTemplate;
 
 var dice = new DiceRoller();
 
@@ -22,6 +23,7 @@ $(document).ready(
 		attackTemplate = $('#attack_template').clone();
 		defenseTemplate = $('#defense_template').clone();
 		xpHistoryTemplate = $('#xp_history_template').clone();
+		skillHistoryTemplate = $('#skill_history_template').clone();
 		
 		var promises = [];
 		promises.push(loadWeaponsFromServer());
@@ -235,6 +237,7 @@ var updateDerivedFields = function() {
 	$("#character_xp").text(character.xp);	
 	$("#character_unspentXp").text(character.unspentXp);
 	$(".remaining_xp").text(character.spendableXp);
+	$(".remaining_skill").text(character.spendableSkillPoints);
 	
 	updateHpCard();
 	
@@ -255,7 +258,7 @@ var updateDerivedFields = function() {
 	updateAttacks();
 	updateDefenses();
 	updateXpBuyTab();
-
+	updateSkillBuyTab();
 };
 
 var showRelaventClassSections = function() {

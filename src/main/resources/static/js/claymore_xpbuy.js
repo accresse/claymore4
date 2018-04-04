@@ -42,16 +42,6 @@ class HpProcessor extends CharacterProcessor {
 	
 }
 
-var getHpIncrease = function(level, points) {
-	var hpMap = {};
-	if(level>20) {
-		hpMap = HP_BUY_TABLE['highLevel'];
-	} else {
-		hpMap = HP_BUY_TABLE['lowLevel'];
-	}
-	return hpMap[points];
-};
-
 class ClassProcessor extends CharacterProcessor {
 	init() {
 		character.classes = {};
@@ -180,6 +170,26 @@ class WeaponMasteryProcessor extends CharacterProcessor {
 
 }
 
+class SkillPointsEarnedProcessor extends CharacterProcessor {
+	init() {
+		character.skillPoints = SKILL_POINTS_BASE + getRecallMods().skillPoints;
+	}
+	
+	postProcess() {
+		for(var level=1; level<=character.level; level++) {
+			var skillPointBuy = getXpBuy(level, 'SkillPoints');
+			if(skillPointBuy) {				
+				character.skillPoints += getSkillPointIncrease(skillPointBuy.points);
+			} else {
+				character.skillPoints += getSkillPointIncrease(0);
+			}
+			//add ps bonus
+			character.skillPoints += getProblemSolvingMods().skillPoints;
+		}
+	}
+	
+}
+
 var xpBuyProcessors = {
 	XP: new XpProcessor(),
 	HP: new HpProcessor(),
@@ -188,7 +198,8 @@ var xpBuyProcessors = {
 	SavingThrow: new SavingThrowProcessor(),
 	ClassSavingThrow: new ClassSavingThrowProcessor(),
 	WeaponSkill: new WeaponSkillProcessor(),
-	WeaponMastery: new WeaponMasteryProcessor()
+	WeaponMastery: new WeaponMasteryProcessor(),
+	SkillPoints: new SkillPointsEarnedProcessor()
 };
 
 //Start code for the XP Buy tab
