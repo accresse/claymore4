@@ -256,20 +256,20 @@ var WEAPON_GROUP_COST_TABLE = {
 	'Blades_Stabbing':12,
 	'Blades_Two_Handed':16,
 	'Bows':14,
-	'Crossbows':6,
 	'Cleaving':10,
+	'Crossbows':6,
 	'Crushing':8,
 	'Flails':16,
+	'Improvised':10,
 	'Lances':14,
 	'Polearms':14,
-	'Spears':10,
 	'Punching_Weapons':4,
+	'Quarter_Staff':12,
 	'Rope_like':14,
+	'Shields	':4,		
 	'Slings':14,
 	'Small_Throwing':8,
-	'Quarter_Staff':12,
-	'Improvised':10,
-	'Shields	':4		
+	'Spears':10
 };
 
 var WEAPON_MASTERY_TABLE = [

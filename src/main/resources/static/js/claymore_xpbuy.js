@@ -204,30 +204,12 @@ var xpBuyProcessors = {
 
 //Start code for the XP Buy tab
 var initXpBuyTab = function() {
-	$('#level_up_button').click(
-		function(){
-			character.xpBuys.push({level: character.level+1, points: 0, category: "HP", ability: null});
-			character.xpBuys.push({level: character.level+1, points: 0, category: "SavingThrow", ability: null});
-			character.xpBuys.push({level: character.level+1, points: 0, category: "SkillPoints", ability: null});
-			character.xpBuys.push({level: character.level+1, points: 0, category: "WeaponSkill", ability: character.primaryWeaponSkill});
-			
-			//reset fighter upgrades to zero
-			$('#xpShop_class_fighter_mastery_0').prop('checked',true);
-			
-			
-			updateJsonView();
-			updateDerivedFields();
-		}
-	);
-	
+
 	$('.xpBuyInput').change(
 		function(event){
 			console.log('change: '+event.target.id);
 			clearCurrentLevelXpBuys();
 			addCurrentXpBuys();
-			updateSecondaryWeapon();
-			updateValidResists();
-			updateValidMastery();
 			updateJsonView();
 			updateDerivedFields();
 		}
@@ -362,6 +344,28 @@ var updateValidMastery = function(){
 	
 };
 
+var levelUpXp = function() {
+	character.xpBuys.push({level: character.level+1, points: 0, category: "HP", ability: null});
+	character.xpBuys.push({level: character.level+1, points: 0, category: "SavingThrow", ability: null});
+	character.xpBuys.push({level: character.level+1, points: 0, category: "SkillPoints", ability: null});
+	character.xpBuys.push({level: character.level+1, points: 0, category: "WeaponSkill", ability: character.primaryWeaponSkill});
+	
+	//reset fighter upgrades to zero
+	$('#xpShop_class_fighter_mastery_0').prop('checked',true);
+};
+
+var validateLevelUpXp = function(errors) {
+	if(character.unspentXp<10) {
+		errors.push('You must have at least 10 unspent XP to level.');
+	}
+	if(character.spendableXp >= 10) {
+		errors.push('You must spend at least 1 XP to level.');
+	}
+	if(character.spendableXp < 0) {
+		errors.push('You spent too many XP points this level.  Adjust your purchases before leveling.');
+	}
+};
+
 var updateXpBuyTab = function() {
 	$('#xp_history_table').empty();
 	
@@ -381,21 +385,6 @@ var updateXpBuyTab = function() {
 		row.show();
 	}
 
-	//validate if you can level now
-	if(character.unspentXp<10) {
-		$('#level_up_button').attr('disabled','disabled');
-		$('#level_up_button').prop('title','You must have at least 10 unspent XP to level.');
-	} else if(character.spendableXp >= 10) {
-		$('#level_up_button').attr('disabled','disabled');
-		$('#level_up_button').prop('title','You must spend at least 1 XP to level.');
-	} else if(character.spendableXp < 0) {
-		$('#level_up_button').attr('disabled','disabled');
-		$('#level_up_button').prop('title','You spent too much XP this level.  Adjust your purchases before leveling.');
-	} else {
-		$('#level_up_button').removeAttr('disabled');
-		$('#level_up_button').prop('title',"Let's do this!");
-	}
-		
 	var currentHp = getXpBuy(character.level,'HP');
 	$('#xpShop_hp_'+currentHp.points).prop('checked',true);
 	

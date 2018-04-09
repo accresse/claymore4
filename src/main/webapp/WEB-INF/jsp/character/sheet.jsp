@@ -19,8 +19,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <a id="save_character_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</a> <a id="clone_character_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</a> <a
-          id="delete_character_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</a>
+        <button id="level_up_button" class="btn navbar-btn ml-2 text-white btn-warning"><i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up</button>
+        <button id="save_character_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</button>
+        <button id="clone_character_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</button>
+        <button id="delete_character_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</button>
       </div>
     </div>
   </nav>
@@ -461,21 +463,7 @@
           </div>
         </div>
         <div id="xpShop" class="tab-pane">
-          <div class="py-0">
-            <div class="row my-4">
-              <div class="col-md-3">
-                <h3>
-                  Current Level: <span class="character_level">-</span>
-                </h3>
-              </div>
-              <div class="col-md-2">
-                <button id="level_up_button" class="btn ml-2 text-white btn-primary">
-                  <i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up
-                </button>
-              </div>
-            </div>
-          </div>
-
+        
           <div class="py-0">
             <div class="row my-2">
 
@@ -978,7 +966,45 @@
         </div>
 
         <div id="skillShop" class="tab-pane">
-        
+          <div class="py-5">
+            <div class="row my-1">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row">
+                      <div class="col-md-11">Weapon Skills</div>
+                      <div class="col-md-1">
+                        <a href="#" data-toggle="modal" data-target="#weaponSkillModal" data-title="New Attack"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-sm">
+                      <thead>
+                        <tr class="text-center">
+                          <th>Weapon Group</th>
+                          <th>Spend</th>
+                          <th>Total</th>
+                          <th>Required</th>
+                          <th>Penalty</th>
+                        </tr>
+                      </thead>
+                      <tbody id="weapon_skill_table">
+                        <tr id="weapon_skill_template" class="text-center" style="display: none">
+                          <td><span class="weapon_skill_weaponGroup">--</span></td>
+                          <td><input type="text" class="skillBuyInput weapon_skill_spend text-right" size="4" maxlength="2" value="0"/></td>
+                          <td><span class="weapon_skill_total">0</span></td>
+                          <td><span class="weapon_skill_required">--</span></td>
+                          <td><span class="weapon_skill_penalty">--</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div class="py-5">
             <div class="row my-1">
               <div class="col-md-12">
@@ -1169,6 +1195,33 @@
     </div>
   </div>
 
+  <div class="modal fade" id="weaponSkillModal" tabindex="-1" role="dialog" aria-labelledby="weaponSkillModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="weaponSkillModalLabel">Add Weapon Skill</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-4 text-right">Weapon Skill:</div>
+              <div class="col-md-8">
+                <select id="weaponSkillModal_weaponGroup" class="weaponGroup_select"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="weaponSkillModal_add" type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

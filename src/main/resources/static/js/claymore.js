@@ -14,17 +14,14 @@ var character = null;
 var attackTemplate;
 var defenseTemplate;
 var xpHistoryTemplate;
+
+var weaponSkillTemplate;
 var skillHistoryTemplate;
 
 var dice = new DiceRoller();
 
 $(document).ready(
-	function(){
-		attackTemplate = $('#attack_template').clone();
-		defenseTemplate = $('#defense_template').clone();
-		xpHistoryTemplate = $('#xp_history_template').clone();
-		skillHistoryTemplate = $('#skill_history_template').clone();
-		
+	function(){		
 		var promises = [];
 		promises.push(loadWeaponsFromServer());
 		promises.push(loadDefenseFactorsFromServer());
@@ -37,10 +34,19 @@ $(document).ready(
 
 var layoutPageAfterDataDownload = function() {
 	console.log("Layout page");
+	
+	attackTemplate = $('#attack_template').clone();
+	defenseTemplate = $('#defense_template').clone();
+	xpHistoryTemplate = $('#xp_history_template').clone();
+	
+	weaponSkillTemplate = $('#weapon_skill_template').clone();
+	skillHistoryTemplate = $('#skill_history_template').clone();
+
 	createFormFromModel();
 	updateJsonView();
 	updateDerivedFields();
 
+	$('#level_up_button').click(levelUp);
 	$("#save_character_button").click(saveCharacter);
 	$("#clone_character_button").click(cloneCharacter);
 	$("#delete_character_button").click(deleteCharacter);
@@ -61,6 +67,7 @@ var layoutPageAfterDataDownload = function() {
 	setupAttackModal();
 	setupDefenseModal();
 	initXpBuyTab();
+	initSkillBuyTab();
 };
 
 var formatPlanMessage = function(plan, title) {
@@ -79,6 +86,28 @@ var showMessage = function(message) {
 	$('#alertModal').modal('show');
 };
 
+var levelUp = function() {
+	levelUpXp();
+	levelUpSkills();
+	updateJsonView();
+	updateDerivedFields();
+};
+
+//validate if you can level now
+var validateLevelUp = function() {
+	var errors = [];
+	validateLevelUpXp(errors);
+	validateLevelUpSkills(errors);
+	
+	if(errors.length > 0) {
+		$('#level_up_button').attr('disabled','disabled');
+		$('#level_up_button').prop('title',errors.join('\n\n'));	
+	} else {
+		$('#level_up_button').removeAttr('disabled');
+		$('#level_up_button').prop('title',"Let's do this!");
+	}
+};
+
 var saveCharacter = function() {
 	var jqxhr = $.ajax({
 			type: "PUT",
@@ -89,7 +118,7 @@ var saveCharacter = function() {
 			},
 			contentType: "application/json"
 	});
-}
+};
 
 var cloneCharacter = function() {
 	var jqxhr = $.ajax({
@@ -259,6 +288,7 @@ var updateDerivedFields = function() {
 	updateDefenses();
 	updateXpBuyTab();
 	updateSkillBuyTab();
+	validateLevelUp();
 };
 
 var showRelaventClassSections = function() {
@@ -309,7 +339,7 @@ var processXpBuys = function() {
 	
 };
 
-//{level: {category: [buy1, buy2]}
+//{level: {category: buy}
 var indexXpBuy = function(xpBuy) {
 	var level = xpBuy.level;
 	var category = xpBuy.category;
@@ -322,6 +352,8 @@ var indexXpBuy = function(xpBuy) {
 
 var processSkillBuys = function() {
 	
+	character.levelToSkillBuyMap = {};
+
 	for(var name in skillBuyProcessors) {
 		var processor = skillBuyProcessors[name];
 		processor.init();
@@ -333,6 +365,7 @@ var processSkillBuys = function() {
 		if(processor) {
 			processor.processBuy(skillBuy);
 		}
+		indexSkillBuy(skillBuy);
 	}
 	
 	for(var name in skillBuyProcessors) {
@@ -342,11 +375,34 @@ var processSkillBuys = function() {
 
 };
 
+//{level: {category: {ability: buy}}
+var indexSkillBuy = function(skillBuy) {
+	var level = skillBuy.level;
+	var category = skillBuy.category;
+	var ability = skillBuy.ability;
+	
+	if(!character.levelToSkillBuyMap[level]) {
+		character.levelToSkillBuyMap[level] = {};
+	}
+	if(!character.levelToSkillBuyMap[level][category]) {
+		character.levelToSkillBuyMap[level][category] = {};
+	}
+	character.levelToSkillBuyMap[level][category][ability] = skillBuy;
+};
+
 var getXpBuy = function(level, category) {
 	if(!character.levelToXpBuyMap[level] || !character.levelToXpBuyMap[level][category]) {
 		return null;
 	} else {
 		return character.levelToXpBuyMap[level][category];
+	}
+};
+
+var getSkillBuy = function(level, category, ability) {
+	if(!character.levelToSkillBuyMap[level] || !character.levelToSkillBuyMap[level][category] || !character.levelToSkillBuyMap[level][category][ability]) {
+		return null;
+	} else {
+		return character.levelToSkillBuyMap[level][category][ability];
 	}
 };
 
