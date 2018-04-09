@@ -64,6 +64,18 @@ var skillBuyProcessors = {
 };
 
 var initSkillBuyTab = function() {	
+	$('#weapon_skill_table').empty();
+
+	for(var weaponGroup in WEAPON_GROUP_COST_TABLE) {
+		var row = weaponSkillTemplate.clone();
+		row.attr('id','weapon_skill_'+weaponGroup);
+		row.find('.weapon_skill_weaponGroup').text(weaponGroup);
+		row.find('.weapon_skill_spend').attr('id','weapon_skill_spend_'+weaponGroup).data('weaponGroup',weaponGroup).change(skillBuyInputChange);
+		var required = WEAPON_GROUP_COST_TABLE[weaponGroup];
+		row.find('.weapon_skill_required').text(required);
+		row.appendTo('#weapon_skill_table');
+	}
+
 	$('#weaponSkillModal_add').click(function(){
 		var weaponGroup = $('#weaponSkillModal_weaponGroup').val();
 		$('#weapon_skill_'+weaponGroup).show();
@@ -124,24 +136,19 @@ var skillBuyInputChange = function(event) {
 };
 
 var updateSkillBuyTab = function() {
-	$('#weapon_skill_table').empty();
 	
 	for(var weaponGroup in WEAPON_GROUP_COST_TABLE) {
 		var currentLevelBuy = getSkillBuy(character.level, 'Weapon', weaponGroup);
 		var points = currentLevelBuy ? currentLevelBuy.points : 0;
 		
-		var row = weaponSkillTemplate.clone();
-		row.attr('id','weapon_skill_'+weaponGroup);
-		row.find('.weapon_skill_weaponGroup').text(weaponGroup);
-		row.find('.weapon_skill_spend').attr('id','weapon_skill_spend_'+weaponGroup).data('weaponGroup',weaponGroup).val(points).change(skillBuyInputChange);
+		var row = $('#weapon_skill_'+weaponGroup);
+		row.find('.weapon_skill_spend').val(points);
 		var total = character.weaponGroupPoints[weaponGroup];
 		row.find('.weapon_skill_total').text(total);
 		var required = WEAPON_GROUP_COST_TABLE[weaponGroup];
-		row.find('.weapon_skill_required').text(required);
-		row.appendTo('#weapon_skill_table');
 		if(total) {
 			row.find('.weapon_skill_penalty').text(character.weaponGroupSkill[weaponGroup]);
-			$('#weapon_skill_'+weaponGroup).show();
+			row.show();
 		} else {
 			row.find('.weapon_skill_penalty').text(character.unskilledPenalty);
 		}

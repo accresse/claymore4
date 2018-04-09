@@ -43,6 +43,7 @@ var layoutPageAfterDataDownload = function() {
 	skillHistoryTemplate = $('#skill_history_template').clone();
 
 	createFormFromModel();
+	initSkillBuyTab();
 	updateJsonView();
 	updateDerivedFields();
 
@@ -67,7 +68,6 @@ var layoutPageAfterDataDownload = function() {
 	setupAttackModal();
 	setupDefenseModal();
 	initXpBuyTab();
-	initSkillBuyTab();
 };
 
 var formatPlanMessage = function(plan, title) {
