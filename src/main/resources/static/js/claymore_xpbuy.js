@@ -190,6 +190,15 @@ class SkillPointsEarnedProcessor extends CharacterProcessor {
 	
 }
 
+class WizardClassAbilityProcessor extends CharacterProcessor {
+	init() {
+		character.learnSpell = getProblemSolvingMods().learnSpell + getRecallMods().learnSpell;
+		character.spellFailure = getWitMods().spellFailure;
+	}
+	
+
+}
+
 var xpBuyProcessors = {
 	XP: new XpProcessor(),
 	HP: new HpProcessor(),
@@ -199,7 +208,8 @@ var xpBuyProcessors = {
 	ClassSavingThrow: new ClassSavingThrowProcessor(),
 	WeaponSkill: new WeaponSkillProcessor(),
 	WeaponMastery: new WeaponMasteryProcessor(),
-	SkillPoints: new SkillPointsEarnedProcessor()
+	SkillPoints: new SkillPointsEarnedProcessor(),
+	WizardClassAbility: new WizardClassAbilityProcessor()
 };
 
 //Start code for the XP Buy tab

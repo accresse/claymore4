@@ -284,6 +284,9 @@ var updateDerivedFields = function() {
 	$("#character_mws").text(character.mws+"%");
 	$("#character_bws").text(character.bws+"%");
 	
+	$("#character_learn_spell").text(character.learnSpell+"%");
+	$("#character_spell_failure").text(character.spellFailure+"%");
+
 	updateAttacks();
 	updateDefenses();
 	updateXpBuyTab();

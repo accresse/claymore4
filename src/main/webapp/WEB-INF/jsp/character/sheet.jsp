@@ -398,7 +398,13 @@
           <div id="section_Wizard" class="row my-1 visible_Wizard" style="display: none;">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header">Wizard</div>
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-md-8">Wizard</div>
+                    <div class="col-md-2">Learn Spell: <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_learn_spell" value="--%"></button></div>
+                    <div class="col-md-2">Spell Failure: <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_spell_failure" value="--%"></button></div>
+                  </div>
+                </div>
                 <div class="card-body">
                   <p class=" p-y-1">(Pencil and paper for now)</p>
                 </div>
