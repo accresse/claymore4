@@ -374,6 +374,17 @@ var getWeaponSkillBonus = function(index, points) {
 	return WEAPON_SKILL_BONUS_TABLE[points][index];
 };
 
+var WIZARD_SCHOOLS = [
+	'Abjuration',
+	'Alteration',
+	'Charm',
+	'Demonology',
+	'Divination',
+	'Evocation',
+	'Illusion',
+	'Necromancy'
+];
+
 class CharacterProcessor {
 	init(){}
 	

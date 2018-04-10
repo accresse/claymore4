@@ -190,12 +190,30 @@ class SkillPointsEarnedProcessor extends CharacterProcessor {
 	
 }
 
-class WizardClassAbilityProcessor extends CharacterProcessor {
+class WizardCastingLevelProcessor extends CharacterProcessor {
 	init() {
 		character.learnSpell = getProblemSolvingMods().learnSpell + getRecallMods().learnSpell;
 		character.spellFailure = getWitMods().spellFailure;
+		character.wizardCastingLevels = {};
+		for(var i=0; i<WIZARD_SCHOOLS.length; i++) {
+			var school = WIZARD_SCHOOLS[i];
+			character.wizardCastingLevels[school] = 0;
+		}
 	}
 	
+	processBuy(xpBuy) {
+		var ability = xpBuy.ability;
+		if(ability) {
+			if(ability=='ALL') {
+				for(var i=0; i<WIZARD_SCHOOLS.length; i++) {
+					var school = WIZARD_SCHOOLS[i];
+					character.wizardCastingLevels[school]++;
+				}
+			} else {
+				character.wizardCastingLevels[ability]++;
+			}
+		}
+	}
 
 }
 
@@ -209,7 +227,7 @@ var xpBuyProcessors = {
 	WeaponSkill: new WeaponSkillProcessor(),
 	WeaponMastery: new WeaponMasteryProcessor(),
 	SkillPoints: new SkillPointsEarnedProcessor(),
-	WizardClassAbility: new WizardClassAbilityProcessor()
+	WizardCastingLevel: new WizardCastingLevelProcessor()
 };
 
 //Start code for the XP Buy tab
@@ -286,6 +304,10 @@ var addCurrentXpBuys = function() {
 		var selectedMasteryPoints = parseInt($('input[name=xpShop_class_fighter_mastery]:checked').val());
 		character.xpBuys.push({level: character.level, points: selectedMasteryPoints, category: "WeaponMastery", ability: getSelectedMastery(selectedMasteryPoints).toString()});
 	}
+	if(selectedClasses.Wizard) {
+		var selectedCastingLevelPoints = parseInt($('input[name=xpShop_class_wizard_casting_level]:checked').val());
+		character.xpBuys.push({level: character.level, points: selectedCastingLevelPoints, category: "WizardCastingLevel", ability: getSelectedSchools(selectedCastingLevelPoints).toString()});
+	}
 };
 
 var getSelectedResists = function(selectedResistPoints) {
@@ -298,6 +320,16 @@ var getSelectedMastery = function(selectedMasteryPoints) {
 	var resists = [$("#xpShop_class_fighter_mastery_weapon_1").val(),$("#xpShop_class_fighter_mastery_weapon_2").val()];
 	var length = selectedMasteryPoints;
 	return resists.splice(0,length);
+};
+
+var getSelectedSchools = function(selectedCastingLevelPoints) {
+	if(selectedCastingLevelPoints==8) {
+		return "ALL";
+	} else if(selectedCastingLevelPoints==4) {
+		return $("#xpShop_class_wizard_casting_level_school").val();
+	} else {
+		return "";
+	}
 };
 
 var updateValidResists = function(){

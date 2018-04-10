@@ -896,17 +896,17 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_schools_0" name="xpShop_class_wizard_schools" checked="checked" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_casting_level_0" class="xpBuyInput" name="xpShop_class_wizard_casting_level" value="0" checked="checked" /></td>
                               <td class="text-center">0</td>
                               <td class="text-center">None</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_schools_4" name="xpShop_class_wizard_schools" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_casting_level_4" class="xpBuyInput" name="xpShop_class_wizard_casting_level" value="4"/></td>
                               <td class="text-center">4</td>
-                              <td class="text-center">+1 to <select></select></td>
+                              <td class="text-center">+1 to <select id="xpShop_class_wizard_casting_level_school" class="xpBuyInput wizardSchool_select"></select></td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_schools_8" name="xpShop_class_wizard_schools" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_wizard_casting_level_8" class="xpBuyInput" name="xpShop_class_wizard_casting_level" value="8"/></td>
                               <td class="text-center">8</td>
                               <td class="text-center">+1 to all schools</td>
                             </tr>

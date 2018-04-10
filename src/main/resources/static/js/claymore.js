@@ -65,6 +65,11 @@ var layoutPageAfterDataDownload = function() {
 		return false;
 	});	
 	
+	for(var i=0; i< WIZARD_SCHOOLS.length; i++) {
+		var school = WIZARD_SCHOOLS[i];
+		$('.wizardSchool_select').append($('<option>').text(school).attr('value', school).attr('class','wizardSchool_option_'+school));
+	}
+
 	setupAttackModal();
 	setupDefenseModal();
 	initXpBuyTab();
