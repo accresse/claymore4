@@ -14,7 +14,7 @@
 <body>
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="/claymore"><i class="fa d-inline fa-lg fa-address-book"></i><b class="m-1">Claymore</b></a><span class="navbar-brand"> / </span><a class="navbar-brand" href="/claymore/character">Characters</a>
+      <a class="navbar-brand" href="/claymore"><i class="fa d-inline fa-lg fa-address-book"></i><b class="m-1">Claymore</b></a><span class="navbar-brand"> / </span><a class="navbar-brand" href="/claymore/characterList.html">Characters</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,6 +24,8 @@
         <button id="clone_character_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</button>
         <button id="delete_character_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</button>
       </div>
+      <span class="navbar-brand"></span>
+      <span id="user" class="navbar-brand"></span>
     </div>
   </nav>
   <div class="py-0">
@@ -1257,6 +1259,7 @@
   <script src="../js/jqueryui-editable.min.js"></script>
    -->
   <script src="../js/dice-roller.js"></script>
+  <script src="../js/claymore_common.js"></script>
   <script src="../js/claymore_data.js"></script>
   <script src="../js/claymore_xpbuy.js"></script>
   <script src="../js/claymore_skillbuy.js"></script>

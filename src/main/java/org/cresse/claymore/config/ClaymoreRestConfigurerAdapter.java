@@ -12,6 +12,7 @@ public class ClaymoreRestConfigurerAdapter extends RepositoryRestConfigurerAdapt
 
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+		config.exposeIdsFor(org.cresse.claymore.model.Character.class);
 		config.exposeIdsFor(DefenseFactor.class);
 		config.exposeIdsFor(Player.class);
 		config.exposeIdsFor(Weapon.class);
