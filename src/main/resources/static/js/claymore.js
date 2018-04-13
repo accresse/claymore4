@@ -122,6 +122,8 @@ var saveCharacter = function() {
 				alert('Character has been saved.');
 			},
 			contentType: "application/json"
+	}).fail(function() {
+	    alert('ERROR: Could not save character');
 	});
 };
 
@@ -129,7 +131,7 @@ var cloneCharacter = function() {
 	var jqxhr = $.ajax({
 			type: "POST",
 			url: "/claymore/api/characters", 
-			data: JSON.stringify(character, null, 2), 
+			data: getClonedCharacter(), 
 			success: function(data) {
 				alert('Character has been cloned.');
 			},
@@ -137,20 +139,30 @@ var cloneCharacter = function() {
 	});
 }
 
+var getClonedCharacter = function() {
+	var id = character.characterId;
+	character.characterId = null;
+	var charString = JSON.stringify(character, null, 2);
+	character.characterId = id;
+	return charString;
+};
+
 var deleteCharacter = function() {
 	character.active=false;
 	var answer = confirm("Really delete character?");
 	if(!answer) return;
 	
 	var jqxhr = $.ajax({
-		type: "PUT",
-		url: "/claymore/api/characters/" + id, 
-		data: JSON.stringify(character, null, 2), 
-		success: function(data) {
-			window.location.replace('/claymore/character');
-		},
-		contentType: "application/json"
-});
+			type: "PUT",
+			url: "/claymore/api/characters/" + id, 
+			data: JSON.stringify(character, null, 2), 
+			success: function(data) {
+				window.location.replace('/claymore/characterList.html');
+			},
+			contentType: "application/json"
+	}).fail(function() {
+		    alert('ERROR: Could not delete character');
+	});
 }
 
 var rollable_d100 = function(event){

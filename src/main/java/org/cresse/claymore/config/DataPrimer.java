@@ -53,8 +53,6 @@ public class DataPrimer implements CommandLineRunner {
 
 	private DefenseFactor other;
 
-	private Player system;
-
 	@Override
 	public void run(String... args) throws Exception {
 		createWeapons();
@@ -209,8 +207,7 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 	}
 
 	private void createSystemUser() {
-		system = new Player("system");
-		playerRepository.save(system);
+		playerRepository.save(new Player("system", "System User"));
 	}
 
 	private void createCharacterTemplate() {
@@ -222,7 +219,6 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 	private void template() {
 		org.cresse.claymore.model.Character template = new org.cresse.claymore.model.Character();
 		template.setName("Template");
-		template.setPlayer(system);
 		template.setGender(Gender.Male);
 		template.setAge(20);
 		template.setHeight(68);
@@ -255,7 +251,6 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 	private void quin() {
 		org.cresse.claymore.model.Character quin = new org.cresse.claymore.model.Character();
 		quin.setName("Quin");
-		quin.setPlayer(system);
 		quin.setGender(Gender.Male);
 		quin.setAge(20);
 		quin.setHeight(72);

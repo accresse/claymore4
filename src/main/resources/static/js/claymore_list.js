@@ -1,15 +1,41 @@
+var characterRow;
+
 $(document).ready(
 	function(){
 		$('#new_character_button').click(createNewCharacter);
+		characterRow = $('#character_row').clone();
+		
+		getCharacters();
 	}
 );
+
+var getCharacters = function() {
+	$.get(
+			"/claymore/api/characters/search/findCharactersByActive?active=true&sort=name,lastModifiedTs", 
+			showCharacters
+		);	
+};
+
+var showCharacters = function(data) {
+	var table = $("#character_table");
+	table.empty();
+	var characters = data._embedded.characters;
+	for(var i=0; i<characters.length; i++) {
+		var character = characters[i];
+		var row = characterRow.clone();
+		row.find('.character').text(character.name).attr('href','/claymore/character/'+character.characterId);
+		row.find('.player').text(character.player.userName);
+		row.find('.last_modified').text(moment(new Date(character.lastModifiedTs)).fromNow());
+		table.append(row);
+	}
+};
 
 var createNewCharacter = function() {
 	$.get(
 		"/claymore/api/characters/search/findFirstCharacterByName?name=Template", 
 		function(character) {
 			character.active=true;
-			//data.player=logged in user
+			character.characterId=null;
 			character.name='Beginner McNoob';
 			saveCharacter(character);
 		}
