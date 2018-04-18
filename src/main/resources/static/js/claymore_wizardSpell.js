@@ -116,7 +116,6 @@ var updateWizardSpells = function() {
 		$('#wizard_spells_slots_'+i).text(val);
 	}
 
-
 	$('#wizardSpell_table').empty();
 	for(var i=0; i<character.wizardSpells.length; i++) {
 		var wizardSpell = character.wizardSpells[i];
@@ -136,6 +135,14 @@ var updateWizardSpells = function() {
 		row.find('.wizardSpell_known').text(wizardSpell.known);
 		row.find('.wizardSpell_copied').text(wizardSpell.copied);
 		row.find('.wizardSpell_notes').text(wizardSpell.notes);
+		row.find('.wizardSpell_memorized').val(wizardSpell.memorized).data('wizardSpellIndex',i).change(function(event) {
+			var memorized = $(event.target).val();
+			var index = $(event.target).data('wizardSpellIndex');
+			character.wizardSpells[index].memorized = memorized;
+			updateJsonView();
+			updateDerivedFields();
+		});		
+
 		row.find('.rollable_d100').click(rollable_d100);
 		row.find('.rollable_literal').click(rollable_literal);
 		row.appendTo('#wizardSpell_table');

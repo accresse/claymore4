@@ -1,8 +1,7 @@
 **TODO List**
 
-	doesn't remember/populate # memorized spells	
 	Mark spells as "Favorite", filter by favorite
-	Restrict to certain schools
+	Restrict some spell slots to certain schools
 
 	Non-martial skill buy
 	Non-martial skill display
@@ -28,5 +27,7 @@
 	convert sheet.jsp to html
 	
 	Notes
+	
+	"Are you sure you want to leave without saving?"
 	
 	Racial adjustments
