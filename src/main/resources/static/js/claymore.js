@@ -6,25 +6,28 @@ var defenseFactorMap = {};
 
 var weaponList = null;
 var weaponMap = {};
-
 var weaponGroupList = null;
+
+var wizardSpellList = null;
+var wizardSpellMap = {};
 
 var character = null;
 
 var attackTemplate;
 var defenseTemplate;
+var wizardSpellTemplate;
 var xpHistoryTemplate;
 
 var weaponSkillTemplate;
 var skillHistoryTemplate;
 
 var dice = new DiceRoller();
-
 $(document).ready(
 	function(){		
 		var promises = [];
 		promises.push(loadWeaponsFromServer());
 		promises.push(loadDefenseFactorsFromServer());
+		promises.push(loadWizardSpellsFromServer());
 		promises.push(loadCharFromServer());
 		$.when.apply($, promises).then(layoutPageAfterDataDownload, function() {
 			alert("Error loading character");
@@ -37,6 +40,7 @@ var layoutPageAfterDataDownload = function() {
 	
 	attackTemplate = $('#attack_template').clone();
 	defenseTemplate = $('#defense_template').clone();
+	wizardSpellTemplate = $('#wizardSpell_template').clone();
 	xpHistoryTemplate = $('#xp_history_template').clone();
 	
 	weaponSkillTemplate = $('#weapon_skill_template').clone();
@@ -65,6 +69,7 @@ var layoutPageAfterDataDownload = function() {
 		return false;
 	});	
 	
+	//wizard stuff
 	for(var i=0; i< WIZARD_SCHOOLS.length; i++) {
 		var school = WIZARD_SCHOOLS[i];
 		$('.wizardSchool_select').append($('<option>').text(school).attr('value', school).attr('class','wizardSchool_option_'+school));
@@ -72,6 +77,7 @@ var layoutPageAfterDataDownload = function() {
 
 	setupAttackModal();
 	setupDefenseModal();
+	setupWizardSpellModal();
 	initXpBuyTab();
 };
 
@@ -228,6 +234,27 @@ var loadDefenseFactorsFromServer = function() {
 	);
 };
 
+var loadWizardSpellsFromServer = function() {
+	return $.get(
+		"/claymore/api/wizardSpells?sort=level,name&size=1000", 
+		function(data) {
+			wizardSpellList = data._embedded.wizardSpells;
+			var previousLevel = null;
+			for(var i=0; i< wizardSpellList.length; i++) {
+				var wizardSpell = wizardSpellList[i];
+				if(wizardSpell.level != previousLevel) {
+					previousLevel = wizardSpell.level;
+					$('#wizardSpellModal_baseSpell').append($('<option>').text('-- Level '+wizardSpell.level+' --').attr('disabled', true));
+				}
+				$('#wizardSpellModal_baseSpell').append($('<option>').text(wizardSpell.name).attr('value', wizardSpell.spellId));
+				wizardSpellMap[wizardSpell.spellId] = wizardSpell;
+			}
+			
+			console.log('Done loading wizard spells');
+		}
+	);
+};
+
 var loadCharFromServer = function() {
 	return $.get(
 		"/claymore/api/characters/" + id, 
@@ -306,6 +333,7 @@ var updateDerivedFields = function() {
 
 	updateAttacks();
 	updateDefenses();
+	updateWizardSpells();
 	updateXpBuyTab();
 	updateSkillBuyTab();
 	validateLevelUp();
@@ -427,6 +455,10 @@ var getSkillBuy = function(level, category, ability) {
 };
 
 var calculateValWithOverride = function(overrideVal, baseVal) {
-	return overrideVal ? overrideVal : baseVal;
+	var retVal = overrideVal ? overrideVal : baseVal;
+	if(retVal == null) {
+		retVal = "";
+	}
+	return retVal;
 };
 

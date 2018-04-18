@@ -394,6 +394,10 @@ var levelUpXp = function() {
 	
 	//reset fighter upgrades to zero
 	$('#xpShop_class_fighter_mastery_0').prop('checked',true);
+
+	//reset wizard upgrades to zero
+	$('#xpShop_class_wizard_casting_level_0').prop('checked',true);
+	
 };
 
 var validateLevelUpXp = function(errors) {
@@ -486,6 +490,13 @@ var updateXpBuyTab = function() {
 			$('#xpShop_class_fighter_mastery_'+weaponMasteryBuy.points).prop('checked',true);
 		}
 		updateValidMastery();
+	}
+
+	if(character.classes.Wizard) {		
+		var castingLevelBuy = getXpBuy(character.level,'WizardCastingLevel');
+		if(castingLevelBuy) {
+			$('#xpShop_class_wizard_casting_level_'+castingLevelBuy.points).prop('checked',true);
+		}
 	}
 
 };

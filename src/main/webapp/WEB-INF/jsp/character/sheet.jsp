@@ -19,10 +19,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <button id="level_up_button" class="btn navbar-btn ml-2 text-white btn-warning"><i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up</button>
-        <button id="save_character_button" class="btn navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</button>
-        <button id="clone_character_button" class="btn navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</button>
-        <button id="delete_character_button" class="btn navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</button>
+        <button id="level_up_button" class="btn btn-sm navbar-btn ml-2 text-white btn-warning"><i class="fa d-inline fa-lg fa-arrow-circle-up"></i> Level Up</button>
+        <button id="save_character_button" class="btn btn-sm navbar-btn ml-2 text-white btn-success"><i class="fa d-inline fa-lg fa-user"></i> Save</button>
+        <button id="clone_character_button" class="btn btn-sm navbar-btn ml-2 text-white btn-info"><i class="fa d-inline fa-lg fa-users"></i> Clone</button>
+        <button id="delete_character_button" class="btn btn-sm navbar-btn ml-2 text-white btn-danger"><i class="fa d-inline fa-lg fa-user-times"></i> Delete</button>
       </div>
       <span class="navbar-brand"></span>
       <span id="user" class="navbar-brand"></span>
@@ -163,28 +163,28 @@
                     <tbody>
                       <tr>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_might" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_might" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_fortitude" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_fortitude" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_agility" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_agility" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_will" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_will" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_identity" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_identity" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_surprise" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_surprise" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_perception" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_perception" value="--%"></button>
                         </td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_passiveId" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_passiveId" value="--%"></button>
                         </td>
                         <td id="character_weightLimit" class="text-center">--</td>
                         <td id="character_maxLift" class="text-center">--</td>
@@ -203,11 +203,11 @@
                     <div class="col-md-7">Attack</div>
                     <div class="col-md-2">
                       MWS<a id="character_mws_plan" href="#"><sup>[?]</sup></a>:
-                      <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
                     </div>
                     <div class="col-md-2">
                       BWS<a id="character_bws_plan" href="#"><sup>[?]</sup></a>:
-                      <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
                     </div>
                     <div class="col-md-1">
                       <a href="#" data-toggle="modal" data-target="#attackModal" data-title="New Attack"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
@@ -230,16 +230,16 @@
                       <tr id="attack_template" class="text-center" style="display: none">
                         <td class=""><a href="#" class="attack_name" data-toggle="modal" data-target="#attackModal" data-title="Edit Attack"></a><a href="#"><sup class="attack_plan">[?]</sup></a></td>
                         <td>
-                          <button class="btn btn-outline-primary attack_hit rollable_d100" title="Press to Roll" value="--%"></button>
+                          <button class="btn btn-sm btn-outline-primary attack_hit rollable_d100" title="Press to Roll" value="--%"></button>
                         </td>
                         <td>
-                          <button class="btn btn-outline-primary attack_damage rollable_literal" title="Press to Roll" value="--"></button>
+                          <button class="btn btn-sm btn-outline-primary attack_damage rollable_literal" title="Press to Roll" value="--"></button>
                         </td>
                         <td class="attack_speed">-</td>
                         <td class="attack_attacks">--</td>
                         <td>
                           <div class="btn-group border border-primary">
-                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown">
+                            <button class="btn btn-sm dropdown-toggle btn-link" data-toggle="dropdown">
                               <i class="fa d-inline fa-lg fa-exclamation-circle"></i>
                             </button>
                             <div class="dropdown-menu">
@@ -288,7 +288,7 @@
                         <td class="defense_t">--</td>
                         <td class="defense_notes_cell">
                           <div class="btn-group border border-primary">
-                            <button class="btn dropdown-toggle btn-link" data-toggle="dropdown">
+                            <button class="btn btn-sm dropdown-toggle btn-link" data-toggle="dropdown">
                               <i class="fa d-inline fa-lg fa-exclamation-circle"></i>
                             </button>
                             <div class="dropdown-menu">
@@ -364,15 +364,15 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                           </tr>
                         </tbody>
                       </table>
@@ -388,7 +388,7 @@
                         <div class="col-md-2 text-left">x2</div>
                         <div class="col-md-2 text-right font-weight-bold">Kill %:</div>
                         <div class="col-md-2 text-left">
-                          <a href="#" class="btn btn-outline-primary" title="Press to Roll">10%</a>
+                          <a href="#" class="btn btn-sm btn-outline-primary" title="Press to Roll">10%</a>
                         </div>
                       </div>
                     </div>
@@ -401,14 +401,135 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
+                
+                
+                <!-- 
                   <div class="row">
-                    <div class="col-md-8">Wizard</div>
-                    <div class="col-md-2">Learn Spell: <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_learn_spell" value="--%"></button></div>
-                    <div class="col-md-2">Spell Failure: <button class="btn btn-outline-primary rollable_d100" title="Press to Roll" id="character_spell_failure" value="--%"></button></div>
+                    <div class="col-md-7">Attack</div>
+                    <div class="col-md-2">
+                      MWS<a id="character_mws_plan" href="#"><sup>[?]</sup></a>:
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
+                    </div>
+                    <div class="col-md-2">
+                      BWS<a id="character_bws_plan" href="#"><sup>[?]</sup></a>:
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
+                    </div>
+                    <div class="col-md-1">
+                      <a href="#" data-toggle="modal" data-target="#attackModal" data-title="New Attack"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+                    </div>
+                  </div>
+                 -->
+
+
+
+                  <div class="row">
+                    <div class="col-md-7">Wizard</div>
+                    <div class="col-md-2">
+                      Learn Spell:
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_learn_spell" value="--%"></button>
+                    </div>
+                    <div class="col-md-2">
+                      Spell Failure:
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_spell_failure" value="--%"></button>
+                    </div>
+                    <div class="col-md-1">
+                      <a href="#" data-toggle="modal" data-target="#wizardSpellModal" data-title="New Spell"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+                    </div>
                   </div>
                 </div>
                 <div class="card-body">
-                  <p class=" p-y-1">(Pencil and paper for now)</p>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h5>Slots:</h5>
+                      <table class="table table-sm">
+                        <thead>
+                          <tr class="text-center">
+                            <th>0</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="text-center">
+                            <td id="wizard_spells_slots_0"></td>
+                            <td id="wizard_spells_slots_1"></td>
+                            <td id="wizard_spells_slots_2"></td>
+                            <td id="wizard_spells_slots_3"></td>
+                            <td id="wizard_spells_slots_4"></td>
+                            <td id="wizard_spells_slots_5"></td>
+                            <td id="wizard_spells_slots_6"></td>
+                            <td id="wizard_spells_slots_7"></td>
+                          </tr>
+                          <!-- 
+                          <tr class="text-center">
+                            <th>Remaining</th>
+                            <td class="wizard_spells_remaining_0">0</td>
+                            <td class="wizard_spells_remaining_1">1</td>
+                            <td class="wizard_spells_remaining_2">2</td>
+                            <td class="wizard_spells_remaining_3">3</td>
+                            <td class="wizard_spells_remaining_4">4</td>
+                            <td class="wizard_spells_remaining_5">5</td>
+                            <td class="wizard_spells_remaining_6">6</td>
+                            <td class="wizard_spells_remaining_7">7</td>
+                          </tr>
+                           -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h5>Spells:</h5>
+                      <table class="table table-sm">
+                        <thead>
+                          <tr class="text-center">
+                            <th>#</th>
+                            <th>Level</th>
+                            <th>Name</th>
+                            <th>Speed</th>
+                            <th>Damage</th>
+                            <th>Notes</th>
+                          </tr>
+                        </thead>
+                        <tbody id="wizardSpell_table">
+                          <tr id="wizardSpell_template" class="text-center">
+                            <td><input class="wizardSpell_memorized text-right" type="text" size="3" maxlength="2" value="0"></input></td>
+                            <td class="wizardSpell_level"></td>
+                            <td class="wizardSpell_name_cell"><a href="#" class="wizardSpell_name" data-toggle="modal" data-target="#wizardSpellModal" data-title="Edit Wizard Spell"></a></td>
+                            <td class="wizardSpell_speed"></td>
+                            <td class="wizardSpell_damage"></td>
+                            <td class="wizardSpell_notes_cell">
+                              <div class="btn-group border border-primary">
+                                <button class="btn btn-sm dropdown-toggle btn-link" data-toggle="dropdown">
+                                  <i class="fa d-inline fa-lg fa-exclamation-circle"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="#">
+                                    <ul>
+                                      <li>School: <span class="wizardSpell_school"></span></li>
+                                      <li>Range: <span class="wizardSpell_range"></span></li>
+                                      <li>AoE: <span class="wizardSpell_aoe"></span></li>
+                                      <li>Duration: <span class="wizardSpell_duration"></span></li>
+                                      <li>Components: <span class="wizardSpell_components"></span></li>                                 
+                                      <li>Resist: <span class="wizardSpell_resist"></span></li>                                 
+                                      <li>Known: <span class="wizardSpell_known"></span></li>                                 
+                                      <li>Copied: <span class="wizardSpell_known"></span></li>                                 
+                                    </ul>
+                                    Notes:<br><span class="wizardSpell_notes"></span>                           
+                                  </a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -449,7 +570,7 @@
                     <tbody>
                       <tr>
                         <td><a href="#">Future Skill Here</a></td>
-                        <td><a href="#" class="btn btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                        <td><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1126,9 +1247,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button id="attackModal_save" type="button" class="btn btn-primary">Save changes</button>
-          <button id="attackModal_delete" type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+          <button id="attackModal_save" type="button" class="btn btn-sm btn-primary">Save changes</button>
+          <button id="attackModal_delete" type="button" class="btn btn-sm btn-danger">Delete</button>
         </div>
       </div>
     </div>
@@ -1195,9 +1316,119 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button id="defenseModal_save" type="button" class="btn btn-primary">Save changes</button>
-          <button id="defenseModal_delete" type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+          <button id="defenseModal_save" type="button" class="btn btn-sm btn-primary">Save changes</button>
+          <button id="defenseModal_delete" type="button" class="btn btn-sm btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="wizardSpellModal" tabindex="-1" role="dialog" aria-labelledby="wizardSpellModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Spell</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <input id="wizardSpellModal_index" type="hidden" />
+            <div class="row">
+              <div class="col-md-4 text-right">Name:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_name" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Base Spell:</div>
+              <div class="col-md-8">
+                <select id="wizardSpellModal_baseSpell"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Level:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_level" type="text"type="text" size="3" maxlength="1"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">School:</div>
+              <div class="col-md-8">
+                <select id="wizardSpellModal_school"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Speed:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_speed" type="text" size="3" maxlength="2"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Damage:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_damage" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Range:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_range" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Area of Effect:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_aoe" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Duration:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_duration" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Components:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_components" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Resist:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_resist" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Known:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_known" type="checkbox"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Copied:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_copied" type="checkbox"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Notes:</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-8">
+                <textarea id="wizardSpellModal_notes"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+          <button id="wizardSpellModal_save" type="button" class="btn btn-sm btn-primary">Save changes</button>
+          <button id="wizardSpellModal_delete" type="button" class="btn btn-sm btn-danger">Delete</button>
         </div>
       </div>
     </div>
@@ -1223,8 +1454,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button id="weaponSkillModal_add" type="button" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+          <button id="weaponSkillModal_add" type="button" class="btn btn-sm btn-primary">Add</button>
         </div>
       </div>
     </div>
@@ -1265,6 +1496,7 @@
   <script src="../js/claymore_skillbuy.js"></script>
   <script src="../js/claymore_attack.js"></script>
   <script src="../js/claymore_defense.js"></script>
+  <script src="../js/claymore_wizardSpell.js"></script>
   <script src="../js/claymore.js"></script>
   <!-- 
    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;

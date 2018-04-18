@@ -73,6 +73,11 @@ public class Character {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name = "character_id")
+	@RestResource(exported=false)
+	private List<CustomizedWizardSpell> wizardSpells = new LinkedList<>();
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "character_id")
 	@OrderBy("level, category")
 	@RestResource(exported=false)
 	private List<XpBuy> xpBuys = new LinkedList<>();
@@ -259,6 +264,18 @@ public class Character {
 
 	public void removeDefense(Defense defense) {
 		this.defenses.remove(defense);
+	}
+
+	public List<CustomizedWizardSpell> getWizardSpells() {
+		return wizardSpells;
+	}
+
+	public void addDefense(CustomizedWizardSpell spell) {
+		this.wizardSpells.add(spell);
+	}
+
+	public void removeDefense(CustomizedWizardSpell spell) {
+		this.wizardSpells.remove(spell);
 	}
 
 	public List<XpBuy> getXpBuys() {

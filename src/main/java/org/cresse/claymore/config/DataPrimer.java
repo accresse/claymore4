@@ -12,12 +12,15 @@ import org.cresse.claymore.model.SkillBuy;
 import org.cresse.claymore.model.Weapon;
 import org.cresse.claymore.model.WeaponGroup;
 import org.cresse.claymore.model.WeaponSkillType;
+import org.cresse.claymore.model.WizardSchool;
+import org.cresse.claymore.model.WizardSpell;
 import org.cresse.claymore.model.XpBuy;
 import org.cresse.claymore.model.XpBuyCategory;
 import org.cresse.claymore.repository.CharacterRepository;
 import org.cresse.claymore.repository.DefenseFactorRepository;
 import org.cresse.claymore.repository.PlayerRepository;
 import org.cresse.claymore.repository.WeaponRepository;
+import org.cresse.claymore.repository.WizardSpellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -37,6 +40,9 @@ public class DataPrimer implements CommandLineRunner {
 	private WeaponRepository weaponRepository;
 
 	@Autowired
+	private WizardSpellRepository wizardSpellRepository;
+
+	@Autowired
 	private PlayerRepository playerRepository;
 
 	private Weapon sword;
@@ -53,10 +59,19 @@ public class DataPrimer implements CommandLineRunner {
 
 	private DefenseFactor other;
 
+	private Weapon xbow;
+
+	private Weapon gladius;
+
+	private Weapon dagger;
+
+	private DefenseFactor smallShield;
+
 	@Override
 	public void run(String... args) throws Exception {
 		createWeapons();
 		createDefenses();
+		createSpells();
 		createSystemUser();
 		createCharacterTemplate();
 		createExampleCharacters();
@@ -70,8 +85,8 @@ public class DataPrimer implements CommandLineRunner {
 		saveWeapon(new Weapon("Broad Sword",			Size.MediumPlus,		WeaponGroup.Blades_Slashing,		DamageType.Slashing,1,"2d8+1"));
 		saveWeapon(new Weapon("Knife (S)",			Size.Small,			WeaponGroup.Blades_Slashing,		DamageType.Slashing,5,"2d3"));
 
-		saveWeapon(new Weapon("Dagger (P)",			Size.Small,			WeaponGroup.Blades_Stabbing,		DamageType.Piercing,5,"2d4"));
-		saveWeapon(new Weapon("Gladius Urnum",		Size.MediumMinus,	WeaponGroup.Blades_Stabbing,		DamageType.Piercing,5,"2d6+3"));
+		dagger = saveWeapon(new Weapon("Dagger (P)",			Size.Small,			WeaponGroup.Blades_Stabbing,		DamageType.Piercing,5,"2d4"));
+		gladius = saveWeapon(new Weapon("Gladius Urnum",		Size.MediumMinus,	WeaponGroup.Blades_Stabbing,		DamageType.Piercing,5,"2d6+3"));
 		saveWeapon(new Weapon("Knife (P)",			Size.Small,			WeaponGroup.Blades_Stabbing,		DamageType.Piercing,5,"2d3"));
 		saveWeapon(new Weapon("Short Sword",			Size.MediumMinus,	WeaponGroup.Blades_Stabbing,		DamageType.Piercing,5,"2d6+1"));
 		saveWeapon(new Weapon("Tuck",				Size.Medium,			WeaponGroup.Blades_Stabbing,		DamageType.Piercing,4,"2d8"));
@@ -87,7 +102,7 @@ public class DataPrimer implements CommandLineRunner {
 
 		saveWeapon(new Weapon("Hand Crossbow",		Size.Small,			WeaponGroup.Crossbows,			DamageType.Piercing,3,"2d3"));
 		saveWeapon(new Weapon("Heavy Crossbow",		Size.Large,			WeaponGroup.Crossbows,			DamageType.Piercing,2,"2d8+1"));
-		saveWeapon(new Weapon("Light Crossbow",		Size.Medium,			WeaponGroup.Crossbows,			DamageType.Piercing,3,"2d6+1"));
+		xbow = saveWeapon(new Weapon("Light Crossbow",		Size.Medium,			WeaponGroup.Crossbows,			DamageType.Piercing,3,"2d6+1"));
 
 		saveWeapon(new Weapon("Battle Axe",			Size.MediumPlus,		WeaponGroup.Cleaving,			DamageType.Slashing,1,"2d8+1"));
 		saveWeapon(new Weapon("Hand Axe",			Size.Medium,			WeaponGroup.Cleaving,			DamageType.Slashing,4,"2d6"));
@@ -107,77 +122,75 @@ public class DataPrimer implements CommandLineRunner {
 		saveWeapon(new Weapon("Footman's Flail",		Size.Medium,			WeaponGroup.Flails,				DamageType.Bludgeoning,1,"3d8-H"));
 		saveWeapon(new Weapon("Two-handed Flail",	Size.LargePlus,		WeaponGroup.Flails,				DamageType.Bludgeoning,-1,"3d12-H"));
 
+		saveWeapon(new Weapon("Light Lance",Size.Large,WeaponGroup.Lances,DamageType.Piercing,6,"2d6+2"));
+		saveWeapon(new Weapon("Heavy Lance",Size.Large,WeaponGroup.Lances,DamageType.Piercing,6,"2d10+2"));
+		saveWeapon(new Weapon("Jousting Lance",Size.Large,WeaponGroup.Lances,DamageType.Bludgeoning,6,"3d4DH"));
 
+		saveWeapon(new Weapon("Long Pole ax",Size.LargePlus,WeaponGroup.Polearms,DamageType.Slashing,-2,"2d10+1"));
+		saveWeapon(new Weapon("Long Pole fork",Size.LargePlus,WeaponGroup.Polearms,DamageType.Piercing,-1,"2d8"));
+		saveWeapon(new Weapon("Long Pole hammer",Size.LargePlus,WeaponGroup.Polearms,DamageType.Bludgeoning,-3,"3d12DH-1"));
+		saveWeapon(new Weapon("Long Pole pick",Size.LargePlus,WeaponGroup.Polearms,DamageType.Piercing,-3,"2d6+1"));
+		saveWeapon(new Weapon("Long Pole spear",Size.LargePlus,WeaponGroup.Polearms,DamageType.Piercing,-1,"2d10"));
+		saveWeapon(new Weapon("Pole axe",Size.Large,WeaponGroup.Polearms,DamageType.Slashing,0,"2d12"));
+		saveWeapon(new Weapon("Pole fork",Size.Large,WeaponGroup.Polearms,DamageType.Piercing,1,"2d8"));
+		saveWeapon(new Weapon("Pole hammer",Size.Large,WeaponGroup.Polearms,DamageType.Bludgeoning,-2,"3d12DH"));
+		saveWeapon(new Weapon("Pole pick",Size.Large,WeaponGroup.Polearms,DamageType.Piercing,-2,"2d8"));
+		saveWeapon(new Weapon("Pole spear",Size.Large,WeaponGroup.Polearms,DamageType.Piercing,1,"2d10+1"));
+		saveWeapon(new Weapon("Spear",Size.Medium,WeaponGroup.Polearms,DamageType.Piercing,5,"2d8"));
+		saveWeapon(new Weapon("Trident",Size.MediumPlus,WeaponGroup.Polearms,DamageType.Piercing,1,"2d6"));
 
-saveWeapon(new Weapon("Light Lance",Size.Large,WeaponGroup.Lances,DamageType.Piercing,6,"2d6+2"));
-saveWeapon(new Weapon("Heavy Lance",Size.Large,WeaponGroup.Lances,DamageType.Piercing,6,"2d10+2"));
-saveWeapon(new Weapon("Jousting Lance",Size.Large,WeaponGroup.Lances,DamageType.Bludgeoning,6,"3d4DH"));
+		saveWeapon(new Weapon("Javelin",Size.Medium,WeaponGroup.Spears,DamageType.Piercing,4,"2d6"));
+		saveWeapon(new Weapon("Pole fork",Size.Large,WeaponGroup.Spears,DamageType.Piercing,1,"2d8"));
+		saveWeapon(new Weapon("Pole spear",Size.Large,WeaponGroup.Spears,DamageType.Piercing,1,"2d10"));
+		saveWeapon(new Weapon("Spear",Size.Medium,WeaponGroup.Spears,DamageType.Piercing,5,"2d8"));
+		saveWeapon(new Weapon("Short Spear",Size.MediumMinus,WeaponGroup.Spears,DamageType.Piercing,5,"2d6+2"));
+		saveWeapon(new Weapon("Trident",Size.Medium,WeaponGroup.Spears,DamageType.Piercing,1,"2d6"));
 
-saveWeapon(new Weapon("Long Pole ax",Size.LargePlus,WeaponGroup.Polearms,DamageType.Slashing,-2,"2d10+1"));
-saveWeapon(new Weapon("Long Pole fork",Size.LargePlus,WeaponGroup.Polearms,DamageType.Piercing,-1,"2d8"));
-saveWeapon(new Weapon("Long Pole hammer",Size.LargePlus,WeaponGroup.Polearms,DamageType.Bludgeoning,-3,"3d12DH-1"));
-saveWeapon(new Weapon("Long Pole pick",Size.LargePlus,WeaponGroup.Polearms,DamageType.Piercing,-3,"2d6+1"));
-saveWeapon(new Weapon("Long Pole spear",Size.LargePlus,WeaponGroup.Polearms,DamageType.Piercing,-1,"2d10"));
-saveWeapon(new Weapon("Pole axe",Size.Large,WeaponGroup.Polearms,DamageType.Slashing,0,"2d12"));
-saveWeapon(new Weapon("Pole fork",Size.Large,WeaponGroup.Polearms,DamageType.Piercing,1,"2d8"));
-saveWeapon(new Weapon("Pole hammer",Size.Large,WeaponGroup.Polearms,DamageType.Bludgeoning,-2,"3d12DH"));
-saveWeapon(new Weapon("Pole pick",Size.Large,WeaponGroup.Polearms,DamageType.Piercing,-2,"2d8"));
-saveWeapon(new Weapon("Pole spear",Size.Large,WeaponGroup.Polearms,DamageType.Piercing,1,"2d10+1"));
-saveWeapon(new Weapon("Spear",Size.Medium,WeaponGroup.Polearms,DamageType.Piercing,5,"2d8"));
-saveWeapon(new Weapon("Trident",Size.MediumPlus,WeaponGroup.Polearms,DamageType.Piercing,1,"2d6"));
+		saveWeapon(new Weapon("Brass Knuckles",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Bludgeoning,3,"3d4DH"));
+		saveWeapon(new Weapon("Gauntlet",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Bludgeoning,3,"3d4DH+2"));
+		saveWeapon(new Weapon("Cestus (P)",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Piercing,3,"2d4"));
+		saveWeapon(new Weapon("Cestus (S)",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Slashing,3,"2d4"));
+		saveWeapon(new Weapon("Punch Buckler",Size.SmallMinus,WeaponGroup.Punching_Weapons,DamageType.Bludgeoning,3,"3d4DH"));
+		saveWeapon(new Weapon("Punch Dagger",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Piercing,3,"2d3"));
 
-saveWeapon(new Weapon("Javelin",Size.Medium,WeaponGroup.Spears,DamageType.Piercing,4,"2d6"));
-saveWeapon(new Weapon("Pole fork",Size.Large,WeaponGroup.Spears,DamageType.Piercing,1,"2d8"));
-saveWeapon(new Weapon("Pole spear",Size.Large,WeaponGroup.Spears,DamageType.Piercing,1,"2d10"));
-saveWeapon(new Weapon("Spear",Size.Medium,WeaponGroup.Spears,DamageType.Piercing,5,"2d8"));
-saveWeapon(new Weapon("Short Spear",Size.MediumMinus,WeaponGroup.Spears,DamageType.Piercing,5,"2d6+2"));
-saveWeapon(new Weapon("Trident",Size.Medium,WeaponGroup.Spears,DamageType.Piercing,1,"2d6"));
+		saveWeapon(new Weapon("Chain",Size.Large,WeaponGroup.Rope_like,DamageType.Bludgeoning,2,"3d10DH"));
+		saveWeapon(new Weapon("Short Chain",Size.Medium,WeaponGroup.Rope_like,DamageType.Bludgeoning,2,"3d8DH"));
+		saveWeapon(new Weapon("Scourge ",Size.Medium,WeaponGroup.Rope_like,DamageType.Slashing,2,"2d4+2"));
+		saveWeapon(new Weapon("Whip",Size.Medium,WeaponGroup.Rope_like,DamageType.Slashing,2,"2d2"));
 
-saveWeapon(new Weapon("Brass Knuckles",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Bludgeoning,3,"3d4DH"));
-saveWeapon(new Weapon("Gauntlet",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Bludgeoning,3,"3d4DH+2"));
-saveWeapon(new Weapon("Cestus (P)",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Piercing,3,"2d4"));
-saveWeapon(new Weapon("Cestus (S)",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Slashing,3,"2d4"));
-saveWeapon(new Weapon("Punch Buckler",Size.SmallMinus,WeaponGroup.Punching_Weapons,DamageType.Bludgeoning,3,"3d4DH"));
-saveWeapon(new Weapon("Punch Dagger",Size.Small,WeaponGroup.Punching_Weapons,DamageType.Piercing,3,"2d3"));
+		saveWeapon(new Weapon("Sling - Bullet",Size.Medium,WeaponGroup.Slings,DamageType.Bludgeoning,1,"2d6+2"));
+		saveWeapon(new Weapon("Sling - Stone",Size.Medium,WeaponGroup.Slings,DamageType.Bludgeoning,1,"2d6+1"));
+		saveWeapon(new Weapon("Staff Sling - Bullet",Size.MediumPlus,WeaponGroup.Slings,DamageType.Bludgeoning,0,"2d6+4"));
+		saveWeapon(new Weapon("Staff Sling - Stone",Size.MediumPlus,WeaponGroup.Slings,DamageType.Bludgeoning,0,"2d6+3"));
 
-saveWeapon(new Weapon("Chain",Size.Large,WeaponGroup.Rope_like,DamageType.Bludgeoning,2,"3d10DH"));
-saveWeapon(new Weapon("Short Chain",Size.Medium,WeaponGroup.Rope_like,DamageType.Bludgeoning,2,"3d8DH"));
-saveWeapon(new Weapon("Scourge ",Size.Medium,WeaponGroup.Rope_like,DamageType.Slashing,2,"2d4+2"));
-saveWeapon(new Weapon("Whip",Size.Medium,WeaponGroup.Rope_like,DamageType.Slashing,2,"2d2"));
+		saveWeapon(new Weapon("Dagger",Size.Small,WeaponGroup.Small_Throwing,DamageType.Piercing,5,"2d4"));
+		saveWeapon(new Weapon("Hatchet",Size.Small,WeaponGroup.Small_Throwing,DamageType.Slashing,4,"2d4"));
+		saveWeapon(new Weapon("Knife (S)",Size.Small,WeaponGroup.Small_Throwing,DamageType.Slashing,5,"2d3"));
+		saveWeapon(new Weapon("Knife (P)",Size.Small,WeaponGroup.Small_Throwing,DamageType.Piercing,5,"2d3"));
+		saveWeapon(new Weapon("Rock",Size.Small,WeaponGroup.Small_Throwing,DamageType.Bludgeoning,5,"3d4DH"));
 
-saveWeapon(new Weapon("Sling - Bullet",Size.Medium,WeaponGroup.Slings,DamageType.Bludgeoning,1,"2d6+2"));
-saveWeapon(new Weapon("Sling - Stone",Size.Medium,WeaponGroup.Slings,DamageType.Bludgeoning,1,"2d6+1"));
-saveWeapon(new Weapon("Staff Sling - Bullet",Size.MediumPlus,WeaponGroup.Slings,DamageType.Bludgeoning,0,"2d6+4"));
-saveWeapon(new Weapon("Staff Sling - Stone",Size.MediumPlus,WeaponGroup.Slings,DamageType.Bludgeoning,0,"2d6+3"));
+		saveWeapon(new Weapon("Quarterstaff ",Size.Large,WeaponGroup.Quarter_Staff,DamageType.Bludgeoning,4,"3d6DH"));
 
-saveWeapon(new Weapon("Dagger",Size.Small,WeaponGroup.Small_Throwing,DamageType.Piercing,5,"2d4"));
-saveWeapon(new Weapon("Hatchet",Size.Small,WeaponGroup.Small_Throwing,DamageType.Slashing,4,"2d4"));
-saveWeapon(new Weapon("Knife (S)",Size.Small,WeaponGroup.Small_Throwing,DamageType.Slashing,5,"2d3"));
-saveWeapon(new Weapon("Knife (P)",Size.Small,WeaponGroup.Small_Throwing,DamageType.Piercing,5,"2d3"));
-saveWeapon(new Weapon("Rock",Size.Small,WeaponGroup.Small_Throwing,DamageType.Bludgeoning,5,"3d4DH"));
+		saveWeapon(new Weapon("Chair/Stool",Size.MediumMinus,WeaponGroup.Improvised,DamageType.Bludgeoning,0,"3d6DH"));
+		saveWeapon(new Weapon("Chisel/Ice Pick ",Size.SmallMinus,WeaponGroup.Improvised,DamageType.Piercing,2,"2d3"));
+		saveWeapon(new Weapon("Crowbar",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,1,"3d8dH-1"));
+		saveWeapon(new Weapon("Machete",Size.Medium,WeaponGroup.Improvised,DamageType.Slashing,2,"2d8"));
+		saveWeapon(new Weapon("Molotov Cocktail",Size.Small,WeaponGroup.Improvised,DamageType.Bludgeoning,1,"0"));
+		saveWeapon(new Weapon("Pitch Fork",Size.Medium,WeaponGroup.Improvised,DamageType.Piercing,0,"2d6"));
+		saveWeapon(new Weapon("Pot, Heavy",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,1,"3d6DH+1"));
+		saveWeapon(new Weapon("Rock",Size.Small,WeaponGroup.Improvised,DamageType.Bludgeoning,5,"3d4DH"));
+		saveWeapon(new Weapon("Rock, Robust",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,3,"3d6DH"));
+		saveWeapon(new Weapon("Sickle",Size.Small,WeaponGroup.Improvised,DamageType.Slashing,2,"2d4+1"));
+		saveWeapon(new Weapon("Torch",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,4,"3d6DH-1"));
+		saveWeapon(new Weapon("Torch, Thrown",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,4,"0"));
+		saveWeapon(new Weapon("Vial",Size.Small,WeaponGroup.Improvised,DamageType.Bludgeoning,4,"0"));
 
-saveWeapon(new Weapon("Quarterstaff ",Size.Large,WeaponGroup.Quarter_Staff,DamageType.Bludgeoning,4,"3d6DH"));
-
-saveWeapon(new Weapon("Chair/Stool",Size.MediumMinus,WeaponGroup.Improvised,DamageType.Bludgeoning,0,"3d6DH"));
-saveWeapon(new Weapon("Chisel/Ice Pick ",Size.SmallMinus,WeaponGroup.Improvised,DamageType.Piercing,2,"2d3"));
-saveWeapon(new Weapon("Crowbar",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,1,"3d8dH-1"));
-saveWeapon(new Weapon("Machete",Size.Medium,WeaponGroup.Improvised,DamageType.Slashing,2,"2d8"));
-saveWeapon(new Weapon("Molotov Cocktail",Size.Small,WeaponGroup.Improvised,DamageType.Bludgeoning,1,"0"));
-saveWeapon(new Weapon("Pitch Fork",Size.Medium,WeaponGroup.Improvised,DamageType.Piercing,0,"2d6"));
-saveWeapon(new Weapon("Pot, Heavy",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,1,"3d6DH+1"));
-saveWeapon(new Weapon("Rock",Size.Small,WeaponGroup.Improvised,DamageType.Bludgeoning,5,"3d4DH"));
-saveWeapon(new Weapon("Rock, Robust",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,3,"3d6DH"));
-saveWeapon(new Weapon("Sickle",Size.Small,WeaponGroup.Improvised,DamageType.Slashing,2,"2d4+1"));
-saveWeapon(new Weapon("Torch",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,4,"3d6DH-1"));
-saveWeapon(new Weapon("Torch, Thrown",Size.Medium,WeaponGroup.Improvised,DamageType.Bludgeoning,4,"0"));
-saveWeapon(new Weapon("Vial",Size.Small,WeaponGroup.Improvised,DamageType.Bludgeoning,4,"0"));
-
-saveWeapon(new Weapon("Buckler",Size.SmallMinus,WeaponGroup.Shields,DamageType.Bludgeoning,3,"3d4DH"));
-saveWeapon(new Weapon("Small Shield",Size.Small,WeaponGroup.Shields,DamageType.Bludgeoning,2,"3d4DH"));
-saveWeapon(new Weapon("Medium Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,1,"3d4DH"));
-saveWeapon(new Weapon("Kite Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,1,"3d4DH"));
-saveWeapon(new Weapon("Large Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,0,"3d6DH"));
-saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,-1,"3d4DH"));
+		saveWeapon(new Weapon("Buckler",Size.SmallMinus,WeaponGroup.Shields,DamageType.Bludgeoning,3,"3d4DH"));
+		saveWeapon(new Weapon("Small Shield",Size.Small,WeaponGroup.Shields,DamageType.Bludgeoning,2,"3d4DH"));
+		saveWeapon(new Weapon("Medium Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,1,"3d4DH"));
+		saveWeapon(new Weapon("Kite Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,1,"3d4DH"));
+		saveWeapon(new Weapon("Large Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,0,"3d6DH"));
+		saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.Bludgeoning,-1,"3d4DH"));
 	}
 
 	private Weapon saveWeapon(Weapon weapon) {
@@ -193,6 +206,8 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 
 		plateMail = saveDefenseFactor(new DefenseFactor("Armor - Plate Mail","=24","+6","-8"));
 
+		smallShield = saveDefenseFactor(new DefenseFactor("Shield - Small","+10","+0","0"));
+
 		largeShield = saveDefenseFactor(new DefenseFactor("Shield - Large","+16","+0","-1"));
 
 		other = saveDefenseFactor(new DefenseFactor("Other","+0","+0","0"));
@@ -204,6 +219,21 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 			defenseFactor.setDefenseFactorId(dbDefenseFactor.getDefenseFactorId());
 		}
 		return defenseFactorRepository.save(defenseFactor);
+	}
+
+	private void createSpells() {
+		WizardSpell spell = new WizardSpell();
+		spell.setName("Custom");
+		spell.setSchool(WizardSchool.Evocation);
+		saveWizardSpell(spell);
+	}
+
+	private WizardSpell saveWizardSpell(WizardSpell spell) {
+		WizardSpell dbSpell = wizardSpellRepository.findFirstWizardSpellByName(spell.getName());
+		if(dbSpell != null) {
+			spell.setSpellId(dbSpell.getSpellId());
+		}
+		return wizardSpellRepository.save(spell);
 	}
 
 	private void createSystemUser() {
@@ -246,6 +276,7 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 
 	private void createExampleCharacters() {
 		quin();
+		banric();
 	}
 
 	private void quin() {
@@ -350,6 +381,60 @@ saveWeapon(new Weapon("Tower Shield",Size.Medium,WeaponGroup.Shields,DamageType.
 		quin.addXpBuy(new XpBuy(3,2,XpBuyCategory.WeaponMastery,WeaponGroup.Blades_Slashing+","+WeaponGroup.Bows));
 
 		characterRepository.save(quin);
+	}
+
+	private void banric() {
+		org.cresse.claymore.model.Character banric = new org.cresse.claymore.model.Character();
+		banric.setName("Banric");
+		banric.setGender(Gender.Male);
+		banric.setAge(20);
+		banric.setHeight(68);
+		banric.setWeight(140);
+		banric.setRace(Race.Human);
+		banric.setCurrentHp(10);
+		banric.setXp(20);
+		banric.setStrength(13);
+		banric.setDexterity(13);
+		banric.setConstitution(12);
+		banric.setProblemSolving(22);
+		banric.setRecall(16);
+		banric.setWit(18);
+		banric.setLeadership(10);
+		banric.setPrimaryWeaponSkill(WeaponSkillType.BWS);
+
+		Attack xbow = new Attack(this.xbow, WeaponSkillType.BWS);
+		banric.addAttack(xbow);
+
+		Attack gladius = new Attack(this.gladius, WeaponSkillType.MWS);
+		banric.addAttack(gladius);
+
+		Attack dagger = new Attack(this.dagger, WeaponSkillType.MWS);
+		dagger.setName("Dagger (MWS)");
+		banric.addAttack(dagger);
+
+		dagger = new Attack(this.dagger, WeaponSkillType.BWS);
+		dagger.setName("Dagger (BWS)");
+		banric.addAttack(dagger);
+
+		banric.addDefense(new Defense(smallShield));
+
+		//level 1
+		banric.addXpBuy(new XpBuy(1,0,XpBuyCategory.HP,null));
+		banric.addXpBuy(new XpBuy(1,0,XpBuyCategory.WeaponSkill,"BWS"));
+		banric.addXpBuy(new XpBuy(1,0,XpBuyCategory.SkillPoints,null));
+		banric.addXpBuy(new XpBuy(1,0,XpBuyCategory.SavingThrow,null));
+		banric.addXpBuy(new XpBuy(1,10,XpBuyCategory.Class,"Wizard"));
+		banric.addSkillBuy(new SkillBuy(1,12, WeaponGroup.Blades_Stabbing));
+		banric.addSkillBuy(new SkillBuy(1,6, WeaponGroup.Crossbows));
+
+		//level 2
+		banric.addXpBuy(new XpBuy(2,2,XpBuyCategory.HP,null));
+		banric.addXpBuy(new XpBuy(2,0,XpBuyCategory.WeaponSkill,"BWS"));
+		banric.addXpBuy(new XpBuy(2,0,XpBuyCategory.SkillPoints,null));
+		banric.addXpBuy(new XpBuy(2,0,XpBuyCategory.SavingThrow,null));
+		banric.addXpBuy(new XpBuy(2,8,XpBuyCategory.WizardCastingLevel,"ALL"));
+
+		characterRepository.save(banric);
 	}
 
 }

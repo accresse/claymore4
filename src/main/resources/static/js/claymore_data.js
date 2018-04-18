@@ -352,6 +352,10 @@ var getDefenseFactor = function(defenseFactorId) {
 	return defenseFactorMap[defenseFactorId];
 };
 
+var getWizardSpell = function(spellId) {
+	return wizardSpellMap[spellId];
+};
+
 var SAVING_BONUS_TABLE = [
 	[],
 	[2,1],
@@ -383,6 +387,40 @@ var WIZARD_SCHOOLS = [
 	'Evocation',
 	'Illusion',
 	'Necromancy'
+];
+
+var WIZARD_SPELL_SLOTS = [
+	[],//0
+	[1],
+	[2,1],
+	[3,1],
+	[4,1],
+	[4,2],//5
+	[5,2,1],
+	[6,2,1],
+	[6,3,1],
+	[7,3,2],
+	[7,3,2,1],//10
+	[8,3,2,1],
+	[8,4,2,1],
+	[9,4,3,1],
+	[9,4,3,2],
+	[9,4,3,2,1],//15
+	[10,4,3,2,1],
+	[10,4,4,2,1],
+	[10,5,4,3,2],
+	[11,5,4,3,2],
+	[11,5,4,3,2,1],//20
+	[11,5,4,4,2,1],
+	[12,5,5,4,3,1],
+	[12,5,5,4,3,2],
+	[12,5,5,4,3,2,1],
+	[13,5,5,4,3,2,2],//25
+	[13,5,5,5,4,2,2],
+	[13,6,5,5,4,3,3],
+	[14,6,6,5,4,3,3,1],
+	[14,6,6,5,5,4,4,2],
+	[18,6,6,6,5,5,4,3]//30
 ];
 
 class CharacterProcessor {
