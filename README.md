@@ -1,6 +1,6 @@
 **TODO List**
 
-	Mark spells as "Favorite", filter by favorite
+	Better way of displaying long spell notes
 	Restrict some spell slots to certain schools
 
 	Non-martial skill buy

@@ -15,6 +15,7 @@ var setupWizardSpellModal = function() {
 		wizardSpell.resist = $('#wizardSpellModal_resist').val();
 		wizardSpell.known = $('#wizardSpellModal_known').prop('checked');
 		wizardSpell.copied = $('#wizardSpellModal_copied').prop('checked');
+		wizardSpell.favorite = $('#wizardSpellModal_favorite').prop('checked');
 		wizardSpell.notes = $('#wizardSpellModal_notes').val();
 			  
 		var index = $('#wizardSpellModal_index').val();
@@ -48,6 +49,21 @@ var setupWizardSpellModal = function() {
 
 		  $('#wizardSpellModal_index').val("");
 		  $('#wizardSpellModal_baseSpell').change();
+		  
+		  $('#wizardSpellModal_name').val("");
+		  $('#wizardSpellModal_level').val("");
+		  $('#wizardSpellModal_speed').val("");
+		  $('#wizardSpellModal_damage').val("");
+		  $('#wizardSpellModal_range').val("");
+		  $('#wizardSpellModal_aoe').val("");
+		  $('#wizardSpellModal_duration').val("");
+		  $('#wizardSpellModal_components').val("");
+		  $('#wizardSpellModal_resist').val("");
+		  $('#wizardSpellModal_known').prop('checked',false);
+		  $('#wizardSpellModal_copied').prop('checked',false);
+		  $('#wizardSpellModal_favorite').prop('checked',false);
+		  $('#wizardSpellModal_notes').val("");
+		  
 		  $('#wizardSpellModal_delete').hide();
 		  
 		  if(index || index==0) {
@@ -72,6 +88,7 @@ var setupWizardSpellModal = function() {
 			  $('#wizardSpellModal_resist').val(wizardSpell.resist);
 			  $('#wizardSpellModal_known').prop('checked',wizardSpell.known);
 			  $('#wizardSpellModal_copied').prop('checked',wizardSpell.copied);
+			  $('#wizardSpellModal_favorite').prop('checked',wizardSpell.favorite);
 			  $('#wizardSpellModal_notes').val(wizardSpell.notes);
 
 			  $('#wizardSpellModal_delete').show();
@@ -92,12 +109,28 @@ var setupWizardSpellModal = function() {
 	    $('#wizardSpellModal_duration').attr('placeholder',wizardSpell.duration);
 	    $('#wizardSpellModal_components').attr('placeholder',wizardSpell.components);
 	    $('#wizardSpellModal_resist').attr('placeholder',wizardSpell.resist);
+		$('#wizardSpellModal_notes').attr('placeholder',wizardSpell.notes);
 	});
 	
 	for(var i=0; i<WIZARD_SCHOOLS.length; i++) {
 		var school = WIZARD_SCHOOLS[i];
 		$('#wizardSpellModal_school').append($('<option>').text(school).attr('value', school));
 	}
+	
+    $('#wizardSpells_favorite_filter').change(updateWizardSpellFilter);
+
+};
+
+var updateWizardSpellFilter = function(){
+    var favOnly = $('#wizardSpells_favorite_filter').prop('checked');
+	 
+    $('.wizardSpell_row').hide();
+  
+    for(var i=0; i < character.wizardSpells.length; i++) {
+	    if(character.wizardSpells[i].favorite || !favOnly) {
+		    $('#wizardSpell_'+i).show();
+	    }
+    }
 };
 
 var updateWizardSpells = function() {
@@ -134,6 +167,14 @@ var updateWizardSpells = function() {
 		row.find('.wizardSpell_resist').text(calculateValWithOverride(wizardSpell.resist, baseSpell.resist));
 		row.find('.wizardSpell_known').text(wizardSpell.known);
 		row.find('.wizardSpell_copied').text(wizardSpell.copied);
+		row.find('.wizardSpell_favorite').attr('id','wizardSpell_favorite_'+i).prop('checked',wizardSpell.favorite).data('wizardSpellIndex',i).change(function(event) {
+			var favorite = $(event.target).prop('checked');
+			var index = $(event.target).data('wizardSpellIndex');
+			character.wizardSpells[index].favorite = favorite;
+			updateJsonView();
+			updateDerivedFields();
+		});		
+		row.find('.wizardSpell_favorite_label').attr('for','wizardSpell_favorite_'+i);
 		row.find('.wizardSpell_notes').text(wizardSpell.notes);
 		row.find('.wizardSpell_memorized').val(wizardSpell.memorized).data('wizardSpellIndex',i).change(function(event) {
 			var memorized = $(event.target).val();
@@ -148,4 +189,5 @@ var updateWizardSpells = function() {
 		row.appendTo('#wizardSpell_table');
 		row.show();
 	}
+	updateWizardSpellFilter();
 };

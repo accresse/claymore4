@@ -43,6 +43,8 @@ public class CustomizedWizardSpell {
 
     private boolean copied;
 
+    private boolean favorite;
+
     private int memorized;
 
     private String notes;
@@ -157,6 +159,14 @@ public class CustomizedWizardSpell {
 
 	public void setCopied(boolean copied) {
 		this.copied = copied;
+	}
+
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
 	}
 
 	public int getMemorized() {

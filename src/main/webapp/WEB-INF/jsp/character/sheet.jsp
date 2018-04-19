@@ -10,6 +10,14 @@
    <link rel="stylesheet" href="../css/jqueryui-editable.css" type="text/css"/>
    -->
 <link rel="stylesheet" href="../jquery-ui-1.12.1.custom/jquery-ui.theme.css" type="text/css" />
+<style>
+input[type='checkbox'].icon-checkbox{display:none}
+input[type='checkbox'].icon-checkbox+label .unchecked{display:inline}
+input[type='checkbox'].icon-checkbox+label .checked{display:none}
+input[type='checkbox']:checked.icon-checkbox{display:none}
+input[type='checkbox']:checked.icon-checkbox+label .unchecked{display:none}
+input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
+</style>                  
 </head>
 <body>
   <nav class="navbar navbar-expand-md bg-primary navbar-dark">
@@ -483,11 +491,19 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-1">
                       <h5>Spells:</h5>
+                    </div>
+                    <div class="col-md-11">
+                    <input id="wizardSpells_favorite_filter" type="checkbox" checked/> <span>Favorites Only</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
                       <table class="table table-sm">
                         <thead>
                           <tr class="text-center">
+                            <th style="width:1px"></th>
                             <th>#</th>
                             <th>Level</th>
                             <th>Name</th>
@@ -497,7 +513,14 @@
                           </tr>
                         </thead>
                         <tbody id="wizardSpell_table">
-                          <tr id="wizardSpell_template" class="text-center">
+                          <tr id="wizardSpell_template" class="wizardSpell_row text-center">
+                            <td>
+                              <input id="wizardSpell_favorite_x" class="icon-checkbox wizardSpell_favorite" type="checkbox" />
+                              <label for="wizardSpell_favorite_x" class="wizardSpell_favorite_label text-warning">
+                                <i class='fa fa-lg fa-star-o unchecked'></i>
+                                <i class='fa fa-lg fa-star checked'></i>
+                              </label>
+                            </td>
                             <td><input class="wizardSpell_memorized text-right" type="text" size="3" maxlength="2" value="0"></input></td>
                             <td class="wizardSpell_level"></td>
                             <td class="wizardSpell_name_cell"><a href="#" class="wizardSpell_name" data-toggle="modal" data-target="#wizardSpellModal" data-title="Edit Wizard Spell"></a></td>
@@ -518,7 +541,7 @@
                                       <li>Components: <span class="wizardSpell_components"></span></li>                                 
                                       <li>Resist: <span class="wizardSpell_resist"></span></li>                                 
                                       <li>Known: <span class="wizardSpell_known"></span></li>                                 
-                                      <li>Copied: <span class="wizardSpell_known"></span></li>                                 
+                                      <li>Copied: <span class="wizardSpell_copied"></span></li>                                 
                                     </ul>
                                     Notes:<br><span class="wizardSpell_notes"></span>                           
                                   </a>
@@ -1412,6 +1435,12 @@
               <div class="col-md-4 text-right">Copied:</div>
               <div class="col-md-8">
                 <input id="wizardSpellModal_copied" type="checkbox"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Favorite:</div>
+              <div class="col-md-8">
+                <input id="wizardSpellModal_favorite" type="checkbox"></input>
               </div>
             </div>
             <div class="row">
