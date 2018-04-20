@@ -125,8 +125,13 @@ class WeaponSkillProcessor extends CharacterProcessor {
 
 		character.mws += getStrengthMods().mwsMod;
 		character.bws += getDexterityMods().bwsMod;
-		character.mwsPlan.push(['+'+getStrengthMods().mwsMod,'STR bonus']);
-		character.bwsPlan.push(['+'+getDexterityMods().bwsMod,'DEX bonus']);
+		character.mwsPlan.push([getStrengthMods().mwsMod,'STR bonus']);
+		character.bwsPlan.push([getDexterityMods().bwsMod,'DEX bonus']);
+		var witBonus = getWitMods().weaponMod;
+		character.mws += witBonus;
+		character.bws += witBonus;
+		character.mwsPlan.push([witBonus,'WIT bonus']);
+		character.bwsPlan.push([witBonus,'WIT bonus']);
 		
 	}
 	
@@ -140,13 +145,13 @@ class WeaponSkillProcessor extends CharacterProcessor {
 				if(ability == 'MWS') {
 					character.mws += getWeaponSkillBonus(0,points);
 					character.bws += getWeaponSkillBonus(1,points);
-					character.mwsPlan.push(['+'+getWeaponSkillBonus(0,points),'Level '+level+' WeaponSkill Bonus']);
-					character.bwsPlan.push(['+'+getWeaponSkillBonus(1,points),'Level '+level+' WeaponSkill Bonus']);
+					character.mwsPlan.push([getWeaponSkillBonus(0,points),'Level '+level+' WeaponSkill Bonus']);
+					character.bwsPlan.push([getWeaponSkillBonus(1,points),'Level '+level+' WeaponSkill Bonus']);
 				} else {
 					character.bws += getWeaponSkillBonus(0,points);
 					character.mws += getWeaponSkillBonus(1,points);
-					character.bwsPlan.push(['+'+getWeaponSkillBonus(0,points),'Level '+level+' WeaponSkill Bonus']);
-					character.mwsPlan.push(['+'+getWeaponSkillBonus(1,points),'Level '+level+' WeaponSkill Bonus']);
+					character.bwsPlan.push([getWeaponSkillBonus(0,points),'Level '+level+' WeaponSkill Bonus']);
+					character.mwsPlan.push([getWeaponSkillBonus(1,points),'Level '+level+' WeaponSkill Bonus']);
 				}
 			}
 		}
