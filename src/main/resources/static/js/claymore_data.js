@@ -356,6 +356,10 @@ var getWizardSpell = function(spellId) {
 	return wizardSpellMap[spellId];
 };
 
+var getNonMartialSkill = function(skillId) {
+	return nonMartialSkillMap[skillId];
+};
+
 var SAVING_BONUS_TABLE = [
 	[],
 	[2,1],
@@ -422,6 +426,27 @@ var WIZARD_SPELL_SLOTS = [
 	[14,6,6,5,5,4,4,2],
 	[18,6,6,6,5,5,4,3]//30
 ];
+
+var formulaCheck = /^[0-9 \+\-\*\/\(\)]*$/;
+
+var evaluateCharacterFormula = function(formula) {
+
+	var replacedFormula = formula.toUpperCase()
+		   .replace('STR',character.strength)
+		   .replace('CON',character.constitution)
+	       .replace('DEX',character.dexterity)
+	       .replace('PS',character.problemSolving)
+	       .replace('RC',character.recall)
+	       .replace('WIT',character.wit)
+	       .replace('LD',character.leadership);
+	
+	if(formulaCheck.exec(replacedFormula)) {
+		return eval(replacedFormula);
+	} else {
+		console.alert("Bad formula: "+formula);
+		return null;
+	}
+};
 
 class CharacterProcessor {
 	init(){}

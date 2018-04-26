@@ -1114,7 +1114,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
         </div>
 
         <div id="skillShop" class="tab-pane">
-          <div class="py-5">
+          <div class="py-0">
             <div class="row my-1">
               <div class="col-md-12">
                 <div class="card">
@@ -1144,6 +1144,43 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
                           <td><span class="weapon_skill_total">0</span></td>
                           <td><span class="weapon_skill_required">--</span></td>
                           <td><span class="weapon_skill_penalty">--</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-1">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row">
+                      <div class="col-md-11">Non-Martial Skills</div>
+                      <div class="col-md-1">
+                        <a href="#" data-toggle="modal" data-target="#nonMartialSkillModal" data-title="New Skill"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-sm">
+                      <thead>
+                        <tr class="text-center">
+                          <th>Skill</th>
+                          <th>Spend</th>
+                          <th>Total</th>
+                          <th>Formula</th>
+                          <th>Check</th>
+                        </tr>
+                      </thead>
+                      <tbody id="nonMartialSkill_table">
+                        <tr id="nonMartialSkill_template" class="text-center" style="display:none">
+                          <td><span class="nonMartialSkill_name">--</span></td>
+                          <td><input type="text" class="skillBuyInput nonMartialSkill_spend text-right" size="4" maxlength="2" value="0"/></td>
+                          <td><span class="nonMartialSkill_total">0</span></td>
+                          <td><span class="nonMartialSkill_formula">--</span></td>
+                          <td><button class="nonMartialSkill_check btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">0%</button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -1459,6 +1496,47 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
     </div>
   </div>
 
+  <div class="modal fade" id="nonMartialSkillModal" tabindex="-1" role="dialog" aria-labelledby="wizardSpellModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Skill</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <input id="nonMartialSkillModal_index" type="hidden" />
+            <div class="row">
+              <div class="col-md-4 text-right">Name:</div>
+              <div class="col-md-8">
+                <input id="nonMartialSkillModal_name" type="text"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Base Skill:</div>
+              <div class="col-md-8">
+                <select id="nonMartialSkillModal_baseSkill"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 text-right">Formula:</div>
+              <div class="col-md-8">
+                <input id="nonMartialSkillModal_formula" type="text"type="text" size="20" maxlength="50"></input>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+          <button id="nonMartialSkillModal_save" type="button" class="btn btn-sm btn-primary">Save changes</button>
+          <button id="nonMartialSkillModal_delete" type="button" class="btn btn-sm btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" id="weaponSkillModal" tabindex="-1" role="dialog" aria-labelledby="weaponSkillModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -1523,6 +1601,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
   <script src="../js/claymore_attack.js"></script>
   <script src="../js/claymore_defense.js"></script>
   <script src="../js/claymore_wizardSpell.js"></script>
+  <script src="../js/claymore_nonMartialSkills.js"></script>
   <script src="../js/claymore.js"></script>
   <!-- 
    <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:110px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">made with&nbsp;&nbsp;

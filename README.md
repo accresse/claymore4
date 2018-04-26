@@ -3,8 +3,7 @@
 	Better way of displaying long spell notes
 	Restrict some spell slots to certain schools
 
-	Non-martial skill buy
-	Non-martial skill display
+	Non-martial skill - subtract from skill points
 
 	Security - restrict which users can use app
 	Security - remember me

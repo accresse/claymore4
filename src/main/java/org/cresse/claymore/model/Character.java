@@ -87,6 +87,11 @@ public class Character {
 	@RestResource(exported=false)
 	private List<SkillBuy> skillBuys = new LinkedList<>();
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "character_id")
+	@RestResource(exported=false)
+	private List<CustomizedNonMartialSkill> nonMartialSkills = new LinkedList<>();
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastModifiedTs;
 
@@ -270,12 +275,24 @@ public class Character {
 		return wizardSpells;
 	}
 
-	public void addDefense(CustomizedWizardSpell spell) {
+	public void addWizardSpell(CustomizedWizardSpell spell) {
 		this.wizardSpells.add(spell);
 	}
 
-	public void removeDefense(CustomizedWizardSpell spell) {
+	public void removeWizardSpell(CustomizedWizardSpell spell) {
 		this.wizardSpells.remove(spell);
+	}
+
+	public List<CustomizedNonMartialSkill> getNonMartialSkills() {
+		return nonMartialSkills;
+	}
+
+	public void addNonMartialSkill(CustomizedNonMartialSkill skill) {
+		this.nonMartialSkills.add(skill);
+	}
+
+	public void removeNonMartialSkill(CustomizedNonMartialSkill skill) {
+		this.nonMartialSkills.remove(skill);
 	}
 
 	public List<XpBuy> getXpBuys() {

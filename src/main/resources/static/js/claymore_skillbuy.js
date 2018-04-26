@@ -63,7 +63,8 @@ var skillBuyProcessors = {
 	Weapon: new WeaponGroupProcessor()
 };
 
-var initSkillBuyTab = function() {	
+var initSkillBuyTab = function() {
+	//weapon
 	$('#weapon_skill_table').empty();
 
 	for(var weaponGroup in WEAPON_GROUP_COST_TABLE) {

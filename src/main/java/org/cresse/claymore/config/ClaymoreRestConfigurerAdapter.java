@@ -1,6 +1,7 @@
 package org.cresse.claymore.config;
 
 import org.cresse.claymore.model.DefenseFactor;
+import org.cresse.claymore.model.NonWeaponSkill;
 import org.cresse.claymore.model.Player;
 import org.cresse.claymore.model.Weapon;
 import org.cresse.claymore.model.WizardSpell;
@@ -16,6 +17,7 @@ public class ClaymoreRestConfigurerAdapter extends RepositoryRestConfigurerAdapt
 		config.exposeIdsFor(org.cresse.claymore.model.Character.class);
 		config.exposeIdsFor(DefenseFactor.class);
 		config.exposeIdsFor(Player.class);
+		config.exposeIdsFor(NonWeaponSkill.class);
 		config.exposeIdsFor(Weapon.class);
 		config.exposeIdsFor(WizardSpell.class);
 	}

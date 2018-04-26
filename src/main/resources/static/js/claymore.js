@@ -11,6 +11,9 @@ var weaponGroupList = null;
 var wizardSpellList = null;
 var wizardSpellMap = {};
 
+var nonMartialSkillList = null;
+var nonMartialSkillMap = {};
+
 var character = null;
 
 var attackTemplate;
@@ -19,6 +22,7 @@ var wizardSpellTemplate;
 var xpHistoryTemplate;
 
 var weaponSkillTemplate;
+var nonMartialSkillTemplate;
 var skillHistoryTemplate;
 
 var dice = new DiceRoller();
@@ -28,6 +32,7 @@ $(document).ready(
 		promises.push(loadWeaponsFromServer());
 		promises.push(loadDefenseFactorsFromServer());
 		promises.push(loadWizardSpellsFromServer());
+		promises.push(loadNonMartialSkillsFromServer());
 		promises.push(loadCharFromServer());
 		$.when.apply($, promises).then(layoutPageAfterDataDownload, function() {
 			alert("Error loading character");
@@ -44,6 +49,7 @@ var layoutPageAfterDataDownload = function() {
 	xpHistoryTemplate = $('#xp_history_template').clone();
 	
 	weaponSkillTemplate = $('#weapon_skill_template').clone();
+	nonMartialSkillTemplate = $('#nonMartialSkill_template').clone();
 	skillHistoryTemplate = $('#skill_history_template').clone();
 
 	createFormFromModel();
@@ -78,6 +84,7 @@ var layoutPageAfterDataDownload = function() {
 	setupAttackModal();
 	setupDefenseModal();
 	setupWizardSpellModal();
+	setupNonMartialSkillModal();
 	initXpBuyTab();
 };
 
@@ -255,6 +262,22 @@ var loadWizardSpellsFromServer = function() {
 	);
 };
 
+var loadNonMartialSkillsFromServer = function() {
+	return $.get(
+		"/claymore/api/nonWeaponSkills?sort=skillId,name&size=1000", 
+		function(data) {
+			nonMartialSkillList = data._embedded.nonWeaponSkills;
+			for(var i=0; i< nonMartialSkillList.length; i++) {
+				var skill = nonMartialSkillList[i];
+				$('#nonMartialSkillModal_baseSkill').append($('<option>').text(skill.name).attr('value', skill.skillId));
+				nonMartialSkillMap[skill.skillId] = skill;
+			}
+			
+			console.log('Done loading non-martial skills');
+		}
+	);
+};
+
 var loadCharFromServer = function() {
 	return $.get(
 		"/claymore/api/characters/" + id, 
@@ -336,6 +359,7 @@ var updateDerivedFields = function() {
 	updateDefenses();
 	updateWizardSpells();
 	updateRogueAbilities();
+	updateNonMartialSkills();
 	updateXpBuyTab();
 	updateSkillBuyTab();
 	validateLevelUp();
