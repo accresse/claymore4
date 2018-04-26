@@ -297,6 +297,7 @@ var updateJsonView = function() {
 var updateDerivedFields = function() {
 	processXpBuys();
 	processSkillBuys();
+	processRogueBuys();
 	showRelaventClassSections();
 	
 	$("#character_name").text(character.name);
@@ -334,6 +335,7 @@ var updateDerivedFields = function() {
 	updateAttacks();
 	updateDefenses();
 	updateWizardSpells();
+	updateRogueAbilities();
 	updateXpBuyTab();
 	updateSkillBuyTab();
 	validateLevelUp();
@@ -346,6 +348,8 @@ var showRelaventClassSections = function() {
 	for (var className in character.classes) {
 		$(".visible_"+className).show();
 	}
+	//always show rogue section since everyone gets the abilities to some degree
+	$("#section_Rogue").show();
 };
 
 var updateHpCard = function() {
@@ -423,6 +427,31 @@ var processSkillBuys = function() {
 
 };
 
+var processRogueBuys = function() {
+	
+	character.levelToRogueBuyMap = {};
+
+	for(var name in rogueBuyProcessors) {
+		var processor = rogueBuyProcessors[name];
+		processor.init();
+	}
+
+//	for(var i = 0; i < character.rogueBuys.length; i++) {
+//		var skillBuy = character.rogueBuys[i];
+//		var processor = rogueBuyProcessors[rogueBuy.category];
+//		if(processor) {
+//			processor.processBuy(rogueBuy);
+//		}
+//		indexRogueBuy(rogueBuy);
+//	}
+//	
+//	for(var name in rogueBuyProcessors) {
+//		var processor = rogueBuyProcessors[name];
+//		processor.postProcess();
+//	}
+
+};
+
 //{level: {category: {ability: buy}}
 var indexSkillBuy = function(skillBuy) {
 	var level = skillBuy.level;
@@ -462,3 +491,14 @@ var calculateValWithOverride = function(overrideVal, baseVal) {
 	return retVal;
 };
 
+var updateRogueAbilities = function() {
+	$("#rogue_prestidigitation").text(character.prestidigitation+"%");
+	$("#rogue_stealth").text(character.stealth+"%");
+	$("#rogue_mechanical").text(character.mechanical+"%");
+	$("#rogue_mechanicalDetection").text(character.mechanicalDetection+"%");
+	$("#rogue_scaleSheerSurface").text(character.scaleSheerSurface+"%");
+	$("#rogue_perception").text(character.perception+"%");
+	$("#rogue_detectNoise").text(character.detectNoise+"%");
+	$("#rogue_tracking").text(character.tracking+"%");
+	
+};

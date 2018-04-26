@@ -364,30 +364,26 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
                             <th class="text-center">Mech.</th>
                             <th class="text-center">MD</th>
                             <th class="text-center">SSS</th>
-                            <th class="text-center">Perc.</th>
                             <th class="text-center">DN</th>
                             <th class="text-center">Track</th>
-                            <th class="text-center">Max Lift</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                            <td class="text-center"><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_prestidigitation" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_stealth" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_mechanical" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_mechanicalDetection" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_scaleSheerSurface" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_detectNoise" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
+                            <td class="text-center"><a href="#" id="rogue_tracking" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
                   <hr>
-                  <div class="row">
+                  <div class="row visible_Rogue" style="display:none;">
                     <div class="col-md-12">
                       <div class="row">
                         <div class="col-md-2 text-right font-weight-bold">Hit Bonus:</div>
@@ -1523,6 +1519,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
   <script src="../js/claymore_data.js"></script>
   <script src="../js/claymore_xpbuy.js"></script>
   <script src="../js/claymore_skillbuy.js"></script>
+  <script src="../js/claymore_roguebuy.js"></script>
   <script src="../js/claymore_attack.js"></script>
   <script src="../js/claymore_defense.js"></script>
   <script src="../js/claymore_wizardSpell.js"></script>
