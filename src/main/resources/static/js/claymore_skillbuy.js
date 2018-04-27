@@ -2,6 +2,14 @@ class SkillPointsSoldProcessor extends CharacterProcessor {
 
 	init() {
 		character.spendableSkillPoints = character.skillPoints;
+		
+		if(character.nonMartialSkills) {
+			for(var i=0; i<character.nonMartialSkills.length; i++) {
+				if(character.nonMartialSkills[i].points) {
+					character.spendableSkillPoints -= character.nonMartialSkills[i].points;
+				}
+			}
+		}
 	}
 	
 	processBuy(skillBuy){
