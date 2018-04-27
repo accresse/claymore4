@@ -406,26 +406,6 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
               <div class="card">
                 <div class="card-header">
                 
-                
-                <!-- 
-                  <div class="row">
-                    <div class="col-md-7">Attack</div>
-                    <div class="col-md-2">
-                      MWS<a id="character_mws_plan" href="#"><sup>[?]</sup></a>:
-                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_mws" value="--%"></button>
-                    </div>
-                    <div class="col-md-2">
-                      BWS<a id="character_bws_plan" href="#"><sup>[?]</sup></a>:
-                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_bws" value="--%"></button>
-                    </div>
-                    <div class="col-md-1">
-                      <a href="#" data-toggle="modal" data-target="#attackModal" data-title="New Attack"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
-                    </div>
-                  </div>
-                 -->
-
-
-
                   <div class="row">
                     <div class="col-md-7">Wizard</div>
                     <div class="col-md-2">
@@ -553,50 +533,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
               </div>
             </div>
           </div>
-          <div class="row my-1">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-header">Martial Skills</div>
-                <div class="card-body">
-                  <table class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th>Skill</th>
-                        <th>Points</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#">Future Skill Here</a></td>
-                        <td>10</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-header">Non-Martial Skills</div>
-                <div class="card-body">
-                  <table class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th>Skill</th>
-                        <th>Check</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#">Future Skill Here</a></td>
-                        <td><a href="#" class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll">40%</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <div id="details" class="tab-pane">
           <div class="py-0">
@@ -1176,7 +1113,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
                       </thead>
                       <tbody id="nonMartialSkill_table">
                         <tr id="nonMartialSkill_template" class="text-center" style="display:none">
-                          <td><span class="nonMartialSkill_name">--</span></td>
+                          <td><a href="#" class="nonMartialSkill_name" data-toggle="modal" data-target="#nonMartialSkillModal" data-title="Edit Skill"></a></td>
                           <td><input type="text" class="skillBuyInput nonMartialSkill_spend text-right" size="4" maxlength="2" value="0"/></td>
                           <td><span class="nonMartialSkill_total">0</span></td>
                           <td><span class="nonMartialSkill_formula">--</span></td>

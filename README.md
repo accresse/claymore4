@@ -25,8 +25,10 @@
 	
 	convert sheet.jsp to html
 	
-	Notes
+	Free form Notes
 	
 	"Are you sure you want to leave without saving?"
 	
 	Racial adjustments
+	
+	Generate PC Summary in format for DM

@@ -2,7 +2,7 @@ insert into claymore.non_weapon_skill (name, formula) values ('Acrobatics','(Dex
 insert into claymore.non_weapon_skill (name, formula) values ('Ancient Lang-Arcane*','1');
 insert into claymore.non_weapon_skill (name, formula) values ('Ancient Lang-Vox','(Rc*5) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Ancient Language','(Rc*5) /10');
-insert into claymore.non_weapon_skill (name, formula) values ('Animal training','(PS*4+Rc x2) /10');
+insert into claymore.non_weapon_skill (name, formula) values ('Animal training','(PS*4+Rc*2) /10');--
 insert into claymore.non_weapon_skill (name, formula) values ('Ambidexterity','(Dex*2) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Apothecary','(Rc*2 – 6) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Appraise','(PS*4) /10');
@@ -24,7 +24,7 @@ insert into claymore.non_weapon_skill (name, formula) values ('Brewing','(Rc*10)
 insert into claymore.non_weapon_skill (name, formula) values ('Camouflage','(PS+Dex) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Carpentry','(PS*9) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Clay working','(PS*6+Dex*3) /10');
-insert into claymore.non_weapon_skill (name, formula) values ('Cobbling','(PSx 8) /10');
+insert into claymore.non_weapon_skill (name, formula) values ('Cobbling','(PS*8) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Conceal combat ability','(Dex*3+Wit) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Conceal Trail','(Wit+PS – 16) /10');
 insert into claymore.non_weapon_skill (name, formula) values ('Cook','(PS*8+Rc*2) /10');

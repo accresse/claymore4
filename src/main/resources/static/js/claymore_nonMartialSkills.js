@@ -4,12 +4,15 @@ var setupNonMartialSkillModal = function() {
 		
 		skill.name = $('#nonMartialSkillModal_name').val();
 		skill.baseSkillId = $('#nonMartialSkillModal_baseSkill').val();
-		skill.formula = $('#nonMartialSkillModal_formual').val();
+		skill.formula = $('#nonMartialSkillModal_formula').val();
+		skill.points = 0;
 			  
 		var index = $('#nonMartialSkillModal_index').val();
 	    if(index!="") {
 	    		index=parseInt(index);
-	    		character.nonMartialSkills[index] = skill;
+	    		character.nonMartialSkills[index].name = skill.name;
+	    		character.nonMartialSkills[index].baseSkillId = skill.baseSkillId;
+	    		character.nonMartialSkills[index].formula = skill.formula;
 	    } else {
 	    		character.nonMartialSkills.push(skill);
 	    }
@@ -45,7 +48,7 @@ var setupNonMartialSkillModal = function() {
 		  
 		  if(index || index==0) {
 			  var skill = character.nonMartialSkills[index];
-			  var baseSkill = getNonMartialSkill(skil.baseSkillId);
+			  var baseSkill = getNonMartialSkill(skill.baseSkillId);
 			  
 			  $('#nonMartialSkillModal_index').val(index);
 			  
@@ -53,9 +56,9 @@ var setupNonMartialSkillModal = function() {
 			  $('#nonMartialSkillModal_baseSpell').change();
 			  
 			  $('#nonMartialSkillModal_name').val(skill.name);
-			  $('#nonMartialSkillModal_level').val(skill.formula);
+			  $('#nonMartialSkillModal_formula').val(skill.formula);
 
-			  $('#wizardSpellModal_delete').show();
+			  $('#nonMartialSkillModal_delete').show();
 		  }
 		}
 	);
@@ -95,7 +98,7 @@ var updateNonMartialSkills = function() {
 			check = 100;
 			row.find('.nonMartialSkill_formula').text("Free");
 		} else {
-			check = skill.points * evaluateCharacterFormula(formula); 
+			check = Math.floor(skill.points * evaluateCharacterFormula(formula)); 
 			row.find('.nonMartialSkill_formula').text(formula);
 		}
 		row.find('.nonMartialSkill_check').text(check+"%");

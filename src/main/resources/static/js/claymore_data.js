@@ -443,7 +443,7 @@ var evaluateCharacterFormula = function(formula) {
 	if(formulaCheck.exec(replacedFormula)) {
 		return eval(replacedFormula);
 	} else {
-		console.alert("Bad formula: "+formula);
+		console.log("Bad formula: "+formula);
 		return null;
 	}
 };
