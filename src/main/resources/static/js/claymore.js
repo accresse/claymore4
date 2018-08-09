@@ -52,6 +52,12 @@ var layoutPageAfterDataDownload = function() {
 	nonMartialSkillTemplate = $('#nonMartialSkill_template').clone();
 	skillHistoryTemplate = $('#skill_history_template').clone();
 
+	//wizard stuff
+	for(var i=0; i< WIZARD_SCHOOLS.length; i++) {
+		var school = WIZARD_SCHOOLS[i];
+		$('.wizardSchool_select').append($('<option>').text(school).attr('value', school).attr('class','wizardSchool_option_'+school));
+	}
+
 	createFormFromModel();
 	initSkillBuyTab();
 	updateJsonView();
@@ -75,12 +81,6 @@ var layoutPageAfterDataDownload = function() {
 		return false;
 	});	
 	
-	//wizard stuff
-	for(var i=0; i< WIZARD_SCHOOLS.length; i++) {
-		var school = WIZARD_SCHOOLS[i];
-		$('.wizardSchool_select').append($('<option>').text(school).attr('value', school).attr('class','wizardSchool_option_'+school));
-	}
-
 	setupAttackModal();
 	setupDefenseModal();
 	setupWizardSpellModal();

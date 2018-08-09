@@ -501,6 +501,9 @@ var updateXpBuyTab = function() {
 		var castingLevelBuy = getXpBuy(character.level,'WizardCastingLevel');
 		if(castingLevelBuy) {
 			$('#xpShop_class_wizard_casting_level_'+castingLevelBuy.points).prop('checked',true);
+			if(castingLevelBuy.ability) {				
+				$('#xpShop_class_wizard_casting_level_school .wizardSchool_option_'+castingLevelBuy.ability).prop('selected',true);
+			}
 		}
 	}
 

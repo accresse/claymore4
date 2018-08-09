@@ -407,7 +407,9 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
                 <div class="card-header">
                 
                   <div class="row">
-                    <div class="col-md-7">Wizard</div>
+                    <div class="col-md-2">Wizard</div>
+                    <div class="col-md-2">Casting Level: <span id="wizard_spells_casting_level">---</span></div>
+                    <div class="col-md-3"></div>
                     <div class="col-md-2">
                       Learn Spell:
                       <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_learn_spell" value="--%"></button>

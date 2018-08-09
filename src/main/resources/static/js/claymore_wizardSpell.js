@@ -136,16 +136,23 @@ var updateWizardSpellFilter = function(){
 var updateWizardSpells = function() {
 	var minCastingLevel = 10;
 	var maxCastingLevel = 0;
-	var levelToSchoolMap = [[],[],[],[],[],[],[],[]];
 	for(var school in character.wizardCastingLevels) {
 		var schoolLevel = character.wizardCastingLevels[school];
-		levelToSchoolMap[schoolLevel].push(school);
 		minCastingLevel = Math.min(minCastingLevel,schoolLevel);
 		maxCastingLevel = Math.max(maxCastingLevel,schoolLevel);
 	}
-	var slots = WIZARD_SPELL_SLOTS[maxCastingLevel];
+	var castingLevels = minCastingLevel;
+	if(minCastingLevel != maxCastingLevel) {
+		castingLevels += " / " + maxCastingLevel;
+	}
+	$('#wizard_spells_casting_level').text(castingLevels);
+	
+	var minSlots = WIZARD_SPELL_SLOTS[minCastingLevel];
+	var maxSlots = WIZARD_SPELL_SLOTS[maxCastingLevel];
 	for(var i=0; i<8; i++) {
-		var val = slots[i] ? slots[i] : 0;
+		var minVal = minSlots[i] ? minSlots[i] : 0;
+		var maxVal = maxSlots[i] ? maxSlots[i] : 0;
+		var val = (maxVal==minVal) ? maxVal : minVal + "/" + (maxVal-minVal);
 		$('#wizard_spells_slots_'+i).text(val);
 	}
 
