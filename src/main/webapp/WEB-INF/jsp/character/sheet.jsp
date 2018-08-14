@@ -1166,7 +1166,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
         <div id="json" class="tab-pane">
           <div class="py-0">
             <div class="container">
-              <textarea class="form-control" id="json_text" style="min-height: 600px;" disabled="disabled"></textarea>
+              <textarea class="form-control" id="json_text" style="min-height: 600px;"></textarea>
             </div>
           </div>
         </div>

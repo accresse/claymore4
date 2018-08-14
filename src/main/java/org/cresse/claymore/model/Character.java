@@ -74,6 +74,7 @@ public class Character {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name = "character_id")
 	@RestResource(exported=false)
+	@OrderBy("level, name")
 	private List<CustomizedWizardSpell> wizardSpells = new LinkedList<>();
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)

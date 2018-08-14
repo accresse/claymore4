@@ -127,10 +127,12 @@ var validateLevelUp = function() {
 };
 
 var saveCharacter = function() {
+	//var data = JSON.stringify(character, null, 2);
+	var data = $('#json_text').val();
 	var jqxhr = $.ajax({
 			type: "PUT",
 			url: "/claymore/api/characters/" + id, 
-			data: JSON.stringify(character, null, 2), 
+			data: data,
 			success: function(data) {
 				alert('Character has been saved.');
 			},
