@@ -222,6 +222,20 @@ class WizardCastingLevelProcessor extends CharacterProcessor {
 
 }
 
+class MiscAbilityProcessor extends CharacterProcessor {
+	init() {
+		character.miscAbilities = {};
+	}
+	
+	processBuy(xpBuy) {
+		var miscAbility = xpBuy.ability.split(',');
+		for(var i=0; i<miscAbility.length; i++){			
+			character.miscAbilities[miscAbility[i]]=true;
+		}
+	}
+}
+
+
 var xpBuyProcessors = {
 	XP: new XpProcessor(),
 	HP: new HpProcessor(),
@@ -232,7 +246,8 @@ var xpBuyProcessors = {
 	WeaponSkill: new WeaponSkillProcessor(),
 	WeaponMastery: new WeaponMasteryProcessor(),
 	SkillPoints: new SkillPointsEarnedProcessor(),
-	WizardCastingLevel: new WizardCastingLevelProcessor()
+	WizardCastingLevel: new WizardCastingLevelProcessor(),
+	MiscAbility: new MiscAbilityProcessor()
 };
 
 //Start code for the XP Buy tab
@@ -290,6 +305,7 @@ var addCurrentXpBuys = function() {
 	var addedClasses = [];
 	var totalXp = 0;
 	
+	//handle selected classes
 	for(var className in CLASS_COST_TABLE) {
 		var checkbox = $('#xpShop_class_'+className);
 		if(checkbox.prop('checked')) {
@@ -301,6 +317,7 @@ var addCurrentXpBuys = function() {
 			}
 		}
 	}
+	
 	if(totalXp) {		
 		character.xpBuys.push({level: character.level, points: totalXp, category: "Class", ability: addedClasses.toString()});			
 	}
@@ -313,6 +330,24 @@ var addCurrentXpBuys = function() {
 		var selectedCastingLevelPoints = parseInt($('input[name=xpShop_class_wizard_casting_level]:checked').val());
 		character.xpBuys.push({level: character.level, points: selectedCastingLevelPoints, category: "WizardCastingLevel", ability: getSelectedSchools(selectedCastingLevelPoints).toString()});
 	}
+	
+	var addedAbilities = [];
+	var abilitiesXp = 0;
+	//handle selected misc abilities
+	$('.misc_ability_check:checked').each(
+		function(){
+			var checkbox = $(this);
+			if(!checkbox.prop('disabled')) {
+				var xp = checkbox.data('xp');
+				addedAbilities.push(checkbox.val());
+				abilitiesXp += xp;
+			}
+		}
+	);
+	if(abilitiesXp) {		
+		character.xpBuys.push({level: character.level, points: abilitiesXp, category: "MiscAbility", ability: addedAbilities.toString()});
+	}
+
 };
 
 var getSelectedResists = function(selectedResistPoints) {
@@ -465,8 +500,8 @@ var updateXpBuyTab = function() {
 	}
 	updateSecondaryWeapon();
 	
+	//select and disable all the class checkboxes for classes we already have
 	for(var charClass in character.classes) {
-		//disable all the class checkboxes for classes we already have
 		$('#xpShop_class_'+charClass).prop('checked',true).prop('disabled','disabled');
 	}
 	//but if class was added this level, then enable checkbox
@@ -476,6 +511,20 @@ var updateXpBuyTab = function() {
 		for(var i=0; i<currentLevelClasses.length; i++) {
 			var charClass = currentLevelClasses[i];
 			$('#xpShop_class_'+charClass).removeProp('disabled');
+		}
+	}
+	
+	//select and disable all the misc ability checkboxes for abilities we already have
+	for(var ability in character.miscAbilities) {
+		$('#misc_ability_'+ability+' .misc_ability_check').prop('checked',true).prop('disabled','disabled');
+	}
+	//but if misc ability was added this level, then enable checkbox
+	var currentLevelMiscAbilityBuy = getXpBuy(character.level,'MiscAbility');
+	if(currentLevelMiscAbilityBuy) {
+		var currentLevelMiscAbilities = currentLevelMiscAbilityBuy.ability.split(',');
+		for(var i=0; i<currentLevelMiscAbilities.length; i++) {
+			var ability = currentLevelMiscAbilities[i];
+			$('#misc_ability_'+ability+' .misc_ability_check').removeProp('disabled');
 		}
 	}
 	

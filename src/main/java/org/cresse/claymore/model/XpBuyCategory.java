@@ -3,6 +3,6 @@ package org.cresse.claymore.model;
 public enum XpBuyCategory {
 
 	HP, WeaponSkill, SkillPoints, SavingThrow, Class,
-	WeaponMastery, ClassSavingThrow, FighterClassAbility, WizardCastingLevel, WizardClassAbility;
+	WeaponMastery, ClassSavingThrow, WizardCastingLevel, MiscAbility;
 
 }

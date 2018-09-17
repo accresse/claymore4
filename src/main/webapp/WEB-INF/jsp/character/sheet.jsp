@@ -1008,12 +1008,62 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
                             </tr>
                           </thead>
                           <tbody id="xpShop_class_wizard_misc">
-                            <tr id="xpShop_wizard_misc_row_template" style="display: none;">
-                              <td class="text-center"><input id="xpShop_wizard_misc_" type="checkbox"></td>
-                              <td class="text-center xpShop_wizard_misc_xp">xp</td>
-                              <td class="text-center xpShop_wizard_misc_ability">Ability</td>
-                              <td class="text-center xpShop_wizard_misc_prereq">None</td>
+                            <tr id="misc_ability_wizard_0">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_0" data-xp="1"></td>
+                              <td class="text-center misc_ability_xp">1</td>
+                              <td class="text-center misc_ability_ability">+15 to Idn, -5 to
+                                <select id="xpShop_wizard_misc_res">
+                                  <option value="agility">Agl</option>
+                                  <option value="fortitude">Fot</option>
+                                  <option value="might">Mit</option>
+                                  <option value="will">Wil</option>
+                                </select>
+                              </td>
+                              <td class="text-center misc_ability_prereq">None</td>
                             </tr>
+                            <tr id="misc_ability_wizard_1">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_1" data-xp="2"></td>
+                              <td class="text-center misc_ability_xp">2</td>
+                              <td class="text-center misc_ability_ability">-5% Res to <select id="xpShop_wizard_misc_school" class="wizardSchool_select"></select></td>
+                              <td class="text-center misc_ability_prereq">Casting Level 5</td>
+                            </tr>
+                            <tr id="misc_ability_wizard_2">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_2" data-xp="1"></td>
+                              <td class="text-center misc_ability_xp">1</td>
+                              <td class="text-center misc_ability_ability">Learn spell +40%, low-level spells</td>
+                              <td class="text-center misc_ability_prereq">Casting Level 18</td>
+                            </tr>
+                            <tr id="misc_ability_wizard_3">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_3" data-xp="2"></td>
+                              <td class="text-center misc_ability_xp">2</td>
+                              <td class="text-center misc_ability_ability">Cast any number of 0th level spells</td>
+                              <td class="text-center misc_ability_prereq">Casting Level 20</td>
+                            </tr>
+                            <tr id="misc_ability_wizard_4">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_4" data-xp="2"></td>
+                              <td class="text-center misc_ability_xp">2</td>
+                              <td class="text-center misc_ability_ability">Free cast 1st level spells</td>
+                              <td class="text-center misc_ability_prereq">Casting Level 22</td>
+                            </tr>
+                            <tr id="misc_ability_wizard_5">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_5" data-xp="2"></td>
+                              <td class="text-center misc_ability_xp">2</td>
+                              <td class="text-center misc_ability_ability">Cast 1st level spells w/o V, S components</td>
+                              <td class="text-center misc_ability_prereq">Casting Level 22</td>
+                            </tr>
+                            <tr id="misc_ability_wizard_6">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_6" data-xp="3"></td>
+                              <td class="text-center misc_ability_xp">3</td>
+                              <td class="text-center misc_ability_ability">Free cast 2nd level spells</td>
+                              <td class="text-center misc_ability_prereq">Casting Level 24</td>
+                            </tr>
+                            <tr id="misc_ability_wizard_7">
+                              <td class="text-center"><input class="xpBuyInput misc_ability_check" type="checkbox" value="wizard_7" data-xp="4"></td>
+                              <td class="text-center misc_ability_xp">4</td>
+                              <td class="text-center misc_ability_ability">Weak opponents, -20% Res</td>
+                              <td class="text-center misc_ability_prereq">Casting Level 30</td>
+                            </tr>
+
                           </tbody>
                         </table>
                       </div>
