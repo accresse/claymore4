@@ -136,70 +136,70 @@ var DEX_TABLE = [
 
 var PS_TABLE = [
 	{},
-	{skillPoints:-6, wilMod:-25, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-6, wilMod:-20, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-5, wilMod:-17, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-4, wilMod:-13, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-3, wilMod:-8, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-3, wilMod:-5, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-2, wilMod:-2, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-2, wilMod:-1, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-2, wilMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-1, wilMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-1, wilMod:0, bonusPriestSpells:{}, learnSpell:25},
-	{skillPoints:-1, wilMod:0, bonusPriestSpells:{}, learnSpell:26},
-	{skillPoints:0, wilMod:0, bonusPriestSpells:{}, learnSpell:28},
-	{skillPoints:0, wilMod:0, bonusPriestSpells:{}, learnSpell:29},
-	{skillPoints:0, wilMod:0, bonusPriestSpells:{}, learnSpell:30},
-	{skillPoints:1, wilMod:0, bonusPriestSpells:{}, learnSpell:31},
-	{skillPoints:1, wilMod:1, bonusPriestSpells:{}, learnSpell:32},
-	{skillPoints:1, wilMod:2, bonusPriestSpells:{1:1}, learnSpell:33},
-	{skillPoints:1, wilMod:5, bonusPriestSpells:{1:1}, learnSpell:34},
-	{skillPoints:2, wilMod:8, bonusPriestSpells:{1:1}, learnSpell:36},
-	{skillPoints:2, wilMod:11, bonusPriestSpells:{1:1}, learnSpell:40},
-	{skillPoints:2, wilMod:13, bonusPriestSpells:{1:1,2:1}, learnSpell:48},
-	{skillPoints:3, wilMod:17, bonusPriestSpells:{1:1,2:1}, learnSpell:54},
-	{skillPoints:3, wilMod:20, bonusPriestSpells:{1:1,2:1}, learnSpell:64},
-	{skillPoints:3, wilMod:22, bonusPriestSpells:{1:1,2:1,3:1}, learnSpell:75},
-	{skillPoints:4, wilMod:23, bonusPriestSpells:{1:1,2:1,3:1}, learnSpell:100},
-	{skillPoints:4, wilMod:25, bonusPriestSpells:{1:1,2:1,3:1,4:1}, learnSpell:125},
-	{skillPoints:5, wilMod:27, bonusPriestSpells:{1:2,2:1,3:1,4:1,5:1}, learnSpell:125},
-	{skillPoints:8, wilMod:33, bonusPriestSpells:{1:2,2:2,3:1,4:1,5:1,6:1}, learnSpell:125},
-	{skillPoints:14, wilMod:37, bonusPriestSpells:{1:2,2:2,3:2,4:1,5:1,6:1,7:1}, learnSpell:125}
+	{skillPoints:-6, wilMod:-25, chargeBonus:0, learnSpell:0},
+	{skillPoints:-6, wilMod:-20, chargeBonus:0, learnSpell:0},
+	{skillPoints:-5, wilMod:-17, chargeBonus:0, learnSpell:0},
+	{skillPoints:-4, wilMod:-13, chargeBonus:0, learnSpell:0},
+	{skillPoints:-3, wilMod:-8, chargeBonus:0, learnSpell:0},
+	{skillPoints:-3, wilMod:-5, chargeBonus:0, learnSpell:0},
+	{skillPoints:-2, wilMod:-2, chargeBonus:0, learnSpell:0},
+	{skillPoints:-2, wilMod:-1, chargeBonus:0, learnSpell:0},
+	{skillPoints:-2, wilMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:-1, wilMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:-1, wilMod:0, chargeBonus:0, learnSpell:25},
+	{skillPoints:-1, wilMod:0, chargeBonus:0, learnSpell:26},
+	{skillPoints:0, wilMod:0, chargeBonus:0, learnSpell:28},
+	{skillPoints:0, wilMod:0, chargeBonus:0, learnSpell:29},
+	{skillPoints:0, wilMod:0, chargeBonus:0, learnSpell:30},
+	{skillPoints:1, wilMod:0, chargeBonus:0, learnSpell:31},
+	{skillPoints:1, wilMod:1, chargeBonus:0, learnSpell:32},
+	{skillPoints:1, wilMod:2, chargeBonus:5, learnSpell:33},
+	{skillPoints:1, wilMod:5, chargeBonus:5, learnSpell:34},
+	{skillPoints:2, wilMod:8, chargeBonus:5, learnSpell:36},
+	{skillPoints:2, wilMod:11, chargeBonus:5, learnSpell:40},
+	{skillPoints:2, wilMod:13, chargeBonus:10, learnSpell:48},
+	{skillPoints:3, wilMod:17, chargeBonus:10, learnSpell:54},
+	{skillPoints:3, wilMod:20, chargeBonus:15, learnSpell:64},
+	{skillPoints:3, wilMod:22, chargeBonus:20, learnSpell:75},
+	{skillPoints:4, wilMod:23, chargeBonus:25, learnSpell:100},
+	{skillPoints:4, wilMod:25, chargeBonus:50, learnSpell:125},
+	{skillPoints:5, wilMod:27, chargeBonus:100, learnSpell:125},
+	{skillPoints:8, wilMod:33, chargeBonus:150, learnSpell:125},
+	{skillPoints:14, wilMod:37, chargeBonus:200, learnSpell:125}
 ];
 
 var RC_TABLE = [
 	{},
-	{skillPoints:-65, idnMod:-25, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-60, idnMod:-20, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-55, idnMod:-17, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-50, idnMod:-13, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-45, idnMod:-11, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-40, idnMod:-8, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-35, idnMod:-5, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-30, idnMod:-2, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-20, idnMod:-1, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-15, idnMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-10, idnMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-6, idnMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:-4, idnMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:0, idnMod:0, bonusPriestSpells:{}, learnSpell:0},
-	{skillPoints:2, idnMod:0, bonusPriestSpells:{1:1}, learnSpell:5},
-	{skillPoints:4, idnMod:0, bonusPriestSpells:{1:1}, learnSpell:6},
-	{skillPoints:6, idnMod:1, bonusPriestSpells:{1:1}, learnSpell:7},
-	{skillPoints:8, idnMod:2, bonusPriestSpells:{1:1}, learnSpell:8},
-	{skillPoints:10, idnMod:5, bonusPriestSpells:{1:1}, learnSpell:10},
-	{skillPoints:12, idnMod:8, bonusPriestSpells:{1:1,2:1}, learnSpell:12},
-	{skillPoints:16, idnMod:11, bonusPriestSpells:{1:1,2:1}, learnSpell:14},
-	{skillPoints:20, idnMod:13, bonusPriestSpells:{1:1,2:1}, learnSpell:16},
-	{skillPoints:25, idnMod:17, bonusPriestSpells:{1:1,2:1,3:1}, learnSpell:18},
-	{skillPoints:30, idnMod:20, bonusPriestSpells:{1:2,2:1,3:1}, learnSpell:20},
-	{skillPoints:50, idnMod:22, bonusPriestSpells:{1:2,2:1,3:1,4:1}, learnSpell:22},
-	{skillPoints:70, idnMod:23, bonusPriestSpells:{1:2,2:2,3:1,4:1}, learnSpell:25},
-	{skillPoints:100, idnMod:25, bonusPriestSpells:{1:2,2:2,3:1,4:1,5:1}, learnSpell:30},
-	{skillPoints:150, idnMod:27, bonusPriestSpells:{1:2,2:2,3:2,4:1,5:1}, learnSpell:35},
-	{skillPoints:200, idnMod:23, bonusPriestSpells:{1:2,2:2,3:2,4:1,5:1,6:1,7:1}, learnSpell:40},
-	{skillPoints:300, idnMod:27, bonusPriestSpells:{1:2,2:2,3:2,4:2,5:2,6:1,7:1}, learnSpell:50}
+	{skillPoints:-65, idnMod:-25, chargeBonus:0, learnSpell:0},
+	{skillPoints:-60, idnMod:-20, chargeBonus:0, learnSpell:0},
+	{skillPoints:-55, idnMod:-17, chargeBonus:0, learnSpell:0},
+	{skillPoints:-50, idnMod:-13, chargeBonus:0, learnSpell:0},
+	{skillPoints:-45, idnMod:-11, chargeBonus:0, learnSpell:0},
+	{skillPoints:-40, idnMod:-8, chargeBonus:0, learnSpell:0},
+	{skillPoints:-35, idnMod:-5, chargeBonus:0, learnSpell:0},
+	{skillPoints:-30, idnMod:-2, chargeBonus:0, learnSpell:0},
+	{skillPoints:-20, idnMod:-1, chargeBonus:0, learnSpell:0},
+	{skillPoints:-15, idnMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:-10, idnMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:-6, idnMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:-4, idnMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:0, idnMod:0, chargeBonus:0, learnSpell:0},
+	{skillPoints:2, idnMod:0, chargeBonus:5, learnSpell:5},
+	{skillPoints:4, idnMod:0, chargeBonus:5, learnSpell:6},
+	{skillPoints:6, idnMod:1, chargeBonus:5, learnSpell:7},
+	{skillPoints:8, idnMod:2, chargeBonus:10, learnSpell:8},
+	{skillPoints:10, idnMod:5, chargeBonus:10, learnSpell:10},
+	{skillPoints:12, idnMod:8, chargeBonus:10, learnSpell:12},
+	{skillPoints:16, idnMod:11, chargeBonus:15, learnSpell:14},
+	{skillPoints:20, idnMod:13, chargeBonus:20, learnSpell:16},
+	{skillPoints:25, idnMod:17, chargeBonus:25, learnSpell:18},
+	{skillPoints:30, idnMod:20, chargeBonus:50, learnSpell:20},
+	{skillPoints:50, idnMod:22, chargeBonus:100, learnSpell:22},
+	{skillPoints:70, idnMod:23, chargeBonus:150, learnSpell:25},
+	{skillPoints:100, idnMod:25, chargeBonus:200, learnSpell:30},
+	{skillPoints:150, idnMod:27, chargeBonus:250, learnSpell:35},
+	{skillPoints:200, idnMod:23, chargeBonus:300, learnSpell:40},
+	{skillPoints:300, idnMod:27, chargeBonus:400, learnSpell:50}
 ];
 
 var WIT_TABLE = [
@@ -245,10 +245,20 @@ var UNSKILLED_TABLE = {
 };
 
 var CLASS_COST_TABLE = {
-		Fighter:1,
+		Fighter:3,
 		Priest:6,
 		Rogue:3,
 		Wizard:10
+};
+
+var RACE_TABLE = {
+		'Human':{'bonusSkillPoints': 0, 'mightMod': 0, 'tMod':0, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': 0, 'mwsMod':0, 'bwsMod':0},
+		'Dwarf':{'bonusSkillPoints': 40, 'mightMod': 10, 'tMod':1, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': -10, 'mwsMod':0, 'bwsMod':0},
+		'Elf':{'bonusSkillPoints': 5, 'mightMod': 0, 'tMod':0, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': 20, 'mwsMod':0, 'bwsMod':0},
+		'Gnome':{'bonusSkillPoints': 20, 'mightMod': 0, 'tMod':0, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': 0, 'mwsMod':0, 'bwsMod':0},
+		'Half_Elf':{'bonusSkillPoints': 0, 'mightMod': 0, 'tMod':0, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': 5, 'mwsMod':0, 'bwsMod':0},
+		'Halfling':{'bonusSkillPoints': 27, 'mightMod': 0, 'tMod':0, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': 0, 'mwsMod':-15, 'bwsMod':15},
+		'Hobgoblin':{'bonusSkillPoints': 20, 'mightMod': 0, 'tMod':0, 'fotMod': 0, 'aglMod': 0, 'wilMod': 0, 'idnMod': 0, 'percMod': 5, 'mwsMod':0, 'bwsMod':0},
 };
 
 var WEAPON_GROUP_COST_TABLE = {
@@ -329,6 +339,10 @@ var getRecallMods = function() {
 
 var getWitMods = function() {
 	return WIT_TABLE[character.wit];
+};
+
+var getRacialMods = function() {
+	return RACE_TABLE[character.race];
 };
 
 var getWeaponMasteryLevel = function(weaponGroup) {
@@ -426,6 +440,48 @@ var WIZARD_SPELL_SLOTS = [
 	[14,6,6,5,5,4,4,2],
 	[18,6,6,6,5,5,4,3]//30
 ];
+
+var PRIEST_RAMIFYING_LEVEL = [
+	[0,0,0],//0
+	[0,0,0],
+	[2,0,0],
+	[3,0,0],
+	[3,0,0],
+	[4,0,0],//5
+	[4,0,25],
+	[4,0,50],
+	[5,0,75],
+	[5,0,100],
+	[5,0,125],//10
+	[5,0,125],
+	[6,0,150],
+	[6,0,150],
+	[6,1,175],
+	[6,1,175],//15
+	[6,2,200],
+	[7,2,225],
+	[7,2,225],
+	[7,3,225],
+	[7,3,250],//20
+	[7,3,250],
+	[7,4,250],
+	[8,4,275],
+	[8,4,275],
+	[8,5,275],//25
+	[8,5,300],
+	[8,5,300],
+	[8,6,300],
+	[8,6,325],
+	[9,7,350]//30
+];
+
+var getPriestRamifyingLevelAbilities = function() {
+	return {
+		'signs': PRIEST_RAMIFYING_LEVEL[character.ramifyingLevel][0],
+		'wonders': PRIEST_RAMIFYING_LEVEL[character.ramifyingLevel][1],
+		'chargePercentage': PRIEST_RAMIFYING_LEVEL[character.ramifyingLevel][2]
+	};
+};
 
 var formulaCheck = /^[0-9 \+\-\*\/\(\)]*$/;
 

@@ -57,12 +57,12 @@ class ClassProcessor extends CharacterProcessor {
 
 class SavingThrowProcessor extends CharacterProcessor {
 	init() {
-		character.might=30 + getStrengthMods().might;
-		character.fortitude=20 + getConstitutionMods().fotMod;
-		character.agility=20 + getDexterityMods().aglMod;
-		character.will=20 + getProblemSolvingMods().wilMod;
-		character.identity=20 + getRecallMods().idnMod;
-		character.perception=getWitMods().percMod;//TODO: add racial base and rogue abilities
+		character.might=30 + getStrengthMods().might + getRacialMods().mightMod;
+		character.fortitude=20 + getConstitutionMods().fotMod + getRacialMods().fotMod;
+		character.agility=20 + getDexterityMods().aglMod + getRacialMods().aglMod;
+		character.will=20 + getProblemSolvingMods().wilMod + getRacialMods().wilMod;
+		character.identity=20 + getRecallMods().idnMod + getRacialMods().idnMod;
+		character.perception=getWitMods().percMod + getRacialMods().percMod;//TODO: add rogue abilities
 		character.weightLimit=getConstitutionMods().weight;
 		character.maxLift=getStrengthMods().maxLift;
 	}
@@ -123,10 +123,16 @@ class WeaponSkillProcessor extends CharacterProcessor {
 			character.bwsPlan.push([PWS_BASE,'Base value for secondary skill']);
 		}
 
+		character.mws += getRacialMods().mwsMod;
+		character.bws += getRacialMods().bwsMod;
+		character.mwsPlan.push([getRacialMods().mwsMod,'Racial bonus']);
+		character.bwsPlan.push([getRacialMods().bwsMod,'Racial bonus']);
+		
 		character.mws += getStrengthMods().mwsMod;
 		character.bws += getDexterityMods().bwsMod;
 		character.mwsPlan.push([getStrengthMods().mwsMod,'STR bonus']);
 		character.bwsPlan.push([getDexterityMods().bwsMod,'DEX bonus']);
+		
 		var witBonus = getWitMods().weaponMod;
 		character.mws += witBonus;
 		character.bws += witBonus;
@@ -177,7 +183,7 @@ class WeaponMasteryProcessor extends CharacterProcessor {
 
 class SkillPointsEarnedProcessor extends CharacterProcessor {
 	init() {
-		character.skillPoints = SKILL_POINTS_BASE + getRecallMods().skillPoints;
+		character.skillPoints = SKILL_POINTS_BASE + getRecallMods().skillPoints + getRacialMods().bonusSkillPoints;
 	}
 	
 	postProcess() {
@@ -222,6 +228,34 @@ class WizardCastingLevelProcessor extends CharacterProcessor {
 
 }
 
+class PriestLevelProcessor extends CharacterProcessor {
+	init() {
+		character.chargePercent = getProblemSolvingMods().chargeBonus + getRecallMods().chargeBonus;
+		character.ramifyingLevel = 0;
+	}
+	
+	processBuy(xpBuy) {
+		var points = xpBuy.points;
+		switch(points) {
+			case 0:
+				break;
+			case 3:
+				character.chargePercent += 25;
+				break;
+			case 5:
+				character.ramifyingLevel++;
+				break;
+			case 8:
+				character.ramifyingLevel++;
+				character.chargePercent += 25;
+		}
+	}
+
+	postProcess() {
+		character.chargePercent += getPriestRamifyingLevelAbilities().chargePercentage;
+	}
+}
+
 class MiscAbilityProcessor extends CharacterProcessor {
 	init() {
 		character.miscAbilities = {};
@@ -247,6 +281,7 @@ var xpBuyProcessors = {
 	WeaponMastery: new WeaponMasteryProcessor(),
 	SkillPoints: new SkillPointsEarnedProcessor(),
 	WizardCastingLevel: new WizardCastingLevelProcessor(),
+	PriestLevel: new PriestLevelProcessor(),
 	MiscAbility: new MiscAbilityProcessor()
 };
 
@@ -329,6 +364,10 @@ var addCurrentXpBuys = function() {
 	if(selectedClasses.Wizard) {
 		var selectedCastingLevelPoints = parseInt($('input[name=xpShop_class_wizard_casting_level]:checked').val());
 		character.xpBuys.push({level: character.level, points: selectedCastingLevelPoints, category: "WizardCastingLevel", ability: getSelectedSchools(selectedCastingLevelPoints).toString()});
+	}
+	if(selectedClasses.Priest) {
+		var selectedPriestLevelPoints = parseInt($('input[name=xpShop_class_priest_level]:checked').val());
+		character.xpBuys.push({level: character.level, points: selectedPriestLevelPoints, category: "PriestLevel", ability: ""});
 	}
 	
 	var addedAbilities = [];
@@ -437,6 +476,9 @@ var levelUpXp = function() {
 
 	//reset wizard upgrades to zero
 	$('#xpShop_class_wizard_casting_level_0').prop('checked',true);
+	
+	//reset priest upgrades to zero
+	$('#xpShop_class_priest_level_0').prop('checked',true);
 	
 };
 
@@ -553,6 +595,13 @@ var updateXpBuyTab = function() {
 			if(castingLevelBuy.ability) {				
 				$('#xpShop_class_wizard_casting_level_school .wizardSchool_option_'+castingLevelBuy.ability).prop('selected',true);
 			}
+		}
+	}
+
+	if(character.classes.Priest) {		
+		var priestLevelBuy = getXpBuy(character.level,'PriestLevel');
+		if(priestLevelBuy) {
+			$('#xpShop_class_priest_level_'+priestLevelBuy.points).prop('checked',true);
 		}
 	}
 

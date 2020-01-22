@@ -1,32 +1,34 @@
 **TODO List**
 
-	Better way of displaying long spell notes
-	Restrict some spell slots to certain schools
+	Fighter
+		- misc abilities
 
-	Security - restrict which users can use app
-	Security - remember me
-
-	Martial skill buy
-	Martial skill display
-
-	Wizard misc abilities
-	Fighter misc abilities
-
-	Everything priest
-
-	Everything rogue
-
-	Populate defenses
-	Populate spells
-
-	Inventory
+	Priest
+		- roll for charges
+		- save charges used/remaining
+		- save granted miracles
 	
-	convert sheet.jsp to html
-	
-	Free form Notes
-	
-	"Are you sure you want to leave without saving?"
-	
-	Racial adjustments
-	
-	Generate PC Summary in format for DM
+	Wizard
+		- Better way of displaying long spell notes
+		- Restrict some spell slots to certain schools
+		- misc abilities
+
+	Rogue
+		- everything
+
+	Martial skill
+		- buy
+		- display
+
+	Security
+		- restrict which users can use app
+		- remember me
+		
+	Misc
+		- Populate defenses
+		- Populate spells
+		- Inventory
+		- convert sheet.jsp to html
+		- Free form Notes
+		- "Are you sure you want to leave without saving?"
+		- Generate PC Summary in format for DM

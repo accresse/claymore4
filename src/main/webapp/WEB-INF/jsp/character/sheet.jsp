@@ -342,7 +342,22 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
           <div id="section_Priest" class="row my-1 visible_Priest" style="display: none;">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header">Priest</div>
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-md-2">Priest</div>
+                    <div class="col-md-2">Ramifying: <span id="priest_ramifying_level">--</span></div>
+                    <div class="col-md-2">Signs: <span id="priest_sign_count">--</span></div>
+                    <div class="col-md-2">Wonders: <span id="priest_wonder_count">--</span></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                      Charge Percent:
+                      <button class="btn btn-sm btn-outline-primary rollable_d100" title="Press to Roll" id="character_charge_percent" value="---%"></button>
+                    </div>
+                    <div class="col-md-1">
+                      <a href="#" data-toggle="modal" data-target="#priestMiracleModal" data-title="New Miracle"><i class="fa fa-plus d-inline fa-lg pull-right"></i></a>
+                    </div>
+                  </div>
+                </div>
                 <div class="card-body">
                   <p class=" p-y-1">(Pencil and paper for now)</p>
                 </div>
@@ -822,24 +837,34 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
                             <tr>
                               <th class="text-center"></th>
                               <th class="text-center">XP</th>
-                              <th class="text-center">Casting Level</th>
+                              <th class="text-center">Ramifying Level</th>
+                              <th class="text-center">Charge Bonus</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_priest_spheres_0" name="xpShop_class_priest_spheres" checked="checked" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_level_0" class="xpBuyInput" name="xpShop_class_priest_level" value="0" checked="checked" /></td>
                               <td class="text-center">0</td>
-                              <td class="text-center">None</td>
+                              <td class="text-center">+0</td>
+                              <td class="text-center">+0%</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_priest_spheres_2" name="xpShop_class_priest_spheres" /></td>
-                              <td class="text-center">2</td>
-                              <td class="text-center">+1 to <select></select></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_level_3" class="xpBuyInput" name="xpShop_class_priest_level" value="3" /></td>
+                              <td class="text-center">3</td>
+                              <td class="text-center">+0</td>
+                              <td class="text-center">+25%</td>
                             </tr>
                             <tr>
-                              <td class="text-center"><input type="radio" id="xpShop_class_priest_spheres_5" name="xpShop_class_priest_spheres" /></td>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_level_5" class="xpBuyInput" name="xpShop_class_priest_level" value="5" /></td>
                               <td class="text-center">5</td>
-                              <td class="text-center">+1 to all spheres</td>
+                              <td class="text-center">+1</td>
+                              <td class="text-center">+0%</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><input type="radio" id="xpShop_class_priest_level_8" class="xpBuyInput" name="xpShop_class_priest_level" value="8" /></td>
+                              <td class="text-center">8</td>
+                              <td class="text-center">+1</td>
+                              <td class="text-center">+25%</td>
                             </tr>
                           </tbody>
                         </table>
@@ -1590,6 +1615,7 @@ input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
   <script src="../js/claymore_attack.js"></script>
   <script src="../js/claymore_defense.js"></script>
   <script src="../js/claymore_wizardSpell.js"></script>
+  <script src="../js/claymore_priest.js"></script>
   <script src="../js/claymore_nonMartialSkills.js"></script>
   <script src="../js/claymore.js"></script>
   <!-- 

@@ -117,12 +117,12 @@ var addNaturalDefense = function() {
 	row.find('.defense_name_cell').html('Natural');
 	row.find('.defense_ad').text('0');
 
-	var dexAd = getDexterityMods().aglMod;
+	var dexAd = getDexterityMods().aglMod + getRacialMods().aglMod;
 	row.find('.defense_adMod').text(dexAd);
 	
 	row.find('.defense_aa').text('0');
 
-	var conT = getConstitutionMods().tMod;
+	var conT = getConstitutionMods().tMod + getRacialMods().tMod;
 	row.find('.defense_t').text(conT);
 	
 	row.find('.defense_notes_cell').html('');

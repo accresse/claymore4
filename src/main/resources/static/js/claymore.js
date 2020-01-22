@@ -360,6 +360,7 @@ var updateDerivedFields = function() {
 	updateAttacks();
 	updateDefenses();
 	updateWizardSpells();
+	updatePriestAbilities();
 	updateRogueAbilities();
 	updateNonMartialSkills();
 	updateXpBuyTab();

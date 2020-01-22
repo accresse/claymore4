@@ -137,7 +137,6 @@ var calculateDamageForAttack = function(attack, baseWeapon, masteryBonus) {
 	plan.push([retVal,"Base Weapon"])
 	
 	var bonus = 0;
-	plan.push([bonus,"Mastery Bonus"])
 	if(attackDamage) {
 		attackDamage = parseInt(attackDamage.replace('+',''));
 		bonus += attackDamage;
